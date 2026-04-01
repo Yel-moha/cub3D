@@ -1,0 +1,45 @@
+{
+  "textures": {
+    "no": "./textures/north.xpm",
+    "so": "./textures/south.xpm",
+    "we": "./textures/west.xpm",
+    "ea": "./textures/east.xpm"
+  },
+  "colors": {
+    "floor": {
+      "r": 220,
+      "g": 100,
+      "b": 0,
+      "value": 14443520
+    },
+    "ceiling": {
+      "r": 225,
+      "g": 30,
+      "b": 0,
+      "value": 14753280
+    }
+  },
+  "map": {
+    "width": 10,
+    "height": 6,
+    "grid": [
+      "1111111111",
+      "1000000001",
+      "1000010001",
+      "1000N00001",
+      "1000000001",
+      "1111111111"
+    ]
+  },
+  "player": {
+    "tile_x": 4,
+    "tile_y": 3,
+    "pos_x": 4.5,
+    "pos_y": 3.5,
+    "spawn": "N",
+    "dir_x": 0.0,
+    "dir_y": -1.0,
+    "plane_x": 0.66,
+    "plane_y": 0.0
+  }
+}
