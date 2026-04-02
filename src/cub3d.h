@@ -6,9 +6,12 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/01 16:40:33 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/02 12:55:04 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <unistd.h>
+
 
 typedef struct s_tex_paths {
     char *no;
