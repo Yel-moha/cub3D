@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/01 16:40:33 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/02 22:20:41 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,3 +50,31 @@ typedef struct s_scene {
     t_map       map;
     t_player    player;
 } t_scene;
+
+
+/***** structs x engine *****/
+
+typedef struct s_ray
+{
+    float   ray_angle;
+    float   wall_hit_x;
+    float   wall_hit_y;
+    float   distance;
+    bool    is_ray_facing_up;
+    bool    is_ray_facing_down;
+    bool    is_ray_facing_left;
+    bool    is_ray_facing_right;
+    bool    was_hit_vertical;
+}           t_ray;
+
+typedef struct s_game
+{
+    void        *mlx;
+    void        *win;
+    t_map       map;
+    t_assets    asset_data;
+    t_img       img;
+    t_ray       rays[WINDOW_WIDTH];
+    t_player    player;
+}               t_game;
+
