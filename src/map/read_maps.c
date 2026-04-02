@@ -6,13 +6,11 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 15:24:22 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/02 15:28:34 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/02 16:43:03 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-
 
 static void	*read_line(int fd, char *buffer)
 {
@@ -78,3 +76,48 @@ char	*get_next_line(int fd)
 		return (NULL);
 	return (extract_line(&buffer));
 }
+
+/*
+static char **read_map(void)
+{
+    int         fd;
+    char        **file;
+    char        *line;
+    const char  *map_path;
+    int         i;
+
+    i = 0;
+    map_path = "src/valid_minimal.cub";
+    fd = open(map_path, O_RDONLY);
+    if (fd < 0)
+    {
+        perror("open");
+        return (1);
+    }
+    printf("\n\nContenuto completo di %s:\n", map_path);
+    file[i] = get_next_line(fd);
+    while (line)
+    {
+        i++;
+        //printf("%s", line);
+        //free(line);
+        //line = get_next_line(fd);
+        file[i] = get_next_line(fd);
+    }
+    close(fd);
+    return (file);
+}
+
+static void split_matrix(char **matrix)
+{
+    char **line;
+    int i = 0;
+
+    line = ft_split(matrix[0], " ");
+    while(line)
+    {
+        printf("la prima linea del test e questa: %s\n", line[i]);
+        i++;
+    }
+}
+*/

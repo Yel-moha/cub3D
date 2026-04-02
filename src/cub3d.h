@@ -6,9 +6,12 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/02 15:45:05 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/02 16:49:17 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -64,3 +67,5 @@ typedef struct s_scene {
 // Estratto direttamente del progetto get_next_line al fine di leggere il file della mappa
 char	*get_next_line(int fd);
 ///////////////////////////////////////////////////////////////////////////////////////////
+
+#endif
