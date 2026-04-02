@@ -6,12 +6,19 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/02 12:55:04 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/02 15:45:05 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include "minilibx-linux/mlx.h"
+# include "libft/libft.h"
+# include <math.h>
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 typedef struct s_tex_paths {
     char *no;
@@ -53,3 +60,7 @@ typedef struct s_scene {
     t_map       map;
     t_player    player;
 } t_scene;
+
+// Estratto direttamente del progetto get_next_line al fine di leggere il file della mappa
+char	*get_next_line(int fd);
+///////////////////////////////////////////////////////////////////////////////////////////

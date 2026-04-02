@@ -1,10 +1,4 @@
 
-# include "minilibx-linux/mlx.h"
-# include "../libft/libft.h"
-# include <complex.h>
-# include <stdbool.h>
-# include <math.h>
-# include <stdlib.h>
 
 # define WIDTH 800
 # define HEIGHT 600
