@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/02 16:49:17 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/03 16:36:28 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include "minilibx-linux/mlx.h"
 # include "libft/libft.h"
 # include <math.h>
+// Da cancellare poi
+#include <stdio.h>
+
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -68,4 +71,17 @@ typedef struct s_scene {
 char	*get_next_line(int fd);
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+
+// Validations funcions
+void	is_valid_direction(char **line, t_tex_paths *pos);
+
+
+// Errors functions
+int    read_map_errors(char *line);
+
+// Debug and Prints
+void print_split(char **split);
+void print_text_paths(t_tex_paths pos_text);
+
 #endif
+

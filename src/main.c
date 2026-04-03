@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 15:32:37 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/02 16:51:13 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/03 16:39:02 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,7 @@ static void	free_split(char **split)
 	free(split);
 }
 
-static void print_split(char **split)
-{
-	int i;
 
-	i = 0;
-	while (split && split[i])
-	{
-		printf("token[%d]: %s\n", i, split[i]);
-		i++;
-	}
-}
 
 int main(int argc, char **argv)
 {
@@ -48,7 +38,9 @@ int main(int argc, char **argv)
 	char	*line;
 	char	**split;
 	const char	*map_path;
+	t_tex_paths *pos_text;
 
+	pos_text = malloc(sizeof(t_tex_paths));
 	map_path = "src/valid_minimal.cub";
 	if (argc == 2)
 		map_path = argv[1];
@@ -65,11 +57,17 @@ int main(int argc, char **argv)
 		close(fd);
 		return (1);
 	}
-	printf("prima riga: %s", line);
-	split = ft_split(line, ' ');
-	print_split(split);
-	free(line);
+	while(line)
+	{		
+		line = get_next_line(fd);
+		split = ft_split(line, ' ');
+		is_valid_direction(split, pos_text);
+		//print_split(split);
+		free(line);
+	}
 	free_split(split);
+	print_text_paths(*pos_text);
+	free(pos_text);
 	close(fd);
 	return (0);
 }

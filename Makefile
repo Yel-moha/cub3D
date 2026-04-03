@@ -1,5 +1,11 @@
 NAME		= cub3d
-SRCS		= src/map/read_maps.c src/main.c
+
+SRCS		=	src/map/read_maps.c \
+				src/main.c \
+				src/errors.c \
+				src/debug_prints.c \
+				src/validations.c \
+
 OBJS		= $(SRCS:.c=.o)
 
 CC			= cc
