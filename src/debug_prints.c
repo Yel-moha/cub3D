@@ -31,3 +31,11 @@ void print_text_paths(t_tex_paths pos_text)
 	printf("percorso sfondo west e' : %s\n", pos_text.we);
 	printf("percorso sfondo east e' : %s\n", pos_text.ea);
 }
+
+void	print_colors(t_rgb colors)
+{
+	printf("\nQui la lista dei colori floor e cieling \n");
+	printf("r = %d\n", colors.r);
+	printf("g = %d\n", colors.g);
+	printf("b = %d\n", colors.b);
+}

@@ -61,6 +61,27 @@ int main(int argc, char **argv)
 	while (line)
 	{		
 		split = ft_split(line, ' ');
+		if (!split || !split[0])
+		{
+			free_split(split);
+			free(line);
+			line = get_next_line(fd);
+			continue ;
+		}
+		if (ft_strncmp(split[0], "F", 2) == 0
+			|| ft_strncmp(split[0], "C", 2) == 0)
+		{
+			char	**rgb_split;
+
+			rgb_split = NULL;
+			if (split[1])
+				rgb_split = ft_split(split[1], ',');
+			if (rgb_split)
+			{
+				fill_colors(rgb_split);
+				free_split(rgb_split);
+			}
+		}
 		fill_direction(split, pos_text);
 		free_split(split);
 		free(line);

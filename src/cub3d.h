@@ -75,6 +75,7 @@ char	*get_next_line(int fd);
 
 // Validations funcions
 void	fill_direction(char **line, t_tex_paths *pos);
+void fill_colors(char **line);
 
 
 // Errors functions
@@ -83,6 +84,7 @@ int    read_map_errors(char *line);
 // Debug and Prints
 void print_split(char **split);
 void print_text_paths(t_tex_paths pos_text);
+void	print_colors(t_rgb colors);
 
 // free functions
 void	free_split(char **split);

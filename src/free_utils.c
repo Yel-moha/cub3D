@@ -23,8 +23,5 @@ void    free_paths(t_tex_paths *pos_text)
 
 void    free_colors(t_rgb *flo_ciel)
 {
-    free(flo_ciel->b);
-    free(flo_ciel->g);
-    free(flo_ciel->r);
-    free(flo_ciel->value);
+    free(flo_ciel);
 }

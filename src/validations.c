@@ -14,6 +14,8 @@
 
 void fill_direction(char **line, t_tex_paths *pos)
 {
+    if (!line || !line[0] || !line[1])
+        return ;
     if (ft_strncmp(line[0], "NO", 3) == 0)
         pos->no = ft_strdup(line[1]);
     else if (ft_strncmp(line[0], "SO", 3) == 0)
@@ -27,24 +29,21 @@ void fill_direction(char **line, t_tex_paths *pos)
 void fill_colors(char **line)
 {
     t_rgb *floor;
-    t_rgb *cieling;
+    //t_rgb *cieling;
+
+    if (!line || !line[0] || !line[1] || !line[2])
+        return ;
     
-    floor = ft_calloc(sizeof(int), sizeof(t_rgb));
-    cieling = ft_calloc(sizeof(int), sizeof(t_rgb));
-    if (ft_strncmp(line[0], "F", 3) == 0)
-    {
-       floor->r = ft_atoi(line[1]);
-       floor->g = ft_atoi(line[2]);
-       floor->b = ft_atoi(line[3]);
-       //floor->value = (r << 16) | (g << 8) | b; // ci pensero dopo a calolarla V=65536R+256G+B
-    }
-    else if (ft_strncmp(line[0], "C", 3) == 0)
-    {
-        cieling->r = ft_atoi(line[1]);
-        cieling->g = ft_atoi(line[2]);
-        cieling->b = ft_atoi(line[3]);
-        //cieling->value = (r << 16) | (g << 8) | b; // ci pensero dopo a calolarla V=65536R+256G+B
-    }
+    floor = ft_calloc(1, sizeof(t_rgb));
+    if (!floor)
+        return ;
+    //cieling = ft_calloc(sizeof(int), sizeof(t_rgb));
+    floor->r = ft_atoi(line[0]);
+    floor->g = ft_atoi(line[1]);
+    floor->b = ft_atoi(line[2]);
+    //floor->value = (r << 16) | (g << 8) | b; // ci pensero dopo a calolarla V=65536R+256G+B
+    print_colors(*floor);
+    //print_colors(*cieling);
     free_colors(floor);
-    free_colors (cieling);
+    //free_colors (cieling);
 }
