@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:17:31 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/04 11:39:08 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/04 15:46:06 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,12 @@ void print_text_paths(t_tex_paths pos_text)
 	printf("percorso sfondo south e' : %s\n", pos_text.so);
 	printf("percorso sfondo west e' : %s\n", pos_text.we);
 	printf("percorso sfondo east e' : %s\n", pos_text.ea);
+}
+
+void print_colors(t_rgb colors)
+{
+	printf("\nqui i colori r g b\n");
+	printf("colore r: %d\n", colors.r);
+	printf("colore g: %d\n", colors.g);
+	printf("colore b: %d\n", colors.b);
 }

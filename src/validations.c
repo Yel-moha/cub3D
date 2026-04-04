@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:16:54 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/04 12:09:26 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/04 15:48:11 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void fill_colors(char **line)
         cieling->b = ft_atoi(line[3]);
         //cieling->value = (r << 16) | (g << 8) | b; // ci pensero dopo a calolarla V=65536R+256G+B
     }
+    print_colors(*floor);
+    print_colors(*cieling);
     free_colors(floor);
-    free_colors (cieling);
+    free_colors(cieling);
 }

@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/04 11:59:44 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/04 15:50:42 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ char	*get_next_line(int fd);
 
 // Validations funcions
 void	fill_direction(char **line, t_tex_paths *pos);
+void fill_colors(char **line);
 
 
 // Errors functions
@@ -83,6 +84,7 @@ int    read_map_errors(char *line);
 // Debug and Prints
 void print_split(char **split);
 void print_text_paths(t_tex_paths pos_text);
+void print_colors(t_rgb colors);
 
 // free functions
 void	free_split(char **split);
