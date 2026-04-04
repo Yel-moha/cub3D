@@ -6,11 +6,23 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 15:24:22 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/02 16:43:03 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/04 11:30:10 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static char	*append_buffer(char *buffer, char *temp)
+{
+	char	*joined;
+
+	if (!buffer)
+		joined = ft_strjoin("", temp);
+	else
+		joined = ft_strjoin(buffer, temp);
+	free(buffer);
+	return (joined);
+}
 
 static void	*read_line(int fd, char *buffer)
 {
@@ -26,9 +38,7 @@ static void	*read_line(int fd, char *buffer)
 		if (bytes_read <= 0)
 			break ;
 		temp[bytes_read] = '\0';
-		if (!buffer)
-			buffer = ft_strdup("");
-		buffer = ft_strjoin(buffer, temp);
+		buffer = append_buffer(buffer, temp);
 		if (!buffer)
 			return (free(temp), NULL);
 		if (ft_strchr(buffer, '\n'))
@@ -47,21 +57,17 @@ static char	*extract_line(char **buffer)
 	size_t	i;
 
 	i = 0;
-	if (!(*buffer) || !(*buffer)[0])
-	{
-		free(*buffer);
-		*buffer = NULL;
-		return (NULL);
-	}
+	if (!*buffer || !**buffer)
+		return (free(*buffer), *buffer = NULL, NULL);
 	while ((*buffer)[i] && (*buffer)[i] != '\n')
 		i++;
 	line = ft_substr(*buffer, 0, i + 1);
-	if ((*buffer)[i] == '\n')
-		temp = ft_strdup(&(*buffer)[i + 1]);
-	else
-		temp = ft_strdup("");
+	temp = ft_strdup(&(*buffer)[i + 1]);
 	free(*buffer);
-	*buffer = temp;
+	if (temp && *temp)
+		*buffer = temp;
+	else
+		free(temp), *buffer = NULL;
 	return (line);
 }
 
@@ -76,48 +82,3 @@ char	*get_next_line(int fd)
 		return (NULL);
 	return (extract_line(&buffer));
 }
-
-/*
-static char **read_map(void)
-{
-    int         fd;
-    char        **file;
-    char        *line;
-    const char  *map_path;
-    int         i;
-
-    i = 0;
-    map_path = "src/valid_minimal.cub";
-    fd = open(map_path, O_RDONLY);
-    if (fd < 0)
-    {
-        perror("open");
-        return (1);
-    }
-    printf("\n\nContenuto completo di %s:\n", map_path);
-    file[i] = get_next_line(fd);
-    while (line)
-    {
-        i++;
-        //printf("%s", line);
-        //free(line);
-        //line = get_next_line(fd);
-        file[i] = get_next_line(fd);
-    }
-    close(fd);
-    return (file);
-}
-
-static void split_matrix(char **matrix)
-{
-    char **line;
-    int i = 0;
-
-    line = ft_split(matrix[0], " ");
-    while(line)
-    {
-        printf("la prima linea del test e questa: %s\n", line[i]);
-        i++;
-    }
-}
-*/

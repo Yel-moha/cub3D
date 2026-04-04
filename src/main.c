@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 15:32:37 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/03 18:25:26 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/04 11:46:32 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //da cancellare prima di pusciare
 #include <stdio.h>
 
-static void	free_split(char **split)
+void	free_split(char **split)
 {
 	int	i;
 
@@ -61,20 +61,13 @@ int main(int argc, char **argv)
 	while (line)
 	{		
 		split = ft_split(line, ' ');
-		is_valid_direction(split, pos_text);
-		print_split(split);
-		//free_split(split);
+		fill_direction(split, pos_text);
+		free_split(split);
 		free(line);
 		line = get_next_line(fd);
 	}
-	//free(line);
-	print_text_paths(*pos_text);
-	free(pos_text->no);
-	free(pos_text->so);
-	free(pos_text->we);
-	free(pos_text->ea);
-	free(pos_text);
-	free_split(split);
+	print_text_paths(*pos_text);  // debug
+	free_paths(pos_text);
 	close(fd);
 	return (0);
 }

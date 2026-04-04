@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/03 17:47:24 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/04 11:59:44 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 #  define BUFFER_SIZE 42
 # endif
 
+// gestita nel parsing usando la preziosissima funziona ft_split da libft
 typedef struct s_tex_paths {
     char *no;
     char *so;
@@ -73,7 +74,7 @@ char	*get_next_line(int fd);
 
 
 // Validations funcions
-void	is_valid_direction(char **line, t_tex_paths *pos);
+void	fill_direction(char **line, t_tex_paths *pos);
 
 
 // Errors functions
@@ -82,6 +83,11 @@ int    read_map_errors(char *line);
 // Debug and Prints
 void print_split(char **split);
 void print_text_paths(t_tex_paths pos_text);
+
+// free functions
+void	free_split(char **split);
+void    free_paths(t_tex_paths *pos_text);
+void    free_colors(t_rgb *flo_ciel);
 
 #endif
 

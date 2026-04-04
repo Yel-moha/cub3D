@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug_prints.c                                     :+:      :+:    :+:   */
+/*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/03 16:17:31 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/04 11:39:08 by yel-moha         ###   ########.fr       */
+/*   Created: 2026/04/04 11:35:46 by yel-moha          #+#    #+#             */
+/*   Updated: 2026/04/04 11:59:29 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void print_split(char **split)
+void    free_paths(t_tex_paths *pos_text)
 {
-	int i;
-
-	i = 0;
-	while (split && split[i])
-	{
-		printf("token[%d]: %s\n", i, split[i]);
-		i++;
-	}
+    free(pos_text->no);
+	free(pos_text->so);
+	free(pos_text->we);
+	free(pos_text->ea);
+	free(pos_text);
 }
 
-void print_text_paths(t_tex_paths pos_text)
+void    free_colors(t_rgb *flo_ciel)
 {
-	printf("\npercorso sfondo north e' : %s\n", pos_text.no);
-	printf("percorso sfondo south e' : %s\n", pos_text.so);
-	printf("percorso sfondo west e' : %s\n", pos_text.we);
-	printf("percorso sfondo east e' : %s\n", pos_text.ea);
+    free(flo_ciel->b);
+    free(flo_ciel->g);
+    free(flo_ciel->r);
+    free(flo_ciel->value);
 }
