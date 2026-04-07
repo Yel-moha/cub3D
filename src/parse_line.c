@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:48:58 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/07 18:19:06 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/07 18:29:05 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void parse_textures(char *line, t_scene *scene, int fd)
         split = ft_split(line, ' ');
         if (!split || !split[0])
 		{
-			//line_errors(line, fd);
 			line = get_next_line(fd);
 			continue ;
 		}
         if(num_colors < 4)
             num_colors = fill_direction(split, scene, num_colors);
-        fill_colors()
+        else
+            break ;
         line = get_next_line(fd);
     }
     free_split(split);

@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/07 17:43:30 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/07 18:22:26 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*get_next_line(int fd);
 
 
 // Validations funcions
-void fill_direction(char **line, t_scene *scene);
+int fill_direction(char **line, t_scene *scene, int *num_colors);
 void fill_colors(char **line, t_scene *scene, char f_or_c);
 
 
