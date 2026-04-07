@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/04 11:59:44 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/07 15:50:00 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,9 @@ void	print_colors(t_rgb colors);
 void	free_split(char **split);
 void    free_paths(t_tex_paths *pos_text);
 void    free_colors(t_rgb *flo_ciel);
+
+//parse line
+
 
 #endif
 
