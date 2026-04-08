@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:17:31 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/04 11:39:08 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/08 11:50:57 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,18 @@ void print_split(char **split)
 	}
 }
 
-void print_text_paths(t_tex_paths pos_text)
+void print_text_paths(t_scene scene)
 {
-	printf("\npercorso sfondo north e' : %s\n", pos_text.no);
-	printf("percorso sfondo south e' : %s\n", pos_text.so);
-	printf("percorso sfondo west e' : %s\n", pos_text.we);
-	printf("percorso sfondo east e' : %s\n", pos_text.ea);
+	printf("\npercorso sfondo north e' : %s\n", scene.textures.no);
+	printf("percorso sfondo south e' : %s\n", scene.textures.so);
+	printf("percorso sfondo west e' : %s\n", scene.textures.we);
+	printf("percorso sfondo east e' : %s\n", scene.textures.ea);
 }
 
-void	print_colors(t_rgb colors)
+void	print_colors(t_scene scene)
 {
 	printf("\nQui la lista dei colori floor e cieling \n");
-	printf("r = %d\n", colors.r);
-	printf("g = %d\n", colors.g);
-	printf("b = %d\n", colors.b);
+	printf("r = %d\n", scene.floor.r);
+	printf("g = %d\n", scene.floor.g);
+	printf("b = %d\n", scene.floor.b);
 }

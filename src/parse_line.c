@@ -6,49 +6,44 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:48:58 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/07 18:29:05 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/08 12:02:11 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void parse_line(char *map_path, t_scene *scene)
+void parse_line(const char *map_path, t_scene *scene)
 {
     int         fd;
     char        *line;
     
+	line = NULL;
     fd = open(map_path, O_RDONLY);
-    line_errors(line, fd);
     line = get_next_line(fd);
-    line_errors(line, fd);
-    parse_textures(line, scene, fd);
+	line_errors(line, fd);
+	while(line)
+	{
+		line_errors(line, fd);
+		parse_textures(line, scene, fd);
+		parse_colors(line, scene);
+		line = get_next_line(fd);
+	}
 	free(line);
 }
 void parse_textures(char *line, t_scene *scene, int fd)
 {
     char        **split;
-    int         num_colors;
+    int         *num_colors;
     
     num_colors = 0;
     split = ft_split(line, ' ');
 	if (!split || !split[0])
-        line_errors(line, fd);
-    while(line)
-    {
-        split = ft_split(line, ' ');
-        if (!split || !split[0])
-		{
-			line = get_next_line(fd);
-			continue ;
-		}
-        if(num_colors < 4)
-            num_colors = fill_direction(split, scene, num_colors);
-        else
-            break ;
-        line = get_next_line(fd);
-    }
+    	line_errors(line, fd);
+	print_split(split); //debug
+    //if(*num_colors < 4)
+        num_colors = fill_direction(split, scene, num_colors);
     free_split(split);
-	free(line);
+	//free(line);
 }
 
 void  line_errors(char *line, int fd)
@@ -60,13 +55,17 @@ void  line_errors(char *line, int fd)
 	}
 	if (!line)
 	{
-		printf("file vuoto o non leggibile: %s\n");
+		printf("file vuoto o non leggibile:\n");
         close(fd);
 		return;
 	}
 }
-void parse_colors(char **split, t_scene *scene)
+void parse_colors(char *line, t_scene *scene)
 {
+	char **split;
+
+	split = ft_split(line, ' ');
+	print_split(split); // debug;
 	if (ft_strncmp(split[0], "F", 2) == 0
 		|| ft_strncmp(split[0], "C", 2) == 0)
 	{
@@ -74,6 +73,7 @@ void parse_colors(char **split, t_scene *scene)
 		rgb_split = NULL;
 		if (split[1])
 			rgb_split = ft_split(split[1], ',');
+		print_split(rgb_split); // debug
 		if (rgb_split)
 		{
 			fill_colors(rgb_split, scene, split[0][0]);

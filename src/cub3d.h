@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/07 18:22:26 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/08 11:52:42 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,28 +74,29 @@ char	*get_next_line(int fd);
 
 
 // Validations funcions
-int fill_direction(char **line, t_scene *scene, int *num_colors);
-void fill_colors(char **line, t_scene *scene, char f_or_c);
+int     *fill_direction(char **line, t_scene *scene, int *num_colors);
+void    fill_colors(char **line, t_scene *scene, char f_or_c);
 
 
 // Errors functions
 int    read_map_errors(char *line);
 
 // Debug and Prints
-void print_split(char **split);
-void print_text_paths(t_tex_paths pos_text);
-void	print_colors(t_rgb colors);
+void    print_split(char **split);
+void    print_text_paths(t_scene scene);
+void	print_colors(t_scene scene);
 
 // free functions
 void	free_split(char **split);
 void    free_paths(t_tex_paths *pos_text);
 void    free_colors(t_rgb *flo_ciel);
+void free_scene(t_scene *scene);
 
 //parse line
-void parse_textures(char *map_path, t_scene *scene);
-void split_errors(char **split);
+void parse_line(const char *map_path, t_scene *scene);
+void parse_textures(char *line, t_scene *scene, int fd);
 void  line_errors(char *line, int fd);
-void parse_colors(char **split, t_scene *scene);
+void parse_colors(char *line, t_scene *scene);
 
 #endif
 

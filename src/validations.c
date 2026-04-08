@@ -6,16 +6,16 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:16:54 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/07 18:17:41 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/08 11:42:59 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int fill_direction(char **line, t_scene *scene, int *num_colors)
+int *fill_direction(char **line, t_scene *scene, int *num_colors)
 {
     if (!line || !line[0] || !line[1])
-        return ;
+        return (0);
     if (ft_strncmp(line[0], "NO", 3) == 0)
     {
         scene->textures.no = ft_strdup(line[1]);
@@ -36,8 +36,7 @@ int fill_direction(char **line, t_scene *scene, int *num_colors)
         scene->textures.ea = ft_strdup(line[1]);
         num_colors++;
     }
-    else
-        return (num_colors);
+   return (num_colors);
 }
 
 void fill_colors(char **line, t_scene *scene, char f_or_c)
