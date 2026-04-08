@@ -6,15 +6,15 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:17:31 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/08 11:50:57 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/08 14:56:14 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void print_split(char **split)
+void	print_split(char **split)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (split && split[i])
@@ -24,7 +24,7 @@ void print_split(char **split)
 	}
 }
 
-void print_text_paths(t_scene scene)
+void	print_text_paths(t_scene scene)
 {
 	printf("\npercorso sfondo north e' : %s\n", scene.textures.no);
 	printf("percorso sfondo south e' : %s\n", scene.textures.so);
@@ -38,4 +38,10 @@ void	print_colors(t_scene scene)
 	printf("r = %d\n", scene.floor.r);
 	printf("g = %d\n", scene.floor.g);
 	printf("b = %d\n", scene.floor.b);
+	printf("value  = %d\n", scene.floor.value);
+	printf("\nQui la lista dei colori floor e cieling \n");
+	printf("r = %d\n", scene.ceiling.r);
+	printf("g = %d\n", scene.ceiling.g);
+	printf("b = %d\n", scene.ceiling.b);
+	printf("value = %d\n", scene.ceiling.value);
 }

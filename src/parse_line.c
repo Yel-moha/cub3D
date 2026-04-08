@@ -6,78 +6,82 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:48:58 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/08 12:02:11 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/08 14:56:05 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void parse_line(const char *map_path, t_scene *scene)
+void	parse_line(const char *map_path, t_scene *scene)
 {
-    int         fd;
-    char        *line;
-    
-	line = NULL;
-    fd = open(map_path, O_RDONLY);
-    line = get_next_line(fd);
-	line_errors(line, fd);
-	while(line)
+	int		fd;
+	char	*line;
+	int		num_colors;
+
+	num_colors = 0;
+	fd = open(map_path, O_RDONLY);
+	if (fd < 0)
 	{
-		line_errors(line, fd);
-		parse_textures(line, scene, fd);
+		line_errors(NULL, fd);
+		return ;
+	}
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (num_colors < 4)
+			num_colors = parse_textures(line, scene, fd, &num_colors);
 		parse_colors(line, scene);
+		free(line);
 		line = get_next_line(fd);
 	}
-	free(line);
-}
-void parse_textures(char *line, t_scene *scene, int fd)
-{
-    char        **split;
-    int         *num_colors;
-    
-    num_colors = 0;
-    split = ft_split(line, ' ');
-	if (!split || !split[0])
-    	line_errors(line, fd);
-	print_split(split); //debug
-    //if(*num_colors < 4)
-        num_colors = fill_direction(split, scene, num_colors);
-    free_split(split);
-	//free(line);
+	close(fd);
 }
 
-void  line_errors(char *line, int fd)
+int	parse_textures(char *line, t_scene *scene, int fd, int *num_colors)
 {
-    if (fd < 0)
+	char	**split;
+
+	split = ft_split(line, ' ');
+	if (!split || !split[0])
+		line_errors(line, fd);
+	*num_colors = fill_direction(split, scene, num_colors);
+	free_split(split);
+	return (*num_colors);
+}
+
+void	line_errors(char *line, int fd)
+{
+	if (fd < 0)
 	{
 		perror("open");
-		return;
+		return ;
 	}
 	if (!line)
 	{
 		printf("file vuoto o non leggibile:\n");
-        close(fd);
-		return;
+		close(fd);
+		return ;
 	}
 }
-void parse_colors(char *line, t_scene *scene)
+
+void	parse_colors(char *line, t_scene *scene)
 {
-	char **split;
+	char	**split;
 
 	split = ft_split(line, ' ');
-	print_split(split); // debug;
 	if (ft_strncmp(split[0], "F", 2) == 0
 		|| ft_strncmp(split[0], "C", 2) == 0)
 	{
 		char	**rgb_split;
+
 		rgb_split = NULL;
 		if (split[1])
 			rgb_split = ft_split(split[1], ',');
-		print_split(rgb_split); // debug
 		if (rgb_split)
 		{
 			fill_colors(rgb_split, scene, split[0][0]);
 			free_split(rgb_split);
 		}
 	}
+	free_split(split);
 }

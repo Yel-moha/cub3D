@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 15:32:37 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/08 11:52:02 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/08 14:57:13 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 //da cancellare prima di pusciare
 #include <stdio.h>
 
-void	free_split(char **split)
+void
+free_split(char **split)
 {
 	int	i;
 
@@ -30,9 +31,7 @@ void	free_split(char **split)
 	free(split);
 }
 
-
-
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	const char	*map_path;
 	t_scene		*scene;
@@ -42,7 +41,8 @@ int main(int argc, char **argv)
 		return (1);
 	map_path = argv[1];
 	parse_line(map_path, scene);
-	print_text_paths(*scene);
-	print_colors(*scene);
+	//print_text_paths(*scene); // debug
+	//print_colors(*scene); // debug
+	free_scene(scene);
 	return (0);
 }

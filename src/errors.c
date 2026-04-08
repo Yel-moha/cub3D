@@ -6,15 +6,15 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 15:54:03 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/03 16:17:03 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/08 14:56:13 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int    read_map_errors(char *line)
+int	read_map_errors(char *line)
 {
-    if(!line)
-        return (0);
-    return 1;
+	if (!line)
+		return (0);
+	return (1);
 }
