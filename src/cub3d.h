@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/08 14:17:46 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/08 18:56:23 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_scene {
     t_rgb       ceiling;
     t_map       map;
     t_player    player;
+    int         counter;
 } t_scene;
 
 // Estratto direttamente del progetto get_next_line al fine di leggere il file della mappa
@@ -74,8 +75,9 @@ char	*get_next_line(int fd);
 
 
 // Validations funcions
-int     fill_direction(char **line, t_scene *scene, int *num_colors);
+void    fill_direction(char **line, t_scene *scene);
 void    fill_colors(char **line, t_scene *scene, char f_or_c);
+void    fill_map(char *line, t_scene *scene);
 
 
 // Errors functions
@@ -90,13 +92,16 @@ void	print_colors(t_scene scene);
 void	free_split(char **split);
 void    free_paths(t_tex_paths *pos_text);
 void    free_colors(t_rgb *flo_ciel);
-void free_scene(t_scene *scene);
+void    free_scene(t_scene *scene);
 
 //parse line
-void parse_line(const char *map_path, t_scene *scene);
-int parse_textures(char *line, t_scene *scene, int fd, int *num_colors);
-void  line_errors(char *line, int fd);
-void parse_colors(char *line, t_scene *scene);
+void    parse_line(const char *map_path, t_scene *scene);
+void    parse_textures(char *line, t_scene *scene, int fd);
+void    line_errors(char *line, int fd);
+void    parse_colors(char *line, t_scene *scene);
+
+//map_grid
+void count_grid_height(char *line, t_scene *scene);
 
 #endif
 

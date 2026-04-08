@@ -6,37 +6,38 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:16:54 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/08 14:56:12 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/08 18:55:43 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	fill_direction(char **line, t_scene *scene, int *num_colors)
+void	fill_direction(char **line, t_scene *scene)
 {
 	if (!line || !line[0] || !line[1])
-		return (0);
+		return ;
 	if (ft_strncmp(line[0], "NO", 3) == 0)
 	{
 		scene->textures.no = ft_strdup(line[1]);
-		(*num_colors)++;
+		scene->counter++;
 	}
 	else if (ft_strncmp(line[0], "SO", 3) == 0)
 	{
 		scene->textures.so = ft_strdup(line[1]);
-		(*num_colors)++;
+		scene->counter++;
 	}
 	else if (ft_strncmp(line[0], "WE", 3) == 0)
 	{
 		scene->textures.we = ft_strdup(line[1]);
-		(*num_colors)++;
+		scene->counter++;
 	}
 	else if (ft_strncmp(line[0], "EA", 3) == 0)
 	{
 		scene->textures.ea = ft_strdup(line[1]);
-		(*num_colors)++;
+		scene->counter++;
 	}
-	return (*num_colors);
+	else
+		return ;
 }
 
 void	fill_colors(char **line, t_scene *scene, char f_or_c)
@@ -50,6 +51,7 @@ void	fill_colors(char **line, t_scene *scene, char f_or_c)
 		scene->floor.b = ft_atoi(line[2]);
 		scene->floor.value = (scene->floor.r << 16)
 			| (scene->floor.g << 8) | scene->floor.b;
+		scene->counter++;
 	}
 	else if (f_or_c == 'C')
 	{
@@ -58,6 +60,7 @@ void	fill_colors(char **line, t_scene *scene, char f_or_c)
 		scene->ceiling.b = ft_atoi(line[2]);
 		scene->ceiling.value = (scene->ceiling.r << 16)
 			| (scene->ceiling.g << 8) | scene->ceiling.b;
+		scene->counter++;
 	}
 	else
 		return ;

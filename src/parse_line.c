@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:48:58 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/08 14:56:05 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/08 19:15:56 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ void	parse_line(const char *map_path, t_scene *scene)
 {
 	int		fd;
 	char	*line;
-	int		num_colors;
 
-	num_colors = 0;
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
 	{
@@ -28,25 +26,25 @@ void	parse_line(const char *map_path, t_scene *scene)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (num_colors < 4)
-			num_colors = parse_textures(line, scene, fd, &num_colors);
+		parse_textures(line, scene, fd);
 		parse_colors(line, scene);
+		if(scene->counter == 6)
+			count_grid_height(line, scene);
 		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
 }
 
-int	parse_textures(char *line, t_scene *scene, int fd, int *num_colors)
+void	parse_textures(char *line, t_scene *scene, int fd)
 {
 	char	**split;
 
 	split = ft_split(line, ' ');
 	if (!split || !split[0])
 		line_errors(line, fd);
-	*num_colors = fill_direction(split, scene, num_colors);
+	fill_direction(split, scene);
 	free_split(split);
-	return (*num_colors);
 }
 
 void	line_errors(char *line, int fd)
