@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:16:54 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/09 16:02:30 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/09 18:24:06 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,14 @@ void	fill_colors(char **line, t_scene *scene, char f_or_c)
 		update_flags(scene, "C");
 	}
 }
-//Aggiungo funzione per evitare 
+// Questa funzione avra il compito di verficare il codice dei vari colori r g b
+/*
+static int check_colors_value(char **line)
+{
+	int ret;
 
+	if (!line || !line[0] || !line[1] || !line[2])
+		return (0);
+	
+}
+		*/
