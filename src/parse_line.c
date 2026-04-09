@@ -67,6 +67,11 @@ void	parse_colors(char *line, t_scene *scene)
 	char	**split;
 
 	split = ft_split(line, ' ');
+	if (!split || !split[0])
+	{
+		free_split(split);
+		return ;
+	}
 	if (ft_strncmp(split[0], "F", 2) == 0
 		|| ft_strncmp(split[0], "C", 2) == 0)
 	{

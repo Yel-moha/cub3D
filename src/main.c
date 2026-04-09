@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 15:32:37 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/08 18:12:02 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/09 15:54:24 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,34 @@ free_split(char **split)
 	free(split);
 }
 
+static void allocate_scene(t_scene *scene)
+{
+	scene->flag = ft_calloc(1, sizeof(char));
+	if (!scene->flag)
+		return;
+	scene->counter = 0;
+	scene->pos = 0;
+}
+	
 int	main(int argc, char **argv)
 {
 	const char	*map_path;
 	t_scene		*scene;
 
 	scene = ft_calloc(1, sizeof(t_scene));
-	if(!scene)
+	if (!scene)
 		return (1);
-	scene->counter = 0;
+	allocate_scene(scene);
 	if (argc != 2)
+	{
+		free_scene(scene);
 		return (1);
+	}
 	map_path = argv[1];
 	parse_line(map_path, scene);
-	//print_text_paths(*scene); // debug
+	print_text_paths(*scene); // debug
 	//print_colors(*scene); // debug
+	printf("il numero di texture e' : %d\n", scene->counter);
 	print_split(scene->map.grid);
 	free_scene(scene);
 	return (0);

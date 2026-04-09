@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 11:35:46 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/08 14:56:07 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/09 15:19:57 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	free_scene(t_scene *scene)
 	free(scene->textures.no);
 	free(scene->textures.so);
 	free(scene->textures.we);
+	free(scene->flag);
 	free(scene);
 }

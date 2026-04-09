@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:17:31 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/08 16:47:56 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/09 15:38:43 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	print_text_paths(t_scene scene)
 	printf("percorso sfondo south e' : %s\n", scene.textures.so);
 	printf("percorso sfondo west e' : %s\n", scene.textures.we);
 	printf("percorso sfondo east e' : %s\n", scene.textures.ea);
+	printf("la flag e' : %s\n", scene.flag);
 }
 
 void	print_colors(t_scene scene)

@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/08 18:56:23 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/09 15:15:15 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ typedef struct s_scene {
     t_rgb       ceiling;
     t_map       map;
     t_player    player;
-    int         counter;
+    int         counter;  //usata per contare le linee di percorsi e colori prima della mappa
+    char        *flag;
+    int         pos; //usata per quantificare N,E,W,S dentro la mappa
 } t_scene;
 
 // Estratto direttamente del progetto get_next_line al fine di leggere il file della mappa
