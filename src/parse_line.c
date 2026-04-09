@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:48:58 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/08 19:15:56 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/09 16:54:44 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	parse_line(const char *map_path, t_scene *scene)
 {
 	int		fd;
+	int		line_len;
 	char	*line;
 
 	fd = open(map_path, O_RDONLY);
@@ -26,6 +27,9 @@ void	parse_line(const char *map_path, t_scene *scene)
 	line = get_next_line(fd);
 	while (line)
 	{
+		line_len = max_line(line, scene);
+		if (line_len > scene->map.width)
+			scene->map.width = line_len;
 		parse_textures(line, scene, fd);
 		parse_colors(line, scene);
 		if(scene->counter == 6)
@@ -33,6 +37,7 @@ void	parse_line(const char *map_path, t_scene *scene)
 		free(line);
 		line = get_next_line(fd);
 	}
+	printf("la linea piu lunga ha %d caratteri\n e le linee sono %d\n",scene->map.width, scene->map.height);
 	close(fd);
 }
 

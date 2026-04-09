@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 17:17:44 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/09 14:31:55 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/09 17:00:17 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,22 @@ void count_grid_height(char *line, t_scene *scene)
     i = 0;
 
     scene->pos += count_symb(line);
-    while(line[j] == '1' || line[j] == '0')
+    while(line[j] == '1' || line[j] == '0' || line[j] == ' ')
         j++;
     if(j == ft_strlen(line) - 1 && j != 0)
         printf("riga composta da soli zeri e uni %s\n", line);
     printf("numeri di simboli pos e' : %d\n", scene->pos);
+}
+int max_line(char *line, t_scene *scene)
+{
+    int j;
+
+    j = 0;
+    while((line[j] == '1' || line[j] == '0' || line[j] == ' '
+            || line[j] == 'N' || line[j] == 'S' || line[j] == 'W'
+            || line[j] == 'E') && scene->counter == 6)
+        j++;
+    if(j != 0)
+        scene->map.height++;
+    return (j);
 }
