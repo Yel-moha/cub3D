@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:16:54 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/09 18:24:06 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/10 13:20:47 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	fill_colors(char **line, t_scene *scene, char f_or_c)
 	if (f_or_c == 'F')
 	{
 		if (ft_strchr(scene->flag, 'F'))
-			return ;
+			double_color_path('F', scene, line);
 		scene->floor.r = ft_atoi(line[0]);
 		scene->floor.g = ft_atoi(line[1]);
 		scene->floor.b = ft_atoi(line[2]);
@@ -79,6 +79,7 @@ void	fill_colors(char **line, t_scene *scene, char f_or_c)
 		update_flags(scene, "C");
 	}
 }
+
 // Questa funzione avra il compito di verficare il codice dei vari colori r g b
 /*
 static int check_colors_value(char **line)

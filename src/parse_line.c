@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:48:58 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/09 16:54:44 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/10 13:17:42 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,11 @@ void	line_errors(char *line, int fd)
 	}
 }
 
+static void free_split_helper(char **split, t_scene *scene, char flag)
+{
+	fill_colors(split, scene, flag);
+	free_split(split);
+}
 void	parse_colors(char *line, t_scene *scene)
 {
 	char	**split;
@@ -86,10 +91,7 @@ void	parse_colors(char *line, t_scene *scene)
 		if (split[1])
 			rgb_split = ft_split(split[1], ',');
 		if (rgb_split)
-		{
-			fill_colors(rgb_split, scene, split[0][0]);
-			free_split(rgb_split);
-		}
+		free_split_helper(rgb_split, scene, split[0][0]);
 	}
 	free_split(split);
 }
