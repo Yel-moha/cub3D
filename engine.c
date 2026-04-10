@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 20:31:51 by anacotti          #+#    #+#             */
-/*   Updated: 2026/04/02 21:31:38 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/04/10 18:39:26 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,18 @@ void	raycasting()
 	}
 }
 
-void	dda()
+void	dda(t_game game)
 {
-	map_x = (int)pos_x;
-	map_y = (int)pos_y;
-
+	int		map_x;
+	int		map_y;
+	double	delta_x;
+	double	delta_y;
+	
+//which box of the map we're in
+	map_x = (int)game.scene->player.pos_x;
+	map_y = (int)game.scene->player.pos_y;
+	
+//length of ray from one x or y-side to next x or y-side
 	delta_x = abs(1 / ray_dir_x);
 	delta_y = abs(1 / ray_dir_y);
 
@@ -66,7 +73,8 @@ void	dda()
 	{
 		right;
 	}
-
+	
+//length of ray from current position to next x or y-side
 	side_dist_x = ;
 	side_dist_y = ;
 
@@ -87,7 +95,7 @@ void	dda()
 	}
 }
 
-void	engine_init()
+void	engine_init(t_game game)
 {
 	mlx_init();
 	mlx_new_window();
@@ -101,6 +109,6 @@ void	engine_init()
 	mlx_loop();
 
 	raycasting();
-	dda();
+	dda(game);
 	perp_wall_dist();
 }

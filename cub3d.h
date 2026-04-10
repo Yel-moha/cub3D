@@ -6,13 +6,22 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/02 22:20:41 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/04/10 18:34:07 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef
- #define WINDOW_WIDTH
-#endif
+#ifndef CUB3D_H
+# define CUB3D_H
+
+# define WINDOW_WIDTH
+
+# include <stdbool.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <math.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
+# include "minilibx-linux/mlx.h"
 
 // typedef struct s_tex_paths {
 // 	char *no;
@@ -67,11 +76,11 @@ typedef struct s_player
 
 typedef struct s_scene
 {
-    t_tex_paths textures;
-    t_rgb       floor;
-    t_rgb       ceiling;
-    t_map       map;
-    t_player    player;
+	t_texture 	textures;
+	t_rgb		floor;
+	t_rgb		ceiling;
+	t_map		map;
+	t_player	player;
 } t_scene;
 
 
@@ -90,6 +99,15 @@ typedef struct s_ray
     bool    was_hit_vertical;
 }           t_ray;
 
+typedef struct s_img
+{
+	void	*img_ptr;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_img;
+
 typedef struct s_game
 {
     void        *mlx;
@@ -102,3 +120,4 @@ typedef struct s_game
     // t_player    player;
 }               t_game;
 
+#endif
