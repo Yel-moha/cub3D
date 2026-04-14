@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/14 13:21:13 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/14 16:05:17 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,7 @@ int     max_line(char *line, t_scene *scene);
 
 // errors
 void double_color_path(char flag, t_scene *scene, char **split);
-void error_colors_value(char *line, char **rgb_split);
-
+void error_colors_value(char *line, char **rgb_split, t_scene *scene, char *joined);
 
 #endif
 

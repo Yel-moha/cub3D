@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 15:54:03 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/14 13:21:02 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/14 16:06:18 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	read_map_errors(char *line)
 void double_color_path(char flag, t_scene *scene, char **split)
 {
 	free_split(split);
+	get_next_line(-1);
 	free_scene(scene);
 	write(1, "double path\n", ft_strlen("double path") + 1);
 	if(flag == 'F')
@@ -34,10 +35,13 @@ void double_color_path(char flag, t_scene *scene, char **split)
 	exit(EXIT_FAILURE); // Termina il programma con codice di errore (di solito 1)
 }
 
-void error_colors_value(char *line, char **rgb_split)
+void error_colors_value(char *line, char **rgb_split, t_scene *scene, char *joined)
 {
 	free(line);
+	free(joined);
 	free_split(rgb_split);
+	get_next_line(-1);
+	free_scene(scene);
 	write(2, "Errore valore colori\n", \
 			ft_strlen("Errore valore colori\n") + 1);
 	exit(EXIT_FAILURE); // Termina il programma con codice di errore (di solito 1)

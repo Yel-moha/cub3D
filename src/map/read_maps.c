@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 15:24:22 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/10 15:25:45 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/14 16:16:01 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,12 @@ char	*get_next_line(int fd)
 {
 	static char	*buffer = NULL;
 
+	if (fd == -1)
+	{
+		free(buffer);
+		buffer = NULL;
+		return (NULL);
+	}
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = read_line(fd, buffer);
