@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/10 13:20:29 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:21:13 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ char	*get_next_line(int fd);
 void    fill_direction(char **line, t_scene *scene);
 void    fill_colors(char **line, t_scene *scene, char f_or_c);
 void    fill_map(char *line, t_scene *scene);
+int     check_colors_value(char **rgb_split);
 
 
 // Errors functions
@@ -108,6 +109,8 @@ int     max_line(char *line, t_scene *scene);
 
 // errors
 void double_color_path(char flag, t_scene *scene, char **split);
+void error_colors_value(char *line, char **rgb_split);
+
 
 #endif
 

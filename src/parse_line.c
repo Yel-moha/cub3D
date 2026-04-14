@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:48:58 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/10 13:17:42 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:25:54 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,11 @@ void	parse_colors(char *line, t_scene *scene)
 		rgb_split = NULL;
 		if (split[1])
 			rgb_split = ft_split(split[1], ',');
+		if(check_colors_value(rgb_split) < 0)
+			error_colors_value(line, rgb_split);
+		//printf("il numero della singola cifra colore  == %d\n", check_colors_value(rgb_split));
 		if (rgb_split)
-		free_split_helper(rgb_split, scene, split[0][0]);
+			free_split_helper(rgb_split, scene, split[0][0]);
 	}
 	free_split(split);
 }

@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:16:54 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/10 13:20:47 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:19:26 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	fill_colors(char **line, t_scene *scene, char f_or_c)
 	else if (f_or_c == 'C')
 	{
 		if (ft_strchr(scene->flag, 'C'))
-			return ;
+			double_color_path('C', scene, line);
 		scene->ceiling.r = ft_atoi(line[0]);
 		scene->ceiling.g = ft_atoi(line[1]);
 		scene->ceiling.b = ft_atoi(line[2]);
@@ -80,14 +80,24 @@ void	fill_colors(char **line, t_scene *scene, char f_or_c)
 	}
 }
 
-// Questa funzione avra il compito di verficare il codice dei vari colori r g b
-/*
-static int check_colors_value(char **line)
+int check_colors_value(char **rgb_split)
 {
-	int ret;
+	int	i;
+	int j;
 
-	if (!line || !line[0] || !line[1] || !line[2])
-		return (0);
-	
+	if (!rgb_split || !rgb_split[0] || !rgb_split[1] || !rgb_split[2])
+		return (-1);
+	i = 0;
+	j = 0;
+	while(rgb_split[i])
+	{
+		while(rgb_split[i][j])
+		{
+			if(!ft_isdigit(rgb_split[i][j]))
+				return (-1);
+			j++;
+		}
+		i++;
+	}
+	return (1);
 }
-		*/
