@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:16:54 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/14 13:19:26 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:37:04 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ int check_colors_value(char **rgb_split)
 	if (!rgb_split || !rgb_split[0] || !rgb_split[1] || !rgb_split[2])
 		return (-1);
 	i = 0;
-	j = 0;
 	while(rgb_split[i])
 	{
+		j = 0;
 		while(rgb_split[i][j])
 		{
 			if(!ft_isdigit(rgb_split[i][j]))
