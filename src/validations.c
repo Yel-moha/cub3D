@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:16:54 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/14 15:41:39 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/14 16:56:01 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	fill_colors(char **line, t_scene *scene, char f_or_c)
 	}
 }
 
-int check_colors_value(char **rgb_split)
+int check_colors_value(char **rgb_split, char **split)
 {
 	int	i;
 	int j;
@@ -94,7 +94,10 @@ int check_colors_value(char **rgb_split)
 		while(rgb_split[i][j] && ft_atoi(rgb_split[i]) >= 0)
 		{
 			if(!ft_isdigit(rgb_split[i][j]) && rgb_split[i][j] != '\n')
+			{
+				free_split(split);
 				return (-1);
+			}
 			j++;
 		}
 		i++;

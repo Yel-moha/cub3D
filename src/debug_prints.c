@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:17:31 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/09 15:38:43 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/14 17:31:37 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	print_text_paths(t_scene scene)
 	printf("percorso sfondo south e' : %s\n", scene.textures.so);
 	printf("percorso sfondo west e' : %s\n", scene.textures.we);
 	printf("percorso sfondo east e' : %s\n", scene.textures.ea);
-	printf("la flag e' : %s\n", scene.flag);
 }
 
 void	print_colors(t_scene scene)
@@ -45,4 +44,15 @@ void	print_colors(t_scene scene)
 	printf("g = %d\n", scene.ceiling.g);
 	printf("b = %d\n", scene.ceiling.b);
 	printf("value = %d\n", scene.ceiling.value);
+}
+void print_player(t_scene scene)
+{
+	printf("La direzione del giocatore (spawn) e' %c\n", scene.player.spawn);
+}
+
+void print_map(t_scene scene)
+{
+	printf("la largezza della mappa : %d\n", scene.map.width);
+	printf("la lunghezza della mappa : %d\n", scene.map.height);
+	printf("la flag e' : %s\n", scene.flag);
 }

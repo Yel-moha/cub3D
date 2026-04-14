@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:48:58 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/14 16:17:11 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/14 16:56:32 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ static char *split_more(char **split)
 		joined = tmp;
 		i++;
 	}
-	free_split(split);
 	return (joined);
 }
 
@@ -111,22 +110,22 @@ void	parse_colors(char *line, t_scene *scene)
 {
 	char	**split;
 	int		col_code;
-	
+	char	**rgb_split;
+	char	*joined_rgb;
+
 	split = ft_split(line, ' ');
 	split_error(split);
+	rgb_split = NULL;
+	joined_rgb = NULL;
 	if (ft_strncmp(split[0], "F", 2) == 0
 		|| ft_strncmp(split[0], "C", 2) == 0)
 	{
-		char	**rgb_split;
-		char	*joined_rgb;
-		
-		rgb_split = NULL;
 		joined_rgb = split_more(split);
 		if (joined_rgb)
 			rgb_split = ft_split(joined_rgb, ',');
 		split_error(rgb_split);
-		col_code = check_colors_value(rgb_split);
-		if(col_code == -1)
+		col_code = check_colors_value(rgb_split, split);
+		if (col_code == -1)
 			error_colors_value(line, rgb_split, scene, joined_rgb);
 		if (rgb_split)
 			free_split_helper(rgb_split, scene, split[0][0]);

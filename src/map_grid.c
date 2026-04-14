@@ -6,13 +6,13 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 17:17:44 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/09 17:00:17 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/14 17:54:04 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int count_symb(char *line)
+static int count_symb(char *line, t_scene *scene)
 {
     int  i;
     int     count;
@@ -22,7 +22,10 @@ static int count_symb(char *line)
     while(line[i])
     {
         if(line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+        {
             count++;
+            scene->player.spawn = line[i];
+        }
         i++;
     }
     return (count);
@@ -30,17 +33,19 @@ static int count_symb(char *line)
 void count_grid_height(char *line, t_scene *scene)
 {
     size_t j;
-    size_t i;
 
     j = 0;
-    i = 0;
-
-    scene->pos += count_symb(line);
+    scene->pos += count_symb(line, scene);
+    if(scene->pos > 1)
+        printf("Errore spawn giocatore %d\n", scene->pos);
     while(line[j] == '1' || line[j] == '0' || line[j] == ' ')
         j++;
+    printf("j == %zu \n", j);
+    if ((line[j] == '\n' || line[j] == '\0') && j != 0)
     if(j == ft_strlen(line) - 1 && j != 0)
         printf("riga composta da soli zeri e uni %s\n", line);
-    printf("numeri di simboli pos e' : %d\n", scene->pos);
+    if(j == ft_strlen(line))
+        printf("riga composta da soli zeri e uni %s\n", line);
 }
 int max_line(char *line, t_scene *scene)
 {

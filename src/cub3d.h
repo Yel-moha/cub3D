@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/14 16:05:17 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/14 17:32:13 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*get_next_line(int fd);
 void    fill_direction(char **line, t_scene *scene);
 void    fill_colors(char **line, t_scene *scene, char f_or_c);
 void    fill_map(char *line, t_scene *scene);
-int     check_colors_value(char **rgb_split);
+int     check_colors_value(char **rgb_split, char **split);
 
 
 // Errors functions
@@ -90,6 +90,8 @@ int    read_map_errors(char *line);
 void    print_split(char **split);
 void    print_text_paths(t_scene scene);
 void	print_colors(t_scene scene);
+void    print_player(t_scene scene);
+void    print_map(t_scene scene);
 
 // free functions
 void	free_split(char **split);
@@ -110,6 +112,9 @@ int     max_line(char *line, t_scene *scene);
 // errors
 void double_color_path(char flag, t_scene *scene, char **split);
 void error_colors_value(char *line, char **rgb_split, t_scene *scene, char *joined);
+
+// grid
+
 
 #endif
 

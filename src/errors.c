@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 15:54:03 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/14 16:06:18 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/14 16:52:18 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void double_color_path(char flag, t_scene *scene, char **split)
 	if(flag == 'C')
 		write(2, "Errore doppio path per il colore dei cieling\n", \
 			ft_strlen("Errore doppio path per il colore dei cieling") + 1);
-	//QUi occorre ancora fare il free della *line, e andrebbe passata da parseline
-	exit(EXIT_FAILURE); // Termina il programma con codice di errore (di solito 1)
+	exit(EXIT_FAILURE);
 }
 
 void error_colors_value(char *line, char **rgb_split, t_scene *scene, char *joined)
@@ -44,5 +43,5 @@ void error_colors_value(char *line, char **rgb_split, t_scene *scene, char *join
 	free_scene(scene);
 	write(2, "Errore valore colori\n", \
 			ft_strlen("Errore valore colori\n") + 1);
-	exit(EXIT_FAILURE); // Termina il programma con codice di errore (di solito 1)
+	exit(EXIT_FAILURE);
 }
