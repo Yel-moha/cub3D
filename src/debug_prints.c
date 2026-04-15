@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:17:31 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/14 17:31:37 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/15 11:54:40 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,15 @@ void print_map(t_scene scene)
 	printf("la largezza della mappa : %d\n", scene.map.width);
 	printf("la lunghezza della mappa : %d\n", scene.map.height);
 	printf("la flag e' : %s\n", scene.flag);
+}
+
+void print_grid(t_scene scene)
+{
+	int i;
+
+	i = 0;
+	while(i < scene.map.height)
+	{
+		printf("%s\n", scene.map.grid[i]);
+	}
 }

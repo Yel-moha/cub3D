@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/14 17:32:13 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/15 11:52:59 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,12 @@ void    parse_colors(char *line, t_scene *scene);
 //map_grid
 void    count_grid_height(char *line, t_scene *scene);
 int     max_line(char *line, t_scene *scene);
+void    fill_grid(t_scene *scene, int i, char *line);
 
 // errors
 void double_color_path(char flag, t_scene *scene, char **split);
 void error_colors_value(char *line, char **rgb_split, t_scene *scene, char *joined);
+void error_spawn_player(char *line, t_scene *scene);
 
 // grid
 
