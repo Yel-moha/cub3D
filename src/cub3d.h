@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/15 11:52:59 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/15 17:00:02 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_map {
     char **grid;
     int   width;
     int   height;
+    int   letta;
 } t_map;
 
 typedef struct s_player {
@@ -109,6 +110,8 @@ void    parse_colors(char *line, t_scene *scene);
 void    count_grid_height(char *line, t_scene *scene);
 int     max_line(char *line, t_scene *scene);
 void    fill_grid(t_scene *scene, int i, char *line);
+void    allocate_grid(t_scene *scene);
+
 
 // errors
 void double_color_path(char flag, t_scene *scene, char **split);
@@ -116,7 +119,7 @@ void error_colors_value(char *line, char **rgb_split, t_scene *scene, char *join
 void error_spawn_player(char *line, t_scene *scene);
 
 // grid
-
+void	parse_grid(t_scene *scene, int fd, char *line);
 
 #endif
 

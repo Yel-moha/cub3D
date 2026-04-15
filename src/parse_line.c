@@ -6,38 +6,91 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:48:58 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/14 16:56:32 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/15 17:10:38 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	parse_line(const char *map_path, t_scene *scene)
+static int	is_map_line(char *line)
+{
+	int	j;
+
+	j = 0;
+	while (line[j] == '1' || line[j] == '0' || line[j] == ' '
+		|| line[j] == 'N' || line[j] == 'S' || line[j] == 'W'
+		|| line[j] == 'E')
+		j++;
+	if ((line[j] == '\n' || line[j] == '\0') && j != 0)
+		return (1);
+	return (0);
+}
+
+static int	count_pass_line(t_scene *scene, int fd, char *line)
+{
+	int	line_len;
+
+	line_len = max_line(line, scene);
+	if (line_len > scene->map.width)
+		scene->map.width = line_len;
+	parse_textures(line, scene, fd);
+	parse_colors(line, scene);
+	if (scene->counter == 6 && is_map_line(line))
+	{
+		parse_grid(scene, fd, line);
+		return (1);
+	}
+	return (0);
+}
+
+static void	count_grid_pass(const char *map_path, t_scene *scene)
 {
 	int		fd;
-	int		line_len;
 	char	*line;
 
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
-	{
-		line_errors(NULL, fd);
-		return ;
-	}
+		return (line_errors(NULL, fd));
 	line = get_next_line(fd);
 	while (line)
 	{
-		line_len = max_line(line, scene);
-		if (line_len > scene->map.width)
-			scene->map.width = line_len;
-		parse_textures(line, scene, fd);
-		parse_colors(line, scene);
-		if(scene->counter == 6)
-			count_grid_height(line, scene);
+		if (count_pass_line(scene, fd, line))
+			break ;
 		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
+}
+
+static void	fill_grid_pass(const char *map_path, t_scene *scene)
+{
+	int		fd;
+	int		grid_i;
+	char	*line;
+
+	fd = open(map_path, O_RDONLY);
+	if (fd < 0)
+		return (line_errors(NULL, fd));
+	grid_i = 0;
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (is_map_line(line) && grid_i < scene->map.height)
+			fill_grid(scene, grid_i++, line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+}
+
+void	parse_line(const char *map_path, t_scene *scene)
+{
+	count_grid_pass(map_path, scene);
+	if (scene->map.letta != 1)
+		return ;
+	allocate_grid(scene);
+	scene->map.letta = 2;
+	fill_grid_pass(map_path, scene);
 }
 
 void	parse_textures(char *line, t_scene *scene, int fd)

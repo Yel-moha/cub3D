@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 17:17:44 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/15 12:09:15 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/15 15:46:21 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,19 @@ static int count_symb(char *line, t_scene *scene)
 void count_grid_height(char *line, t_scene *scene)
 {
     size_t j;
-    int     i;
 
     j = 0;
-    i = 0;
     scene->pos += count_symb(line, scene);
     if(scene->pos > 1)
          error_spawn_player(line, scene);
-    while(line[j] == '1' || line[j] == '0' || line[j] == ' ')
-        j++;
-    if ((line[j] == '\n' || line[j] == '\0') && j != 0)
-    if(j == ft_strlen(line) - 1 && j != 0)
+    while(line[j] == '1' || line[j] == '0' || line[j] == ' '
+        || line[j] == 'N' || line[j] == 'S' || line[j] == 'W'
+        || line[j] == 'E')
     {
-        fill_grid(scene, i, line);
-        i++;
+        j++;
     }
-    if(j == ft_strlen(line) && j == (size_t)scene->map.width)
-        printf("riga composta da soli zeri e uni %s\n", line);
+    if ((line[j] == '\n' || line[j] == '\0') && j != 0)
+        scene->map.height++;
 }
 
 int max_line(char *line, t_scene *scene)
@@ -65,8 +61,6 @@ int max_line(char *line, t_scene *scene)
             || line[j] == 'N' || line[j] == 'S' || line[j] == 'W'
             || line[j] == 'E') && scene->counter == 6)
         j++;
-    if(j != 0)
-        scene->map.height++;
     return (j);
 }
 void fill_grid(t_scene *scene, int i, char *line)
@@ -75,8 +69,7 @@ void fill_grid(t_scene *scene, int i, char *line)
     int j;
 
     j = 0;
-    allocate_grid(scene);
-    while(line)
+    while(line[j] != '\0' && line[j] != '\n')
     {
         if(line[j] == ' ')
             scene->map.grid[i][j] = '1';
@@ -84,6 +77,12 @@ void fill_grid(t_scene *scene, int i, char *line)
             scene->map.grid[i][j] = line[j];
         j++;
     }
+    while (j < scene->map.width)
+    {
+        scene->map.grid[i][j] = '1';
+        j++;
+    }
+    scene->map.grid[i][j] = '\0';
 }
 
 void allocate_grid(t_scene *scene)
@@ -92,13 +91,13 @@ void allocate_grid(t_scene *scene)
 
     i = 0;
     if(scene->map.height > 0)
-        scene->map.grid = malloc(sizeof(char *) * scene->map.height + 1);
+        scene->map.grid = malloc(sizeof(char *) * (scene->map.height + 1));
     if(!scene->map.grid)
         return ;
-    scene->map.grid[scene->map.height] = '\0';
-    while(i < scene->map.height);
+    scene->map.grid[scene->map.height] = NULL;
+    while(i < scene->map.height)
     {
-        scene->map.grid[i] = malloc(sizeof(char) * scene->map.width);
+        scene->map.grid[i] = malloc(sizeof(char) * scene->map.width + 1);
         if(!scene->map.grid[i])
             return ;
         scene->map.grid[i][scene->map.width] = '\0';

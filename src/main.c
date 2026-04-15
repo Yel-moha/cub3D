@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 15:32:37 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/14 17:33:39 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/15 17:00:27 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void allocate_scene(t_scene *scene)
 	scene->map.height = 0;
 	scene->counter = 0;
 	scene->pos = 0;
+	scene->map.letta = 0;
 }
 	
 int	main(int argc, char **argv)
