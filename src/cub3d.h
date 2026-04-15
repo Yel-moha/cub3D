@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/15 17:00:02 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/15 18:15:49 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,9 @@ void    free_scene(t_scene *scene);
 
 //parse line
 void    parse_line(const char *map_path, t_scene *scene);
-void    parse_textures(char *line, t_scene *scene, int fd);
-void    line_errors(char *line, int fd);
-void    parse_colors(char *line, t_scene *scene);
+
+
+
 
 //map_grid
 void    count_grid_height(char *line, t_scene *scene);
@@ -114,12 +114,20 @@ void    allocate_grid(t_scene *scene);
 
 
 // errors
-void double_color_path(char flag, t_scene *scene, char **split);
-void error_colors_value(char *line, char **rgb_split, t_scene *scene, char *joined);
-void error_spawn_player(char *line, t_scene *scene);
+void    double_color_path(char flag, t_scene *scene, char **split);
+void    error_colors_value(char *line, char **rgb_split, t_scene *scene, char *joined);
+void    error_spawn_player(char *line, t_scene *scene);
+void    line_errors(char *line, int fd);
+void	split_error(char **split);
 
 // grid
 void	parse_grid(t_scene *scene, int fd, char *line);
+int     is_map_line(char *line);
+void	fill_grid_pass(const char *map_path, t_scene *scene);
+
+// parse colors
+void    parse_colors(char *line, t_scene *scene);
+void    parse_textures(char *line, t_scene *scene, int fd);
 
 #endif
 

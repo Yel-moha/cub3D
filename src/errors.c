@@ -6,18 +6,11 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 15:54:03 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/15 11:02:59 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/15 18:14:37 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	read_map_errors(char *line)
-{
-	if (!line)
-		return (0);
-	return (1);
-}
 
 void double_color_path(char flag, t_scene *scene, char **split)
 {
@@ -53,4 +46,29 @@ void error_spawn_player(char *line, t_scene *scene)
 	write(2, "Errore spawn player\n", \
 			ft_strlen("Errore spawn player\n") + 1);
 	exit(EXIT_FAILURE);
+}
+
+void	line_errors(char *line, int fd)
+{
+	if (fd < 0)
+	{
+		perror("open");
+		return ;
+	}
+	if (!line)
+	{
+		printf("file vuoto o non leggibile:\n");
+		close(fd);
+		return ;
+	}
+}
+
+void	split_error(char **split)
+{
+	if (!split || !split[0])
+	{
+		free_split(split);
+		exit(EXIT_FAILURE);
+	}
+	return ;
 }
