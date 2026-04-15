@@ -63,7 +63,8 @@ int	main(int argc, char **argv)
 	//print_colors(*scene); // debug
 	print_player(*scene);
 	printf("il numero di texture e' : %d\n", scene->counter);
-	print_split(scene->map.grid);
+	//print_split(scene->map.grid);
+	print_grid(*scene);
 	free_scene(scene);
 	return (0);
 }

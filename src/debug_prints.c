@@ -59,11 +59,24 @@ void print_map(t_scene scene)
 
 void print_grid(t_scene scene)
 {
+	printf("la larghezza della griglia è %d\n", scene.map.width);
 	int i;
+	int j;
 
 	i = 0;
-	while(i < scene.map.height)
+	while (i < scene.map.height)
 	{
-		printf("%s\n", scene.map.grid[i]);
+		printf("row[%d]: ", i);
+		j = 0;
+		while (j < scene.map.width)
+		{
+			if (scene.map.grid[i][j] == ' ')
+				printf(".");
+			else
+				printf("%c", scene.map.grid[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
 	}
 }

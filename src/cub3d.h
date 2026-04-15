@@ -93,6 +93,7 @@ void    print_text_paths(t_scene scene);
 void	print_colors(t_scene scene);
 void    print_player(t_scene scene);
 void    print_map(t_scene scene);
+void    print_grid(t_scene scene);
 
 // free functions
 void	free_split(char **split);

@@ -18,9 +18,9 @@ static int	count_pass_line(t_scene *scene, int fd, char *line)
 {
 	int	line_len;
 
-	line_len = max_line(line, scene);
+	line_len = max_line(line, scene);  //Torna la lunghezza della singola linea della griglia
 	if (line_len > scene->map.width)
-		scene->map.width = line_len;
+		scene->map.width = line_len; //Aggiorno la larghezza della griglia con la linea più lunga della griglia
 	parse_textures(line, scene, fd);
 	parse_colors(line, scene);
 	if (scene->counter == 6 && is_map_line(line))

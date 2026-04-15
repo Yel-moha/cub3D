@@ -21,7 +21,7 @@ static void update_flags(t_scene *scene, char *flag)
 		return ;
 	free(scene->flag);
 	scene->flag = joined;
-	scene->counter++;
+	scene->counter++; //Variabile determinante per capire se i colori o le texture sono ripetute prima della griglia
 }
 
 void	fill_direction(char **line, t_scene *scene)

@@ -39,17 +39,15 @@ void count_grid_height(char *line, t_scene *scene)
     size_t j;
 
     j = 0;
-    scene->pos += count_symb(line, scene);
+    scene->pos += count_symb(line, scene);  //Aggiorna il numero dei simboli N, S, E, W all'interno della griglia
     if(scene->pos > 1)
-         error_spawn_player(line, scene);
+         error_spawn_player(line, scene);  //Esce con errore se c'è piu di una posizione N, S, E, W all'interno della griglia
     while(line[j] == '1' || line[j] == '0' || line[j] == ' '
         || line[j] == 'N' || line[j] == 'S' || line[j] == 'W'
         || line[j] == 'E')
-    {
         j++;
-    }
     if ((line[j] == '\n' || line[j] == '\0') && j != 0)
-        scene->map.height++;
+        scene->map.height++;  //Aggiorno l'altezza della mappa dopo ogni linea della griglia corretta e non vuota
 }
 
 int max_line(char *line, t_scene *scene)
