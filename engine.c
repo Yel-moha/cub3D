@@ -37,12 +37,17 @@ void	texture_loading()
 	}
 }
 
+void	init_ray(t_game *game, t_ray *ray, int x)
+{
+
+}
+
 void	raycasting()
 {
 	int	x;
 
 	x = 0;
-	while(x =< WINDOW_WIDTH)
+	while(x < WINDOW_WIDTH)
 	{
 		camera_x = 2 * x / width - 1;
 		ray_dir = dir + plane * camera_x
@@ -50,7 +55,7 @@ void	raycasting()
 	}
 }
 
-void	dda(t_game game)
+void	perform_dda(t_game *game)
 {
 	int		map_x;
 	int		map_y;
@@ -58,20 +63,33 @@ void	dda(t_game game)
 	double	delta_y;
 	
 //which box of the map we're in
-	map_x = (int)game.scene->player.pos_x;
-	map_y = (int)game.scene->player.pos_y;
+	map_x = (int)game->scene->player.pos_x;
+	map_y = (int)game->scene->player.pos_y;
 	
 //length of ray from one x or y-side to next x or y-side
-	delta_x = abs(1 / ray_dir_x);
-	delta_y = abs(1 / ray_dir_y);
+	delta_x = fabs(1 / ray_dir_x);
+	delta_y = fabs(1 / ray_dir_y);
 
-	if(ray_dir_x < 0)
+	if (ray->dir_x < 0)
 	{
-		left;
+		step_x = -1;
+		side_dist_x = (player.pos_x - map_x) * delta_x; //go left
 	}
 	else
 	{
-		right;
+		step_x = 1;
+		side_dist_x = (map_x + 1.0 - player.pos_x) * delta_x; //go right
+	}
+
+	if (ray->dir_y < 0)
+	{
+		step_y = -1;
+		side_dist_y = (player.pos_y - map_y) * delta_y; //go left
+	}
+	else
+	{
+		step_y = 1;
+		side_dist_y = (map_y + 1.0 - player.pos_y) * delta_y; //go right
 	}
 	
 //length of ray from current position to next x or y-side
@@ -80,35 +98,60 @@ void	dda(t_game game)
 
 	while()
 	{
-		if(side_dist_x > side_dist_y)
+		if(side_dist_x < side_dist_y)
 		{
-			//avanzi nella direzione minore
+			side_dist_x += delta_x;
+			map_x += step_x;
+			ray->was_hit_vertical = 1; //avanzo nella direzione minore
 		}
-		else if(side_dist_x < side_dist_y)
+		else
 		{
-			//avanzi nella direzione minore
+			side_dist_y += delta_y;
+			map_y += step_y;
+			ray->was_hit_vertical = 0;
 		}
-		side_dist_x = ;
-		side_dist_y = ;
-		if(game->scene->map[y][x] == '1')
+
+		if(game->scene->map.grid[map_y][map_x] == '1')
 			break ;
 	}
 }
 
+void	render_frame(t_game *game)
+{
+	int	x;
+
+	x = 0;
+	while (x < WINDOW_WIDTH)
+	{
+		init_ray(game, &game->rays[x], x);
+		perform_dda(game, &game->rays[x]);
+		compute_distance(game, &game->rays[x]);
+		draw_column(game, &game->rays[x], x);
+		x++;
+	}
+
+	mlx_put_image_to_window(...);
+}
+
 void	engine_init(t_game game)
 {
-	mlx_init();
-	mlx_new_window();
-	mlx_new_image();
-	...
-	player_init();
-	texture_loading();
+	game->mlx = mlx_init();
+	game->win = mlx_new_window();
 
-	game->rays = malloc(...)
+	init_image(game);
+	player_init(game);
+	texture_loading(game);
 
-	mlx_loop();
+	game->rays = malloc(sizeof(t_ray) * WINDOW_WIDTH);
 
-	raycasting();
-	dda(game);
-	perp_wall_dist();
+	mlx_loop_hook(game->mlx, render_frame, game);
+	mlx_loop(game->mlx);
+
+	// render_frame è dove fai:
+	// raycasting
+	// disegno
+
+	// raycasting();
+	// dda(game);
+	// perp_wall_dist();
 }
