@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 15:32:37 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/15 17:00:27 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/17 18:52:19 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,12 @@ int	main(int argc, char **argv)
 	map_path = argv[1];
 	parse_line(map_path, scene);
 	print_text_paths(*scene); // debug
-	//print_colors(*scene); // debug
+	print_colors(*scene); // debug
 	print_player(*scene);
 	printf("il numero di texture e' : %d\n", scene->counter);
 	//print_split(scene->map.grid);
 	print_grid(*scene);
+	print_map(*scene);
 	free_scene(scene);
 	return (0);
 }
