@@ -6,10 +6,27 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/01 16:40:33 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/04 15:50:42 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef CUB3D_H
+# define CUB3D_H
+
+# include <stdlib.h>
+# include <unistd.h>
+# include "minilibx-linux/mlx.h"
+# include "libft/libft.h"
+# include <math.h>
+// Da cancellare poi
+#include <stdio.h>
+
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
+// gestita nel parsing usando la preziosissima funziona ft_split da libft
 typedef struct s_tex_paths {
     char *no;
     char *so;
@@ -50,3 +67,29 @@ typedef struct s_scene {
     t_map       map;
     t_player    player;
 } t_scene;
+
+// Estratto direttamente del progetto get_next_line al fine di leggere il file della mappa
+char	*get_next_line(int fd);
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Validations funcions
+void	fill_direction(char **line, t_tex_paths *pos);
+void fill_colors(char **line);
+
+
+// Errors functions
+int    read_map_errors(char *line);
+
+// Debug and Prints
+void print_split(char **split);
+void print_text_paths(t_tex_paths pos_text);
+void print_colors(t_rgb colors);
+
+// free functions
+void	free_split(char **split);
+void    free_paths(t_tex_paths *pos_text);
+void    free_colors(t_rgb *flo_ciel);
+
+#endif
+
