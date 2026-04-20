@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_clors.c                                      :+:      :+:    :+:   */
+/*   parse_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:13:26 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/15 18:31:15 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/20 15:27:58 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_parsing.h"
 
 static void free_split_helper(char **split, t_scene *scene, char flag)
 {

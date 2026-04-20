@@ -6,11 +6,11 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 15:24:22 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/14 16:16:01 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/20 15:27:31 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_parsing.h"
 
 static char	*append_buffer(char *buffer, char *temp)
 {

@@ -6,11 +6,11 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:17:31 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/15 11:54:40 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/20 15:28:32 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_parsing.h"
 
 void	print_split(char **split)
 {

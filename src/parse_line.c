@@ -6,11 +6,11 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:48:58 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/15 18:31:10 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/20 15:27:24 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_parsing.h"
 
 
 
@@ -42,6 +42,7 @@ static void	count_grid_pass(const char *map_path, t_scene *scene)
 	line = get_next_line(fd);
 	while (line)
 	{
+		//check_invalid_chars(scene, line);
 		if (count_pass_line(scene, fd, line))
 			break ;
 		free(line);

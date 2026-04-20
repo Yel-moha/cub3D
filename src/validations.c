@@ -6,13 +6,13 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:16:54 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/14 16:56:01 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/20 15:27:48 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_parsing.h"
 
-static void update_flags(t_scene *scene, char *flag)
+void update_flags(t_scene *scene, char *flag)
 {
 	char	*joined;
 

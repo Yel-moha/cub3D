@@ -6,11 +6,11 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 11:35:46 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/09 15:19:57 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/20 15:28:24 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_parsing.h"
 
 void	free_paths(t_tex_paths *pos_text)
 {

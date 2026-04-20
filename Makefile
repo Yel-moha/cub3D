@@ -9,7 +9,8 @@ SRCS		=	src/map/read_maps.c \
 				src/parse_line.c \
 				src/map_grid.c \
 				src/grid.c \
-				src/parse_colors.c 
+				src/parse_colors.c \
+				src/grid_errors.c
 
 OBJS		= $(SRCS:.c=.o)
 

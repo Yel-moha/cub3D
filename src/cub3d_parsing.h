@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/15 18:15:49 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/20 14:51:40 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct s_player {
     double plane_x;
     double plane_y;
 } t_player;
-
 typedef struct s_scene {
     t_tex_paths textures;
     t_rgb       floor;
@@ -82,6 +81,7 @@ void    fill_direction(char **line, t_scene *scene);
 void    fill_colors(char **line, t_scene *scene, char f_or_c);
 void    fill_map(char *line, t_scene *scene);
 int     check_colors_value(char **rgb_split, char **split);
+void    update_flags(t_scene *scene, char *flag);
 
 
 // Errors functions
@@ -129,6 +129,9 @@ void	fill_grid_pass(const char *map_path, t_scene *scene);
 // parse colors
 void    parse_colors(char *line, t_scene *scene);
 void    parse_textures(char *line, t_scene *scene, int fd);
+
+//grind errors
+void check_invalid_chars(t_scene *scene, char *line);
 
 #endif
 

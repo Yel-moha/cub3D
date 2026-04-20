@@ -6,11 +6,11 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 17:17:44 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/15 15:46:21 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/20 15:28:03 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_parsing.h"
 
 static int count_symb(char *line, t_scene *scene)
 {

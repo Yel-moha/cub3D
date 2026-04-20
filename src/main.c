@@ -6,11 +6,11 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 15:32:37 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/17 18:52:19 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/20 15:28:09 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_parsing.h"
 
 //da cancellare prima di pusciare
 #include <stdio.h>
