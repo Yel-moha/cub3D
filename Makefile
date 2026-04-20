@@ -6,6 +6,11 @@ SRCS		=	src/map/read_maps.c \
 				src/debug_prints.c \
 				src/validations.c \
 				src/free_utils.c \
+				src/parse_line.c \
+				src/map_grid.c \
+				src/grid.c \
+				src/parse_colors.c \
+				src/grid_errors.c
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -19,7 +24,7 @@ LIBFT_FLAGS	= -L$(LIBFT_DIR) -lft
 
 # minilibx
 MLX_DIR		= src/minilibx-linux
-MLX			= $(MLX_DIR)/libmlx_linux.a
+MLX			= $(MLX_DIR)/libmlx.a
 MLX_FLAGS	= -L$(MLX_DIR) -lmlx -lX11 -lXext -lm
 
 all: $(NAME)
@@ -31,7 +36,9 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(MLX):
-	$(MAKE) -C $(MLX_DIR)
+	echo "INC=/usr/include" > $(MLX_DIR)/Makefile.gen
+	cat $(MLX_DIR)/Makefile.mk | grep -v %%%% >> $(MLX_DIR)/Makefile.gen
+	$(MAKE) -C $(MLX_DIR) -f Makefile.gen CC="gcc -std=gnu17" all
 
 clean:
 	rm -f $(OBJS)

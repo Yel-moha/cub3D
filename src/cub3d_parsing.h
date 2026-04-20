@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/04 15:50:42 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/20 14:51:40 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_map {
     char **grid;
     int   width;
     int   height;
+    int   letta;
 } t_map;
 
 typedef struct s_player {
@@ -59,13 +60,15 @@ typedef struct s_player {
     double plane_x;
     double plane_y;
 } t_player;
-
 typedef struct s_scene {
     t_tex_paths textures;
     t_rgb       floor;
     t_rgb       ceiling;
     t_map       map;
     t_player    player;
+    int         counter;  //usata per contare le linee di percorsi e colori prima della mappa
+    char        *flag;
+    int         pos; //usata per quantificare N,E,W,S dentro la mappa
 } t_scene;
 
 // Estratto direttamente del progetto get_next_line al fine di leggere il file della mappa
@@ -74,22 +77,61 @@ char	*get_next_line(int fd);
 
 
 // Validations funcions
-void	fill_direction(char **line, t_tex_paths *pos);
-void fill_colors(char **line);
+void    fill_direction(char **line, t_scene *scene);
+void    fill_colors(char **line, t_scene *scene, char f_or_c);
+void    fill_map(char *line, t_scene *scene);
+int     check_colors_value(char **rgb_split, char **split);
+void    update_flags(t_scene *scene, char *flag);
 
 
 // Errors functions
 int    read_map_errors(char *line);
 
 // Debug and Prints
-void print_split(char **split);
-void print_text_paths(t_tex_paths pos_text);
-void print_colors(t_rgb colors);
+void    print_split(char **split);
+void    print_text_paths(t_scene scene);
+void	print_colors(t_scene scene);
+void    print_player(t_scene scene);
+void    print_map(t_scene scene);
+void    print_grid(t_scene scene);
 
 // free functions
 void	free_split(char **split);
 void    free_paths(t_tex_paths *pos_text);
 void    free_colors(t_rgb *flo_ciel);
+void    free_scene(t_scene *scene);
+
+//parse line
+void    parse_line(const char *map_path, t_scene *scene);
+
+
+
+
+//map_grid
+void    count_grid_height(char *line, t_scene *scene);
+int     max_line(char *line, t_scene *scene);
+void    fill_grid(t_scene *scene, int i, char *line);
+void    allocate_grid(t_scene *scene);
+
+
+// errors
+void    double_color_path(char flag, t_scene *scene, char **split);
+void    error_colors_value(char *line, char **rgb_split, t_scene *scene, char *joined);
+void    error_spawn_player(char *line, t_scene *scene);
+void    line_errors(char *line, int fd);
+void	split_error(char **split);
+
+// grid
+void	parse_grid(t_scene *scene, int fd, char *line);
+int     is_map_line(char *line);
+void	fill_grid_pass(const char *map_path, t_scene *scene);
+
+// parse colors
+void    parse_colors(char *line, t_scene *scene);
+void    parse_textures(char *line, t_scene *scene, int fd);
+
+//grind errors
+void check_invalid_chars(t_scene *scene, char *line);
 
 #endif
 
