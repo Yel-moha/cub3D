@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:48:58 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/20 15:27:24 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/21 15:02:16 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static void	count_grid_pass(const char *map_path, t_scene *scene)
 	line = get_next_line(fd);
 	while (line)
 	{
-		//check_invalid_chars(scene, line);
 		if (count_pass_line(scene, fd, line))
 			break ;
 		free(line);

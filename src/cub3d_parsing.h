@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_parsing.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/20 14:51:40 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/21 14:54:22 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void    parse_colors(char *line, t_scene *scene);
 void    parse_textures(char *line, t_scene *scene, int fd);
 
 //grind errors
-void check_invalid_chars(t_scene *scene, char *line);
+void check_extra_chars(t_scene *scene, char *line, char **split);
 
 #endif
 

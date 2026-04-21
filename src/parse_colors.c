@@ -6,11 +6,31 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:13:26 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/20 15:27:58 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/21 15:35:06 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_parsing.h"
+
+static int	split_len(char **split)
+{
+	int	len;
+
+	len = 0;
+	while (split && split[len])
+		len++;
+	return (len);
+}
+
+static int	is_texture_id(const char *id)
+{
+	if (!id)
+		return (0);
+	return (ft_strncmp(id, "NO", 3) == 0
+		|| ft_strncmp(id, "SO", 3) == 0
+		|| ft_strncmp(id, "WE", 3) == 0
+		|| ft_strncmp(id, "EA", 3) == 0);
+}
 
 static void free_split_helper(char **split, t_scene *scene, char flag)
 {
@@ -73,10 +93,28 @@ void	parse_colors(char *line, t_scene *scene)
 void	parse_textures(char *line, t_scene *scene, int fd)
 {
 	char	**split;
+	int		len;
 
 	split = ft_split(line, ' ');
 	if (!split || !split[0])
+	{
+		free_split(split);
+		return ;
+	}
+	if (!is_texture_id(split[0]))
+	{
+		free_split(split);
+		return ;
+	}
+	len = split_len(split);
+	if (len < 2)
+	{
 		line_errors(line, fd);
+		free_split(split);
+		return ;
+	}
+	if (len > 2)
+		check_extra_chars(scene, line, split);
 	fill_direction(split, scene);
 	free_split(split);
 }
