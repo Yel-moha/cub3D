@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 17:01:48 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/20 15:28:16 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/20 15:28:16 by yel-moha         ###   ####fill####.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	parse_grid(t_scene *scene, int fd, char *line)
 		free(line);
 		line = get_next_line(fd);
 	}
+
 	scene->map.letta = 1;
 }
 
@@ -72,3 +73,21 @@ void	fill_grid_pass(const char *map_path, t_scene *scene)
 	}
 	close(fd);
 }
+
+/*
+
+
+void validate_grid(char *line, int index)
+{
+	int counter_lines;
+	char *prev_line;
+
+	prev_line = ft_strdup((const)line);
+	if(!prev_line)
+		return ;
+	
+	counter_lines = 0;
+
+}
+
+*/

@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 17:17:44 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/20 15:28:03 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/21 16:45:24 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,20 @@ void fill_grid(t_scene *scene, int i, char *line)
     j = 0;
     while(line[j] != '\0' && line[j] != '\n')
     {
-        if(line[j] == ' ')
+        if(line[j] == ' ') // sostituisco gli spazi all'interno della mappa di uni
             scene->map.grid[i][j] = '1';
         else
             scene->map.grid[i][j] = line[j];
         j++;
     }
+    // Qui normalizzo la mappa con uni ma prima di farlo vorrei verificare che fosse valida
+    /*
     while (j < scene->map.width)
     {
         scene->map.grid[i][j] = '1';
         j++;
     }
+    */
     scene->map.grid[i][j] = '\0';
 }
 
@@ -89,13 +92,13 @@ void allocate_grid(t_scene *scene)
 
     i = 0;
     if(scene->map.height > 0)
-        scene->map.grid = malloc(sizeof(char *) * (scene->map.height + 1));
+        scene->map.grid = ft_calloc(scene->map.height + 1, sizeof(char *));
     if(!scene->map.grid)
         return ;
-    scene->map.grid[scene->map.height] = NULL;
+    //scene->map.grid[scene->map.height] = NULL;
     while(i < scene->map.height)
     {
-        scene->map.grid[i] = malloc(sizeof(char) * scene->map.width + 1);
+        scene->map.grid[i] = ft_calloc(scene->map.width + 1, sizeof(char));
         if(!scene->map.grid[i])
             return ;
         scene->map.grid[i][scene->map.width] = '\0';
