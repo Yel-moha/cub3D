@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:48:58 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/20 15:27:24 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/22 16:14:33 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,14 @@ void	parse_line(const char *map_path, t_scene *scene)
 	count_grid_pass(map_path, scene);
 	if (scene->map.letta != 1)
 		return ;
+	if (!validate_borders(map_path, scene))
+	{
+		write(2, "Errore mappa non chiusa\n", 24);
+		scene->map.width = 0;
+		scene->map.height = 0;
+		scene->map.letta = 0;
+		return ;
+	}
 	allocate_grid(scene);
 	scene->map.letta = 2;
 	fill_grid_pass(map_path, scene);
