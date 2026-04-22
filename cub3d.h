@@ -88,15 +88,27 @@ typedef struct s_scene
 
 typedef struct s_ray
 {
-    /*float*/ double   ray_angle;
-    /*float*/ double   wall_hit_x;
-    /*float*/ double   wall_hit_y;
-    /*float*/ double   distance;
-    // bool    is_ray_facing_up;
-    // bool    is_ray_facing_down;
-    // bool    is_ray_facing_left;
-    // bool    is_ray_facing_right;
-    bool    was_hit_vertical;
+	double	dir_x;
+	double	dir_y;
+
+	double	pos_x;
+	double	pos_y;
+
+	int		map_x;
+	int		map_y;
+
+	double	delta_x;
+	double	delta_y;
+
+	double	side_dist_x;
+	double	side_dist_y;
+
+	int		step_x;
+	int		step_y;
+
+	double  perp_dist;
+	
+	int was_hit_vertical;
 }           t_ray;
 
 typedef struct s_img
