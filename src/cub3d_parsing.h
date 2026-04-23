@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_parsing.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/21 14:54:22 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:05:40 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,5 +133,8 @@ void    parse_textures(char *line, t_scene *scene, int fd);
 //grind errors
 void check_extra_chars(t_scene *scene, char *line, char **split);
 
+//grid validation
+int	validate_borders(const char *map_path, t_scene *scene);
+int	validate_line(char *line, int index, t_scene *scene);
 #endif
 

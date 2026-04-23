@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:48:58 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/21 16:10:32 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:06:01 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	parse_line(const char *map_path, t_scene *scene)
 	count_grid_pass(map_path, scene);
 	if (scene->map.letta != 1)
 		return ;
-	//da qui occorre implementare le funzioni che verificano la validita della grigli
 	allocate_grid(scene);
 	scene->map.letta = 2;
 	fill_grid_pass(map_path, scene);
