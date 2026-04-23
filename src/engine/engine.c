@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 20:31:51 by anacotti          #+#    #+#             */
-/*   Updated: 2026/04/10 18:39:26 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:26:03 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 ✔ movimento player
 ✔ collisioni
 */
-
+/*
 void	player_init()
 {
 
@@ -152,3 +152,5 @@ void	engine_init(t_game game)
 	// dda(game);
 	// perp_wall_dist();
 }
+
+*/

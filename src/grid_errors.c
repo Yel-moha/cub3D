@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   grid_errors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:18:28 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/21 16:04:17 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:23:29 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_parsing.h"
+#include "cub3d.h"
 
 void check_extra_chars(t_scene *scene, char *line, char **split)
 {

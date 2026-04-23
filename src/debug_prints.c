@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   debug_prints.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:17:31 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/20 15:28:32 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:22:59 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_parsing.h"
+#include "cub3d.h"
 
 void	print_split(char **split)
 {

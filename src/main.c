@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 15:32:37 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/20 15:28:09 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:23:51 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_parsing.h"
+#include "cub3d.h"
 
 //da cancellare prima di pusciare
 #include <stdio.h>
@@ -62,10 +62,10 @@ int	main(int argc, char **argv)
 	print_text_paths(*scene); // debug
 	print_colors(*scene); // debug
 	print_player(*scene);
-	printf("il numero di texture e' : %d\n", scene->counter);
-	//print_split(scene->map.grid);
-	print_grid(*scene);
-	print_map(*scene);
+	//printf("il numero di texture e' : %d\n", scene->counter);
+	print_split(scene->map.grid);
+	//print_grid(*scene);
+	//print_map(*scene);
 	free_scene(scene);
 	return (0);
 }

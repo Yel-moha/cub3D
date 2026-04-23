@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 11:35:46 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/21 15:05:14 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:23:26 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_parsing.h"
+#include "cub3d.h"
 
 void	free_paths(t_tex_paths *pos_text)
 {

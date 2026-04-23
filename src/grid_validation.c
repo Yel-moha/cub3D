@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   grid_validation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 12:25:04 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/23 16:43:49 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:24:39 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_parsing.h"
+#include "cub3d.h"
 
 static int	line_len_no_nl(char *line)
 {

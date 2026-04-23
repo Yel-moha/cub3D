@@ -6,11 +6,11 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 17:01:48 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/23 17:04:58 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:23:40 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_parsing.h"
+#include "cub3d.h"
 
 void	parse_grid(t_scene *scene, int fd, char *line)
 {
