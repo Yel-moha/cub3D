@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 15:32:37 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/23 17:23:51 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/04/23 19:53:59 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ int	main(int argc, char **argv)
 	const char	*map_path;
 	t_scene		*scene;
 
+	//x testing
+	t_game	game;
+
 	scene = ft_calloc(1, sizeof(t_scene));
 	if (!scene)
 		return (1);
@@ -66,6 +69,13 @@ int	main(int argc, char **argv)
 	print_split(scene->map.grid);
 	//print_grid(*scene);
 	//print_map(*scene);
+
+	// x testing - collega scene al game
+	game.scene = scene;
+
+	// x testing - INIT ENGINE
+	engine_init(&game);
+	
 	free_scene(scene);
 	return (0);
 }

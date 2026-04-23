@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 20:31:51 by anacotti          #+#    #+#             */
-/*   Updated: 2026/04/23 17:26:03 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/04/23 19:44:23 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,42 @@
 ✔ movimento player
 ✔ collisioni
 */
-/*
-void	player_init()
-{
 
+//debug
+void	put_pixel(t_img *img, int x, int y, int color)
+{
+	char	*dst;
+
+	if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
+		return ;
+	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	*(unsigned int *)dst = color;
 }
 
-void	texture_loading()
+// void	player_init(t_game *game)
+// {
+
+// }
+
+void	init_image(t_game *game)
 {
-	while()
-	{
-		mlx_xpm_file_to_image();
-		mlx_get_data_addr();
-	}
+	game->img.img_ptr = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	game->img.addr = mlx_get_data_addr(
+		game->img.img_ptr,
+		&game->img.bpp,
+		&game->img.line_len,
+		&game->img.endian
+	);
 }
+
+// void	texture_loading()
+// {
+// 	while()
+// 	{
+// 		mlx_xpm_file_to_image();
+// 		mlx_get_data_addr();
+// 	}
+// }
 
 void	init_ray(t_game *game, t_ray *ray, int x)
 {
@@ -105,41 +127,59 @@ void	perform_dda(t_game *game, t_ray *ray)
 			ray->map_y += ray->step_y;
 			ray->was_hit_vertical = 0;
 		}
-		if (ray->map_y < 0 || ray->map_y >= map_height ||
-				ray->map_x < 0 || ray->map_x >= map_width)
+
+		// DEBUG VISIVO DEL RAGGIO NELLA MAPPA
+		put_pixel(&game->img, ray->map_x * 4, ray->map_y * 4, 0x00FF0000);
+		
+		if (ray->map_y < 0 || ray->map_y >= game->map.height ||
+				ray->map_x < 0 || ray->map_x >= game->map.width)
 			break ;
 		if(game->scene->map.grid[ray->map_y][ray->map_x] == '1')
 			hit = 1;
 	}
 }
 
-void	render_frame(t_game *game)
+int	render_frame(void *param)
 {
-	int	x;
+	t_game	*game;
+	int		x;
+
+	game = (t_game *)param;
+
+	// debug - pulizia schermo (nero)
+	for (int i = 0; i < WINDOW_WIDTH * WINDOW_HEIGHT; i++)
+		((int *)game->img.addr)[i] = 0x000000;
 
 	x = 0;
 	while (x < WINDOW_WIDTH)
 	{
-		init_ray(game, &game->rays[x], x);
-		perform_dda(game, &game->rays[x]);
-		compute_distance(game, &game->rays[x]);
-		draw_column(game, &game->rays[x], x);
+		init_ray(game, game->rays, x);
+		perform_dda(game, game->rays);
+		//compute_distance(game, game->rays[x]);
+		//draw_column(game, game->rays[x], x);
 		x++;
 	}
 
-	mlx_put_image_to_window(...);
+	mlx_put_image_to_window(game->mlx, game->win, game->img.img_ptr, 0, 0);
+	return(0);
 }
 
-void	engine_init(t_game game)
+void	engine_init(t_game *game)
 {
 	game->mlx = mlx_init();
-	game->win = mlx_new_window();
+	if (!game->mlx)
+		return ; // TO-DO clean_exit();
+	game->win = mlx_new_window(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
+	if (!game->win)
+		return ; // TO-DO clean_exit();
 
 	init_image(game);
-	player_init(game);
-	texture_loading(game);
+	//player_init(game);
+	//texture_loading(game);
 
 	game->rays = malloc(sizeof(t_ray) * WINDOW_WIDTH);
+	if (!game->rays)
+		return ; // TO-DO clean_exit();
 
 	mlx_loop_hook(game->mlx, render_frame, game);
 	mlx_loop(game->mlx);
@@ -152,5 +192,3 @@ void	engine_init(t_game game)
 	// dda(game);
 	// perp_wall_dist();
 }
-
-*/

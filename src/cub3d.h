@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/23 17:22:27 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/04/23 19:47:25 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 // Da cancellare poi
 #include <stdio.h>
 
-# define WINDOW_WIDTH
+# define WINDOW_WIDTH 1920
+# define WINDOW_HEIGHT 1080
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
@@ -41,7 +42,7 @@ typedef struct s_tex_paths {
 // {
 //     void *img;
 //     char *addr;
-//     int   width;cub3d.h
+//     int   width;
 //     int   height;
 // } t_texture;
 
@@ -124,10 +125,10 @@ typedef struct s_game
     void        *mlx;
     void        *win;
     t_scene     *scene;
-    // t_map       map;
+    t_map       map;
     t_img       img;
-    t_ray       *rays[WINDOW_WIDTH];
-    // t_player    player;
+    t_ray       *rays; //fixed
+    t_player    player;
 }               t_game;
 
 
@@ -199,5 +200,14 @@ void check_extra_chars(t_scene *scene, char *line, char **split);
 //grid validation
 int	validate_borders(const char *map_path, t_scene *scene);
 int	validate_line(char *line, int index, t_scene *scene);
-#endif
 
+//engine
+void	engine_init(t_game *game);
+int 	render_frame(void *param);
+void	perform_dda(t_game *game, t_ray *ray);
+void	init_ray(t_game *game, t_ray *ray, int x);
+
+void	init_image(t_game *game);
+void	player_init(t_game *game);
+
+#endif
