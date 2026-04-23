@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 12:25:04 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/22 16:46:45 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/23 16:43:49 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,14 +107,14 @@ int	validate_borders(const char *map_path, t_scene *scene)
 	loaded = load_map_rows(map_path, scene, rows);
 	if (loaded != scene->map.height)
 		return (free_rows(rows, loaded), 0);
-	if (!first_line(rows[0], 0, scene))
+	if (!validate_line(rows[0], 0, scene))
 		return (free_rows(rows, loaded), 0);
-	if (!first_line(rows[scene->map.height - 1], scene->map.height - 1, scene))
+	if (!validate_line(rows[scene->map.height - 1], scene->map.height - 1, scene))
 		return (free_rows(rows, loaded), 0);
 	i = 1;
 	while (i < scene->map.height - 1)
 	{
-		if (!first_line(rows[i], i, scene))
+		if (!validate_line(rows[i], i, scene))
 			return (free_rows(rows, loaded), 0);
 		if (!middle_row_is_closed(rows, scene->map.height, i))
 			return (free_rows(rows, loaded), 0);
@@ -124,7 +124,7 @@ int	validate_borders(const char *map_path, t_scene *scene)
 	return (1);
 }
 
-int	first_line(char *line, int index, t_scene *scene)
+int	validate_line(char *line, int index, t_scene *scene)
 {
 	int	j;
 	int	end_line;
@@ -150,5 +150,5 @@ int	first_line(char *line, int index, t_scene *scene)
 		end_line--;
 	if (end_line <= 0 || line[end_line - 1] != '1')
 		return (0);
-	return (0);
+	return (1);
 }
