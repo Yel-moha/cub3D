@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   grid_errors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:18:28 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/23 17:23:29 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/04/24 17:00:10 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void check_extra_chars(t_scene *scene, char *line, char **split)
+void check_extra_chars_textures(t_scene *scene, char *line, char **split)
 {
     int i;
 
@@ -31,4 +31,12 @@ void check_extra_chars(t_scene *scene, char *line, char **split)
         }
         i++;
     }
+}
+
+void    nl_grid_error(char *line)
+{
+    free(line);
+    get_next_line(-1);
+	write(2, "Error\nnewline nel mezzo della griglia\n", 38);
+	exit(EXIT_FAILURE);
 }

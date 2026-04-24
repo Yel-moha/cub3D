@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/23 19:47:25 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/04/24 17:31:56 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,9 +184,11 @@ void    error_colors_value(char *line, char **rgb_split, t_scene *scene, char *j
 void    error_spawn_player(char *line, t_scene *scene);
 void    line_errors(char *line, int fd);
 void	split_error(char **split);
+void    error_extra_line_map(char *line, t_scene *scene);
 
 // grid
 void	parse_grid(t_scene *scene, int fd, char *line);
+int     is_blank_line(char *line);
 int     is_map_line(char *line);
 void	fill_grid_pass(const char *map_path, t_scene *scene);
 
@@ -195,7 +197,8 @@ void    parse_colors(char *line, t_scene *scene);
 void    parse_textures(char *line, t_scene *scene, int fd);
 
 //grind errors
-void check_extra_chars(t_scene *scene, char *line, char **split);
+void    check_extra_chars_textures(t_scene *scene, char *line, char **split);
+void    nl_grid_error(char *line);
 
 //grid validation
 int	validate_borders(const char *map_path, t_scene *scene);

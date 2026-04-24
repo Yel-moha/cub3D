@@ -1,32 +1,35 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   grid.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 17:01:48 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/23 17:23:40 by anacotti         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "cub3d.h"
+
+int	is_blank_line(char *line)
+{
+	int	j;
+
+	j = 0;
+	if (!line)
+		return (1);
+	while (line[j] == ' ' || line[j] == '\n' || line[j] == '\t' || line[j] == '\r')
+		j++;
+	return (line[j] == '\0');
+}
 
 void	parse_grid(t_scene *scene, int fd, char *line)
 {
 	int	line_len;
 
-	if (fd < 0)
-	{
-		line_errors(NULL, fd);
-		return ;
-	}
+	line_errors(line, fd);
 	while (line && scene->counter >= 6)
 	{
-		line_len = max_line(line, scene);
-		if (line_len > scene->map.width)
-			scene->map.width = line_len;
-		count_grid_height(line, scene);
+		if (is_blank_line(line))
+			nl_grid_error(line);
+		if (is_map_line(line))
+		{
+			line_len = max_line(line, scene);
+			if (line_len > scene->map.width)
+				scene->map.width = line_len;
+			count_grid_height(line, scene);
+		}
+		else
+			nl_grid_error(line);
 		free(line);
 		line = get_next_line(fd);
 	}

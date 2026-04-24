@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:13:26 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/23 17:23:59 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/04/24 17:01:29 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	parse_textures(char *line, t_scene *scene, int fd)
 		return ;
 	}
 	if (len > 2)
-		check_extra_chars(scene, line, split);
+		check_extra_chars_textures(scene, line, split);
 	fill_direction(split, scene);
 	free_split(split);
 }

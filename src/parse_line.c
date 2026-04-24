@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:48:58 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/23 17:52:55 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/04/24 17:22:48 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int	count_pass_line(t_scene *scene, int fd, char *line)
 		scene->map.width = line_len; //Aggiorno la larghezza della griglia con la linea più lunga della griglia
 	parse_textures(line, scene, fd);
 	parse_colors(line, scene);
+	error_extra_line_map(line, scene);
 	if (scene->counter == 6 && is_map_line(line))
 	{
 		parse_grid(scene, fd, line);
@@ -69,4 +70,3 @@ void	parse_line(const char *map_path, t_scene *scene)
 	scene->map.letta = 2;
 	fill_grid_pass(map_path, scene);
 }
-

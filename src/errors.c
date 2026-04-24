@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 15:54:03 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/23 17:23:22 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/04/24 17:12:35 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,43 @@ void	split_error(char **split)
 		exit(EXIT_FAILURE);
 	}
 	return ;
+}
+
+static int	is_config_id(char *id)
+{
+	if (!id)
+		return (0);
+	return (ft_strncmp(id, "NO", 3) == 0
+		|| ft_strncmp(id, "SO", 3) == 0
+		|| ft_strncmp(id, "WE", 3) == 0
+		|| ft_strncmp(id, "EA", 3) == 0
+		|| ft_strncmp(id, "F", 2) == 0
+		|| ft_strncmp(id, "C", 2) == 0);
+}
+
+void	error_extra_line_map(char *line, t_scene *scene)
+{
+	char	**split;
+
+	if (!line || !scene)
+		return ;
+	if (is_blank_line(line))
+		return ;
+	split = ft_split(line, ' ');
+	if (!split || !split[0])
+	{
+		free_split(split);
+		return ;
+	}
+	if (is_config_id(split[0]) || is_map_line(line))
+	{
+		free_split(split);
+		return ;
+	}
+	free_split(split);
+	free(line);
+	get_next_line(-1);
+	free_scene(scene);
+	write(2, "Error\nlinea fuori contesto nella mappa\n", 39);
+	exit(EXIT_FAILURE);
 }
