@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/24 17:31:56 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/25 13:05:12 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,5 +212,11 @@ void	init_ray(t_game *game, t_ray *ray, int x);
 
 void	init_image(t_game *game);
 void	player_init(t_game *game);
+
+
+//key_hook
+int	key_hook(int keycode, t_game *game);
+int	close_window(t_game *game);
+//void	execute_fractal(t_game *game);
 
 #endif

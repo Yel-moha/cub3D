@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 20:31:51 by anacotti          #+#    #+#             */
-/*   Updated: 2026/04/23 19:44:23 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/04/25 13:06:50 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,14 @@ void	engine_init(t_game *game)
 		return ; // TO-DO clean_exit();
 
 	mlx_loop_hook(game->mlx, render_frame, game);
+
+	
+	/*Questo aggiunto da youssef*/
+	mlx_key_hook(game->win, key_hook, (void *)game);
+	mlx_hook(game->win, 17, 0, close_window, (void *)game);
+	/*fine parte aggiunta da youssef*/
+
+	
 	mlx_loop(game->mlx);
 
 	// render_frame è dove fai:
