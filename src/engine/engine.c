@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 20:31:51 by anacotti          #+#    #+#             */
-/*   Updated: 2026/04/25 13:06:50 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/25 15:00:34 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ int	render_frame(void *param)
 
 void	engine_init(t_game *game)
 {
+	game->map = game->scene->map;
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return ; // TO-DO clean_exit();
@@ -185,9 +186,10 @@ void	engine_init(t_game *game)
 
 	
 	/*Questo aggiunto da youssef*/
+	//Gestione della chiusura della finestra usando ESC e X
 	mlx_key_hook(game->win, key_hook, (void *)game);
 	mlx_hook(game->win, 17, 0, close_window, (void *)game);
-	/*fine parte aggiunta da youssef*/
+	/*Fine parte aggiunta da youssef*/
 
 	
 	mlx_loop(game->mlx);

@@ -212,6 +212,7 @@ void	init_ray(t_game *game, t_ray *ray, int x);
 
 void	init_image(t_game *game);
 void	player_init(t_game *game);
+void	cleanup_and_exit(t_game *game, int code);
 
 
 //key_hook

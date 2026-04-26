@@ -12,13 +12,29 @@
 
 #include "cub3d.h"
 
+void	cleanup_and_exit(t_game *game, int code)
+{
+	if (!game)
+		exit(code);
+	if (game->img.img_ptr && game->mlx)
+		mlx_destroy_image(game->mlx, game->img.img_ptr);
+	if (game->win && game->mlx)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
+	free(game->rays);
+	free_scene(game->scene);
+	exit(code);
+}
+
 int	key_hook(int keycode, t_game *game)
 {
-    (void)game;
 	if (keycode == 65307)
 	{
-		//free_fractal(fractal);
-		exit(0);
+		cleanup_and_exit(game, 0);
     }
 	return (0);
 }
@@ -74,9 +90,6 @@ void	execute_fractal(t_game *game)
 
 int	close_window(t_game *game)
 {
-
-    (void)game;
-	//free_fractal(fractal);
-	exit(0);
+	cleanup_and_exit(game, 0);
 	return (0);
 }

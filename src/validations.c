@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validations.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:16:54 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/23 17:24:09 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/04/26 16:40:34 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ int check_colors_value(char **rgb_split, char **split)
 		j = 0;
 		while(rgb_split[i][j] && ft_atoi(rgb_split[i]) >= 0)
 		{
-			if(!ft_isdigit(rgb_split[i][j]) && rgb_split[i][j] != '\n')
+			if((!ft_isdigit(rgb_split[i][j]) && rgb_split[i][j] != '\n') ||
+				ft_atoi(&rgb_split[i][j]) > 255)
 			{
 				free_split(split);
 				return (-1);

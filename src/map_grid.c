@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_grid.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 17:17:44 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/23 17:23:56 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/04/26 16:08:49 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int max_line(char *line, t_scene *scene)
 }
 void fill_grid(t_scene *scene, int i, char *line)
 {
-    
     int j;
 
     j = 0;
@@ -76,14 +75,12 @@ void fill_grid(t_scene *scene, int i, char *line)
         j++;
     }
     // Qui normalizzo la mappa con uni ma prima di farlo vorrei verificare che fosse valida
-    /*
     while (j < scene->map.width)
     {
         scene->map.grid[i][j] = '1';
         j++;
     }
-    */
-    scene->map.grid[i][j] = '\0';
+    scene->map.grid[i][scene->map.width] = '\0';
 }
 
 void allocate_grid(t_scene *scene)

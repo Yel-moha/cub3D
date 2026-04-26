@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 15:32:37 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/25 13:05:20 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/26 16:32:57 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int argc, char **argv)
 	t_scene		*scene;
 
 	//x testing
-	t_game	game;
+	t_game	game = {0};
 
 	scene = ft_calloc(1, sizeof(t_scene));
 	if (!scene)
@@ -62,6 +62,11 @@ int	main(int argc, char **argv)
 	}
 	map_path = argv[1];
 	parse_line(map_path, scene);
+	if (scene->map.letta != 2)
+	{
+		free_scene(scene);
+		return (1);
+	}
 	print_text_paths(*scene); // debug
 	print_colors(*scene); // debug
 	print_player(*scene);
