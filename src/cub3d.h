@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/25 13:05:12 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/26 19:07:59 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
+
+
+
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
@@ -125,7 +128,7 @@ typedef struct s_game
     void        *mlx;
     void        *win;
     t_scene     *scene;
-    t_map       map;
+    t_map       map; //prediomola direttamente da scene semmai
     t_img       img;
     t_ray       *rays; //fixed
     t_player    player;
@@ -215,9 +218,60 @@ void	player_init(t_game *game);
 void	cleanup_and_exit(t_game *game, int code);
 
 
-//key_hook
+//engine/testes.c
 int	key_hook(int keycode, t_game *game);
 int	close_window(t_game *game);
 //void	execute_fractal(t_game *game);
+
+
+
+
+
+
+
+# define PADDING 20 // spazio di sicurezza tra la mappa e il bordo della finestra
+//Il padding sopra definito serve per 
+//1 - Evitare che muri e player tocchino il bosrdo dello schermo
+//2 - Rendere piu leggibile la minimappa
+//3 - Lascia spazio per debug e overlay (testo, valori, ecc)
+/*
+    Esempio:
+    finestra 1280x720
+    padding 20
+    area usabile
+        larghezza: 1280 - 40
+        altezza;   720 - 40
+
+    Calcolo Aree
+        +Area interna: // Continuo all'interno del file tests.c
+*/
+    
+//STRUTTURA TEMPORANEA PER YOUSSEF
+typedef struct s_temp_map {
+    int height;
+    int width;
+    int cols;
+    int rows;
+    int tile;
+    int map_width;
+    int map_height;
+    int off_width;
+    int off_height;
+    
+    //per l'uso di minilibx
+    void        *mlx;
+    void        *win;
+    t_img       img;
+    
+} t_temp_map;
+
+
+
+
+
+
+//engine/dimensions
+void draw_grill(t_scene *scene);
+t_temp_map *init_dimensions(t_scene *scene);
 
 #endif

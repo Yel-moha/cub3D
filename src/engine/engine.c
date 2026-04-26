@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 20:31:51 by anacotti          #+#    #+#             */
-/*   Updated: 2026/04/26 16:47:59 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/26 19:10:48 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ void	init_ray(t_game *game, t_ray *ray, int x)
 void	perform_dda(t_game *game, t_ray *ray)
 {
 	int	hit;
-
+	
+	game->map = game->scene->map; // Aggiunto da youssef
 	hit = 0;
 	if (ray->dir_x < 0)
 	{

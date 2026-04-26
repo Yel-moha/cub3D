@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 15:32:37 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/26 16:32:57 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/26 19:14:07 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,9 @@ int	main(int argc, char **argv)
 
 	// x testing - INIT ENGINE
 	engine_init(&game);
+
+	// x testing -
+	//draw_grill(scene);
 	free_scene(scene);
 	return (0);
 }
