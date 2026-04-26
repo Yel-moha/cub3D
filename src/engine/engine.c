@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 20:31:51 by anacotti          #+#    #+#             */
-/*   Updated: 2026/04/25 15:00:34 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/26 16:47:59 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,8 @@ int	render_frame(void *param)
 
 void	engine_init(t_game *game)
 {
-	game->map = game->scene->map;
+	game->map = game->scene->map; // Aggiunto da youssef
+	
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return ; // TO-DO clean_exit();
