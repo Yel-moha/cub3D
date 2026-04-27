@@ -13,8 +13,9 @@ SRCS		=	src/map/read_maps.c \
 				src/grid_errors.c \
 				src/grid_validation.c \
 				src/engine/engine.c \
-				src/engine/tests.c \
-				src/engine/dimensions.c #da togliere eventualmente
+				src/engine/temp/tests.c \
+				src/engine/temp/init_dimensions.c \
+				src/engine/temp/init_graphics.c
 
 OBJS		= $(SRCS:.c=.o)
 

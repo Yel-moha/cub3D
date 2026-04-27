@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/26 19:07:59 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/27 15:44:02 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,17 @@
 // Da cancellare poi
 #include <stdio.h>
 
-# define WINDOW_WIDTH 1920
-# define WINDOW_HEIGHT 1080
+# define WINDOW_WIDTH 1400
+# define WINDOW_HEIGHT 800
 
 
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+# define BUFFER_SIZE 42
 # endif
 
+
+typedef struct s_temp_map				t_temp_map;
 // gestita nel parsing usando la preziosissima funziona ft_split da libft
 typedef struct s_tex_paths {
     char *no;
@@ -128,7 +130,8 @@ typedef struct s_game
     void        *mlx;
     void        *win;
     t_scene     *scene;
-    t_map       map; //prediomola direttamente da scene semmai
+    t_temp_map  *mini_map; // aggiunta per la stampa della minimappa
+    t_map       map; //prendiomola direttamente da scene semmai
     t_img       img;
     t_ray       *rays; //fixed
     t_player    player;
@@ -216,12 +219,15 @@ void	init_ray(t_game *game, t_ray *ray, int x);
 void	init_image(t_game *game);
 void	player_init(t_game *game);
 void	cleanup_and_exit(t_game *game, int code);
+void	put_pixel(t_img *img, int x, int y, int color);
+
+
+
 
 
 //engine/testes.c
 int	key_hook(int keycode, t_game *game);
 int	close_window(t_game *game);
-//void	execute_fractal(t_game *game);
 
 
 
@@ -229,7 +235,9 @@ int	close_window(t_game *game);
 
 
 
-# define PADDING 20 // spazio di sicurezza tra la mappa e il bordo della finestra
+# define MINI_WIN_WIDTH (WINDOW_WIDTH/5)
+# define MINI_WIN_HEIGHT (WINDOW_HEIGHT/4)
+# define PADDING 10 // spazio di sicurezza tra la mappa e il bordo della finestra
 //Il padding sopra definito serve per 
 //1 - Evitare che muri e player tocchino il bosrdo dello schermo
 //2 - Rendere piu leggibile la minimappa
@@ -271,7 +279,10 @@ typedef struct s_temp_map {
 
 
 //engine/dimensions
-void draw_grill(t_scene *scene);
+void draw_grill(t_game *game);
 t_temp_map *init_dimensions(t_scene *scene);
+
+//init_graphics
+void	init_graphics(t_game *game);
 
 #endif

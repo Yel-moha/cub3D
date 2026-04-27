@@ -67,6 +67,8 @@ void	fill_grid_pass(const char *map_path, t_scene *scene)
 		return (line_errors(NULL, fd));
 	grid_i = 0;
 	line = get_next_line(fd);
+	if(scene->pos == 0) // nessun player inserito
+		error_spawn_player(line, scene);
 	while (line)
 	{
 		if (is_map_line(line) && grid_i < scene->map.height)
