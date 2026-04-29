@@ -22,6 +22,15 @@ OBJS		= $(SRCS:.c=.o)
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -g -Isrc
 
+# Build-time debug flags
+# -DRAY_DEBUG: when defined, enables drawing of DDA steps (ray traversal)
+# on the main image for visual debugging of ray paths. To disable, remove
+# -DRAY_DEBUG from the `DEBUG_FLAGS` below or compile without it.
+DEBUG_FLAGS	= -DRAY_DEBUG
+
+# Append debug flags to CFLAGS so the project compiles with ray debug enabled
+CFLAGS		+= $(DEBUG_FLAGS)
+
 # libft
 LIBFT_DIR	= src/libft
 LIBFT		= $(LIBFT_DIR)/libft.a

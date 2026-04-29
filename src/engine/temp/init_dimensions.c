@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 18:14:21 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/27 15:41:54 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:01:01 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ t_temp_map *init_dimensions(t_scene *scene)
 //2 - Funzione Calcolo griglia
 void draw_grill(t_game *game)
 {   
+    if (game->mini_map)
+    {
+        free(game->mini_map);
+        game->mini_map = NULL;
+    }
     game->mini_map = init_dimensions(game->scene);
     if (!game->mini_map)
         return ;

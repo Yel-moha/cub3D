@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 12:27:09 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/27 15:50:46 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:01:01 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,5 @@ void	init_graphics(t_game *game)
 	}
 	draw_vlines(game);
 	draw_hlines(game);
-	free(game->mini_map);
-	game->mini_map = NULL;
+	/* keep game->mini_map allocated so caller can draw overlays (rays, player) */
 }

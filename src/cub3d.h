@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/27 15:44:02 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/04/29 12:32:50 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,9 +215,15 @@ void	engine_init(t_game *game);
 int 	render_frame(void *param);
 void	perform_dda(t_game *game, t_ray *ray);
 void	init_ray(t_game *game, t_ray *ray, int x);
-
-void	init_image(t_game *game);
+/***************Youssef********************* */
+void	compute_distance(t_game *game, t_ray *ray);
+void	draw_column(t_game *game, t_ray *ray, int x);
 void	player_init(t_game *game);
+void	draw_rays_on_minimap(t_game *game);
+void    fill_player_ew(char c, t_game *game,  int row, int col);
+void    fill_player_ns(char c, t_game *game, int row, int col);
+/*********************************************** */
+void	init_image(t_game *game);
 void	cleanup_and_exit(t_game *game, int code);
 void	put_pixel(t_img *img, int x, int y, int color);
 
