@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug_prints.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:17:31 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/23 17:22:59 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/02 17:22:04 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	print_colors(t_scene scene)
 }
 void print_player(t_scene scene)
 {
-	printf("La direzione del giocatore (spawn) e' %c\n", scene.player.spawn);
+	printf("La direzione del giocatore (spawn) e' %c\n", scene.player->spawn);
 }
 
 void print_map(t_scene scene)

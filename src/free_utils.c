@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 11:35:46 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/23 17:23:26 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/02 17:22:29 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ void	free_scene(t_scene *scene)
 	free(scene->textures.we);
 	free_split(scene->map.grid);
 	free(scene->flag);
-	
+	free(scene->player);
 	free(scene);
 }

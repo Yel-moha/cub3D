@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:48:58 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/27 12:46:37 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/02 17:40:34 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static int	count_pass_line(t_scene *scene, int fd, char *line)
 	error_extra_line_map(line, scene);
 	if (scene->counter == 6 && is_map_line(line))
 	{
+		if(!textures_exist(scene))
+			textures_error_path(scene);
 		parse_grid(scene, fd, line);
 		return (1);
 	}

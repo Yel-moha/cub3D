@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:16:54 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/26 16:40:34 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/02 17:41:52 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,71 @@ void update_flags(t_scene *scene, char *flag)
 	scene->counter++; //Variabile determinante per capire se i colori o le texture sono ripetute prima della griglia
 }
 
-void	fill_direction(char **line, t_scene *scene)
+void	fill_direction_fixed(char **line, t_scene *scene, int path_index)
 {
-	if (!line || !line[0] || !line[1])
+	char	*trimmed;
+	
+	if (!line || !line[0] || !line[path_index])
 		return ;
+	trimmed = ft_strtrim(line[path_index], " \t\n\r");
+	if (!trimmed || !trimmed[0])
+	{
+		free(trimmed);
+		return ;
+	}
 	if (ft_strncmp(line[0], "NO", 3) == 0 && !scene->textures.no)
 	{
-		scene->textures.no = ft_strdup(line[1]);
+		scene->textures.no = ft_strdup(trimmed);
 		update_flags(scene, "NO");
 	}
 	else if (ft_strncmp(line[0], "SO", 3) == 0 && !scene->textures.so)
 	{
-		scene->textures.so = ft_strdup(line[1]);
+		scene->textures.so = ft_strdup(trimmed);
 		update_flags(scene, "SO");
 	}
 	else if (ft_strncmp(line[0], "WE", 3) == 0 && !scene->textures.we)
 	{
-		scene->textures.we = ft_strdup(line[1]);
+		scene->textures.we = ft_strdup(trimmed);
 		update_flags(scene, "WE");
 	}
 	else if (ft_strncmp(line[0], "EA", 3) == 0 && !scene->textures.ea)
 	{
-		scene->textures.ea = ft_strdup(line[1]);
+		scene->textures.ea = ft_strdup(trimmed);
 		update_flags(scene, "EA");
 	}
-	else
+	free(trimmed);
+}
+
+void	fill_direction(char **line, t_scene *scene)
+{
+	char	*trimmed;
+	
+	if (!line || !line[0] || !line[1])
 		return ;
+	trimmed = ft_strtrim(line[1], " \t\n\r");
+	if (!trimmed)
+		return ;
+	if (ft_strncmp(line[0], "NO", 3) == 0 && !scene->textures.no)
+	{
+		scene->textures.no = ft_strdup(trimmed);
+		update_flags(scene, "NO");
+	}
+	else if (ft_strncmp(line[0], "SO", 3) == 0 && !scene->textures.so)
+	{
+		scene->textures.so = ft_strdup(trimmed);
+		update_flags(scene, "SO");
+	}
+	else if (ft_strncmp(line[0], "WE", 3) == 0 && !scene->textures.we)
+	{
+		scene->textures.we = ft_strdup(trimmed);
+		update_flags(scene, "WE");
+	}
+	else if (ft_strncmp(line[0], "EA", 3) == 0 && !scene->textures.ea)
+	{
+		scene->textures.ea = ft_strdup(trimmed);
+		update_flags(scene, "EA");
+	}
+	free(trimmed);
 }
 
 void	fill_colors(char **line, t_scene *scene, char f_or_c)

@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 20:31:51 by anacotti          #+#    #+#             */
-/*   Updated: 2026/04/29 12:33:58 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/02 17:22:02 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,42 +82,42 @@ void	player_init(t_game *game)
 void fill_player_ns(char c, t_game *game, int row, int col)
 {
 	/* position at cell center */
-	game->scene->player.pos_x = col + 0.5;
-	game->scene->player.pos_y = row + 0.5;
+	game->scene->player->pos_x = col + 0.5;
+	game->scene->player->pos_y = row + 0.5;
 	if (c == 'N')
 	{ 
-	game->scene->player.dir_x = -1;
-	game->scene->player.dir_y = 0;
-	game->scene->player.plane_x = 0;
-	game->scene->player.plane_y = 0.66;
+	game->scene->player->dir_x = -1;
+	game->scene->player->dir_y = 0;
+	game->scene->player->plane_x = 0;
+	game->scene->player->plane_y = 0.66;
 	}
 	else if (c == 'S') 
 	{
-	game->scene->player.dir_x = 1;
-	game->scene->player.dir_y = 0;
-	game->scene->player.plane_x = 0;
-	game->scene->player.plane_y = -0.66;
+	game->scene->player->dir_x = 1;
+	game->scene->player->dir_y = 0;
+	game->scene->player->plane_x = 0;
+	game->scene->player->plane_y = -0.66;
 	}
 }
 
 void fill_player_ew(char c, t_game *game,  int row, int col)
 {
 	/* position at cell center */
-	game->scene->player.pos_x = col + 0.5;
-	game->scene->player.pos_y = row + 0.5;
+	game->scene->player->pos_x = col + 0.5;
+	game->scene->player->pos_y = row + 0.5;
 	if (c == 'E')
 	{
-	game->scene->player.dir_x = 0; 
-	game->scene->player.dir_y = 1;
-	game->scene->player.plane_x = 0.66;
-	game->scene->player.plane_y = 0;
+	game->scene->player->dir_x = 0; 
+	game->scene->player->dir_y = 1;
+	game->scene->player->plane_x = 0.66;
+	game->scene->player->plane_y = 0;
 	}
 	else if (c == 'W')
 	{
-	game->scene->player.dir_x = 0;
-	game->scene->player.dir_y = -1;
-	game->scene->player.plane_x = -0.66;
-	game->scene->player.plane_y = 0;
+	game->scene->player->dir_x = 0;
+	game->scene->player->dir_y = -1;
+	game->scene->player->plane_x = -0.66;
+	game->scene->player->plane_y = 0;
 	}
 }
 
@@ -139,11 +139,11 @@ void	init_ray(t_game *game, t_ray *ray, int x)
 	//trasformare x in spazio camera
 	camera_x = 2 * x / (double)WINDOW_WIDTH - 1;
 	//trasformare x in spazio camera
-	ray->dir_x = scene->player.dir_x + scene->player.plane_x * camera_x;
-	ray->dir_y = scene->player.dir_y + scene->player.plane_y * camera_x;
+	ray->dir_x = scene->player->dir_x + scene->player->plane_x * camera_x;
+	ray->dir_y = scene->player->dir_y + scene->player->plane_y * camera_x;
 	//direzione del raggio
-	ray->pos_x = scene->player.pos_x;
-	ray->pos_y = scene->player.pos_y;
+	ray->pos_x = scene->player->pos_x;
+	ray->pos_y = scene->player->pos_y;
 	//posizione del raggio
 	ray->map_x = (int)ray->pos_x;
 	ray->map_y = (int)ray->pos_y;
@@ -290,8 +290,8 @@ void	draw_rays_on_minimap(t_game *game)
 	scene = game->scene;
 	tile = game->mini_map->tile;
 	/* player pixel */
-	px = PADDING + game->mini_map->off_width + (int)(scene->player.pos_x * tile);
-	py = PADDING + game->mini_map->off_height + (int)(scene->player.pos_y * tile);
+	px = PADDING + game->mini_map->off_width + (int)(scene->player->pos_x * tile);
+	py = PADDING + game->mini_map->off_height + (int)(scene->player->pos_y * tile);
 	i = 0;
 	while (i < WINDOW_WIDTH && i < (int)(sizeof(*game->rays) * WINDOW_WIDTH))
 	{

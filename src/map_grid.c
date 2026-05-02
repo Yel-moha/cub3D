@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 17:17:44 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/26 16:08:49 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/02 17:23:11 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int count_symb(char *line, t_scene *scene)
         i++;
     }
     if(count == 1)
-        scene->player.spawn = c;
+        scene->player->spawn = c;
     return (count);
 }
 

@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 15:32:37 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/27 14:56:27 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/02 17:22:27 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ static void allocate_scene(t_scene *scene)
 {
 	scene->flag = ft_calloc(1, sizeof(char));
 	if (!scene->flag)
+		return ;
+	scene->player = ft_calloc(1, sizeof(t_player));
+	if (!scene->player)
 		return ;
 	scene->map.width = 0;
 	scene->map.height = 0;

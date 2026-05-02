@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/29 12:32:50 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/02 17:19:26 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_scene {
     t_rgb       floor;
     t_rgb       ceiling;
     t_map       map;
-    t_player    player;
+    t_player    *player;
     int         counter;  //usata per contare le linee di percorsi e colori prima della mappa
     char        *flag;
     int         pos; //usata per quantificare N,E,W,S dentro la mappa
@@ -134,7 +134,7 @@ typedef struct s_game
     t_map       map; //prendiomola direttamente da scene semmai
     t_img       img;
     t_ray       *rays; //fixed
-    t_player    player;
+    t_player    *player;
 }               t_game;
 
 
@@ -148,6 +148,7 @@ char	*get_next_line(int fd);
 
 // Validations funcions
 void    fill_direction(char **line, t_scene *scene);
+void    fill_direction_fixed(char **line, t_scene *scene, int path_index);
 void    fill_colors(char **line, t_scene *scene, char f_or_c);
 void    fill_map(char *line, t_scene *scene);
 int     check_colors_value(char **rgb_split, char **split);
@@ -192,6 +193,10 @@ void    line_errors(char *line, int fd);
 void	split_error(char **split);
 void    error_extra_line_map(char *line, t_scene *scene);
 
+// textures_accec.c
+int textures_exist(t_scene *scene);
+void textures_error_path(t_scene *scene);
+
 // grid
 void	parse_grid(t_scene *scene, int fd, char *line);
 int     is_blank_line(char *line);
@@ -227,9 +232,17 @@ void	init_image(t_game *game);
 void	cleanup_and_exit(t_game *game, int code);
 void	put_pixel(t_img *img, int x, int y, int color);
 
+//player_movement
 
 
 
+
+
+
+//engine/player_movment.c
+void	move_player(t_game *game, double forward);
+void	strafe_player(t_game *game, double right);
+void	rotate_player(t_game *game, double angle);
 
 //engine/testes.c
 int	key_hook(int keycode, t_game *game);

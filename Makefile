@@ -15,7 +15,9 @@ SRCS		=	src/map/read_maps.c \
 				src/engine/engine.c \
 				src/engine/temp/tests.c \
 				src/engine/temp/init_dimensions.c \
-				src/engine/temp/init_graphics.c
+				src/engine/temp/init_graphics.c \
+				src/textures_access.c \
+				src/engine/player_movment.c
 
 OBJS		= $(SRCS:.c=.o)
 
