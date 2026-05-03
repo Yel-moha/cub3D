@@ -38,6 +38,7 @@ void error_colors_value(char *line, char **rgb_split, t_scene *scene, char *join
 			ft_strlen("Errore valore colori\n") + 1);
 	exit(EXIT_FAILURE);
 }
+
 void error_spawn_player(char *line, t_scene *scene)
 {
 	free(line);

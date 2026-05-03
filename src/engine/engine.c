@@ -6,11 +6,12 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 20:31:51 by anacotti          #+#    #+#             */
-/*   Updated: 2026/05/02 17:22:02 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/03 14:42:49 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <sys/time.h>
 
 /*
 ✔ player + direzione
@@ -226,10 +227,9 @@ void	draw_column(t_game *game, t_ray *ray, int x)
 	int draw_start;
 	int draw_end;
 	int y;
-	int color;
-
 	if (!game || !ray)
 		return ;
+	/* compute column extents */
 	line_height = (int)(WINDOW_HEIGHT / ray->perp_dist);
 	draw_start = -line_height / 2 + WINDOW_HEIGHT / 2;
 	draw_end = line_height / 2 + WINDOW_HEIGHT / 2;
@@ -238,17 +238,65 @@ void	draw_column(t_game *game, t_ray *ray, int x)
 	if (draw_end >= WINDOW_HEIGHT)
 		draw_end = WINDOW_HEIGHT - 1;
 
-	/* choose color, darker for vertical hits */
+	/* compute exact hit position on the wall */
+	double wall_x;
 	if (ray->was_hit_vertical)
-		color = 0x00444444;
+		wall_x = ray->pos_y + ray->perp_dist * ray->dir_y;
 	else
-		color = 0x00BBBBBB;
+		wall_x = ray->pos_x + ray->perp_dist * ray->dir_x;
+	wall_x -= floor(wall_x);
 
-	y = draw_start;
-	while (y <= draw_end)
+	/* select texture id: 0=NO,1=SO,2=WE,3=EA */
+	int tex_id;
+	if (ray->was_hit_vertical)
 	{
+		if (ray->dir_x > 0)
+			tex_id = 2; /* WE */
+		else
+			tex_id = 3; /* EA */
+	}
+	else
+	{
+		if (ray->dir_y > 0)
+			tex_id = 1; /* SO */
+		else
+			tex_id = 0; /* NO */
+	}
+
+	t_img *t = &game->tex[tex_id];
+	int tex_w = game->tex_w[tex_id];
+	int tex_h = game->tex_h[tex_id];
+	if (!t->img_ptr || tex_w <= 0 || tex_h <= 0)
+	{
+		/* fallback: flat color */
+		int color = ray->was_hit_vertical ? 0x00444444 : 0x00BBBBBB;
+		for (y = draw_start; y <= draw_end; y++)
+			put_pixel(&game->img, x, y, color);
+		return ;
+	}
+
+	/* texture X coordinate */
+	int tex_x = (int)(wall_x * (double)tex_w);
+	/* correct orientation for some faces */
+	if (ray->was_hit_vertical && ray->dir_x > 0)
+		tex_x = tex_w - tex_x - 1;
+	if (!ray->was_hit_vertical && ray->dir_y < 0)
+		tex_x = tex_w - tex_x - 1;
+
+	/* step in texture per screen pixel */
+	double step = (double)tex_h / (double)line_height;
+	double tex_pos = (draw_start - WINDOW_HEIGHT / 2 + line_height / 2) * step;
+
+	for (y = draw_start; y <= draw_end; y++)
+	{
+		int tex_y = (int)tex_pos;
+		if (tex_y < 0) tex_y = 0;
+		if (tex_y >= tex_h) tex_y = tex_h - 1;
+		tex_pos += step;
+		unsigned int color = *(unsigned int *)(t->addr + tex_y * t->line_len + tex_x * (t->bpp / 8));
+		if (ray->was_hit_vertical)
+			color = (color >> 1) & 0x7F7F7F; /* simple shading */
 		put_pixel(&game->img, x, y, color);
-		y++;
 	}
 }
 
@@ -289,15 +337,18 @@ void	draw_rays_on_minimap(t_game *game)
 		return ;
 	scene = game->scene;
 	tile = game->mini_map->tile;
-	/* player pixel */
-	px = PADDING + game->mini_map->off_width + (int)(scene->player->pos_x * tile);
+	/* player pixel (mirrored X) */
+	px = PADDING + game->mini_map->off_width
+		+ (int)((scene->map.width - 1 - scene->player->pos_x) * tile);
 	py = PADDING + game->mini_map->off_height + (int)(scene->player->pos_y * tile);
 	i = 0;
 	while (i < WINDOW_WIDTH && i < (int)(sizeof(*game->rays) * WINDOW_WIDTH))
 	{
 		/* end pixel at cell center */
-		tx = PADDING + game->mini_map->off_width + game->rays[i].map_x * tile + tile/2;
-		ty = PADDING + game->mini_map->off_height + game->rays[i].map_y * tile + tile/2;
+		/* mirror ray map x coordinate */
+		tx = PADDING + game->mini_map->off_width
+			+ ((scene->map.width - 1 - game->rays[i].map_x) * tile) + tile / 2;
+		ty = PADDING + game->mini_map->off_height + game->rays[i].map_y * tile + tile / 2;
 		draw_line(&game->img, px, py, tx, ty, 0x00FF0000);
 		i++;
 	}
@@ -308,6 +359,24 @@ int	render_frame(void *param)
 	t_game	*game;
 	int		x;
 	game = (t_game *)param;
+
+	/* compute delta time and process held keys each frame */
+	{
+		struct timeval tv;
+		double now;
+		double dt;
+
+		gettimeofday(&tv, NULL);
+		now = tv.tv_sec + tv.tv_usec / 1e6;
+		if (game->last_time <= 0.0)
+			dt = 1.0 / 60.0;
+		else
+			dt = now - game->last_time;
+		if (dt <= 0 || dt > 0.5)
+			dt = 1.0 / 60.0;
+		game->last_time = now;
+		handle_keys(game, dt);
+	}
 
 	// debug - pulizia schermo (nero)
 	for (int i = 0; i < WINDOW_WIDTH * WINDOW_HEIGHT; i++)
@@ -344,11 +413,24 @@ void	engine_init(t_game *game)
 
 	init_image(game);
 	player_init(game);
+
+	/* Qui preveremo a caricare le textures
+	if (!load_textures(game))
+	{
+		// warning - textures not loaded, continue with flat colors
+		// write(1, "Warning: textures not loaded\n", 25); 
+	}
 	//texture_loading(game);
+	*/
 
 	game->rays = malloc(sizeof(t_ray) * WINDOW_WIDTH);
 	if (!game->rays)
 		return ; // TO-DO clean_exit();
+
+	/* init key states and frame timer */
+	for (int i = 0; i < 65536; i++)
+		game->keys[i] = 0;
+	game->last_time = 0.0;
 
 	mlx_loop_hook(game->mlx, render_frame, game);
 
@@ -356,7 +438,9 @@ void	engine_init(t_game *game)
 	/*Questo aggiunto da youssef*/
 	//Gestione della chiusura della finestra usando ESC e X
 
-	mlx_key_hook(game->win, key_hook, (void *)game);
+	/* Use KeyPress/KeyRelease hooks so held keys work */
+	mlx_hook(game->win, 2, 1L<<0, key_press, (void *)game);
+	mlx_hook(game->win, 3, 1L<<1, key_release, (void *)game);
 	mlx_hook(game->win, 17, 0, close_window, (void *)game);
 
 	////////////

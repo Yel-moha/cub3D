@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/02 17:19:26 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/03 14:49:08 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,15 @@ typedef struct s_game
     t_img       img;
     t_ray       *rays; //fixed
     t_player    *player;
+    
+    /* support full X11 keysyms (up to 65535) */
+    int         keys[65536];
+    double      last_time; /* seconds since epoch of last frame */
+    
+    /* textures for walls: 0=NO,1=SO,2=WE,3=EA */
+    t_img       tex[4];
+    int         tex_w[4];
+    int         tex_h[4];
 }               t_game;
 
 
@@ -231,6 +240,7 @@ void    fill_player_ns(char c, t_game *game, int row, int col);
 void	init_image(t_game *game);
 void	cleanup_and_exit(t_game *game, int code);
 void	put_pixel(t_img *img, int x, int y, int color);
+int	load_textures(t_game *game);
 
 //player_movement
 
@@ -247,6 +257,9 @@ void	rotate_player(t_game *game, double angle);
 //engine/testes.c
 int	key_hook(int keycode, t_game *game);
 int	close_window(t_game *game);
+int	key_press(int keycode, t_game *game);
+int	key_release(int keycode, t_game *game);
+void	handle_keys(t_game *game, double dt);
 
 
 
