@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 20:31:51 by anacotti          #+#    #+#             */
-/*   Updated: 2026/05/03 14:42:49 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/05 15:41:49 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,19 +137,47 @@ void	init_ray(t_game *game, t_ray *ray, int x)
 	t_scene *scene;
 
 	scene = game->scene;
-	//trasformare x in spazio camera
+	
+	/* TRASFORMAZIONE COORDINATE SCHERMO -> CAMERA SPACE
+	 * camera_x normalizza x [0, WINDOW_WIDTH] -> [-1, 1]
+	 * -1 = bordo sinistro schermo
+	 *  0 = centro (allineato con player->dir)
+	 * +1 = bordo destro schermo
+	 */
 	camera_x = 2 * x / (double)WINDOW_WIDTH - 1;
-	//trasformare x in spazio camera
+	
+	/* DIREZIONE DEL RAGGIO
+	 * rayDir = playerDir + camera_x * camera_plane
+	 * Combinando dir (forward) + plane (camera width) * offset (camera_x)
+	 * otteniamo un raggio diverso per ogni colonna dello schermo
+	 * camera_x negativo = raggio deviato a sinistra
+	 * camera_x positivo = raggio deviato a destra
+	 */
 	ray->dir_x = scene->player->dir_x + scene->player->plane_x * camera_x;
 	ray->dir_y = scene->player->dir_y + scene->player->plane_y * camera_x;
-	//direzione del raggio
+	
+	/* POSIZIONE INIZIALE DEL RAGGIO: dove il giocatore si trova nel mondo
+	 * player->pos_x/pos_y è al centro della cella + 0.5 (vedi player_init)
+	 */
 	ray->pos_x = scene->player->pos_x;
 	ray->pos_y = scene->player->pos_y;
-	//posizione del raggio
+	
+	/* COORDINATE DELLA CELLA SULLA MAPPA
+	 * Converte la posizione float in indice grid [0, map.width/height]
+	 * Usato dalla DDA per accedere a map.grid[map_y][map_x]
+	 */
 	ray->map_x = (int)ray->pos_x;
 	ray->map_y = (int)ray->pos_y;
-	//delta distance
-	if (ray->dir_x == 0) //per evitare crash
+	
+	/* DELTA DISTANCE: distanza lungo il raggio per attraversare UNA cella
+	 * delta_x = |1 / dir_x| = lunghezza raggio tra due linee verticali di griglia
+	 * delta_y = |1 / dir_y| = lunghezza raggio tra due linee orizzontali di griglia
+	 * Valori assoluti perché ci interessa solo la magnitudine
+	 * 
+	 * Se dir_x = 0 (raggio verticale), non attraverserà mai una linea verticale
+	 * quindi delta_x = 1e30 (pseudo-infinito) per escluderlo dal confronto DDA
+	 */
+	if (ray->dir_x == 0)
 		ray->delta_x = 1e30;
 	else
 		ray->delta_x = fabs(1 / ray->dir_x);
@@ -165,44 +193,75 @@ void	perform_dda(t_game *game, t_ray *ray)
 	
 	game->map = game->scene->map; // Aggiunto da youssef
 	hit = 0;
+	
+	/* INIZIALIZZAZIONE PASSO E DISTANZA ORIZZONTALE (X)
+	 * step_x: -1 se il raggio va a sinistra (dir_x < 0), +1 se va a destra
+	 * side_dist_x: distanza dal punto di partenza fino al PRIMO bordo verticale
+	 *   - Se dir_x < 0: frazione della cella (pos_x - map_x) * delta_x = distanza al bordo sinistro
+	 *   - Else: distanza fino al prossimo bordo destro = (map_x + 1 - pos_x) * delta_x
+	 */
 	if (ray->dir_x < 0)
 	{
 		ray->step_x = -1;
-		ray->side_dist_x = (ray->pos_x - ray->map_x) * ray->delta_x; //go left
+		ray->side_dist_x = (ray->pos_x - ray->map_x) * ray->delta_x;
 	}
 	else
 	{
 		ray->step_x = 1;
-		ray->side_dist_x = (ray->map_x + 1.0 - ray->pos_x) * ray->delta_x; //go right
+		ray->side_dist_x = (ray->map_x + 1.0 - ray->pos_x) * ray->delta_x;
 	}
 
+	/* INIZIALIZZAZIONE PASSO E DISTANZA VERTICALE (Y)
+	 * Stessa logica di X ma per l'asse verticale
+	 */
 	if (ray->dir_y < 0)
 	{
 		ray->step_y = -1;
-		ray->side_dist_y = (ray->pos_y - ray->map_y) * ray->delta_y; //go left
+		ray->side_dist_y = (ray->pos_y - ray->map_y) * ray->delta_y;
 	}
 	else
 	{
 		ray->step_y = 1;
-		ray->side_dist_y = (ray->map_y + 1.0 - ray->pos_y) * ray->delta_y; //go right
+		ray->side_dist_y = (ray->map_y + 1.0 - ray->pos_y) * ray->delta_y;
 	}
+	
+	/* LOOP DDA (Digital Differential Analyzer)
+	 * Itera attraverso la griglia della mappa fino a trovare un muro ('1')
+	 * Ad ogni iterazione:
+	 *   1. Confronta side_dist_x e side_dist_y
+	 *   2. Avanza nella direzione con distanza minore (cioè il prossimo bordo più vicino)
+	 *   3. Aggiorna la cella corrente (map_x o map_y)
+	 *   4. Somma il delta corrispondente alla side_dist per la prossima iterazione
+	 *   5. Segna quale lato è stato colpito (verticale o orizzontale)
+	 */
 	while(hit == 0)
 	{
+		/* Se il prossimo bordo verticale è più vicino del prossimo bordo orizzontale */
 		if(ray->side_dist_x < ray->side_dist_y)
 		{
+			/* Avanza X: aggiungi delta_x, incremente map_x, segna hit verticale */
 			ray->side_dist_x += ray->delta_x;
 			ray->map_x += ray->step_x;
-			ray->was_hit_vertical = 1; //avanzo nella direzione minore
+			ray->was_hit_vertical = 1;
 		}
 		else
 		{
+			/* Altrimenti avanza Y: aggiungi delta_y, incrementa map_y, segna hit orizzontale */
 			ray->side_dist_y += ray->delta_y;
 			ray->map_y += ray->step_y;
 			ray->was_hit_vertical = 0;
 		}
+		/* VERIFICA CONFINI DELLA MAPPA
+		 * Se la cella attuale esce dai limiti della mappa, esci dal loop
+		 * (il raggio ha raggiunto il confine senza trovare un muro)
+		 */
 		if (ray->map_y < 0 || ray->map_y >= game->map.height ||
 				ray->map_x < 0 || ray->map_x >= game->map.width)
 			break ;
+		/* RICERCA MURO
+		 * Se la cella attuale contiene '1' (muro), hit trovato!
+		 * Esci dal loop; possiamo ora calcolare la distanza e renderizzare
+		 */
 		if(game->scene->map.grid[ray->map_y][ray->map_x] == '1')
 			hit = 1;
 	}

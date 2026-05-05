@@ -1,22 +1,22 @@
 NAME		= cub3d
 
-SRCS		=	src/map/read_maps.c \
+SRCS		=	src/parsing/read_maps.c \
 				src/main.c \
-				src/errors.c \
-				src/debug_prints.c \
-				src/validations.c \
-				src/free_utils.c \
-				src/parse_line.c \
-				src/map_grid.c \
-				src/grid.c \
-				src/parse_colors.c \
-				src/grid_errors.c \
-				src/grid_validation.c \
+				src/parsing/errors.c \
+				src/parsing/debug_prints.c \
+				src/parsing/validations.c \
+				src/parsing/free_utils.c \
+				src/parsing/parse_line.c \
+				src/parsing/map_grid.c \
+				src/parsing/grid.c \
+				src/parsing/parse_colors.c \
+				src/parsing/grid_errors.c \
+				src/parsing/grid_validation.c \
 				src/engine/engine.c \
 				src/engine/temp/tests.c \
 				src/engine/temp/init_dimensions.c \
 				src/engine/temp/init_graphics.c \
-				src/textures_access.c \
+				src/engine/textures_access.c \
 				src/engine/player_movment.c
 
 OBJS		= $(SRCS:.c=.o)
