@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 14:57:44 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/03 14:01:15 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/06 12:16:51 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,18 @@ void strafe_player(t_game *game, double right)
 void rotate_player(t_game *game, double angle)
 {
     double old_dx;
+    double old_dy;
     double old_px;
+    double old_py;
     t_player *player;
 
     player = game->scene->player;
     old_dx = player->dir_x;
+    old_dy = player->dir_y;
     old_px = player->plane_x;
-    player->dir_x = old_dx * cos(angle) - player->dir_y * sin(angle);
-    player->dir_y = old_dx * sin(angle) + player->dir_y * cos(angle);
-    player->plane_x = old_px * cos(angle) - player->plane_y * sin(angle);
-    player->plane_y = old_px * sin(angle) + player->plane_y * cos(angle);
+    old_py = player->plane_y;
+    player->dir_x = old_dx * cos(angle) - old_dy * sin(angle);
+    player->dir_y = old_dx * sin(angle) + old_dy * cos(angle);
+    player->plane_x = old_px * cos(angle) - old_py * sin(angle);
+    player->plane_y = old_px * sin(angle) + old_py * cos(angle);
 }

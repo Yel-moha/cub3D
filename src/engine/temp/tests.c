@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 12:23:45 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/03 14:05:55 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/06 12:07:27 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	handle_keys(t_game *game, double dt)
 	if (!game)
 		return ;
 	/* scale so that dt ~1/60 produces scale ~= 1 */
-	scale = dt * 30.0; //Fatto determinante della velocita di movineto del player
+	scale = dt * 30.0; //Fattore determinante della velocita di movineto del player
 	if (scale <= 0)
 		scale = 1.0;
 	if (game->keys[119]) // w
