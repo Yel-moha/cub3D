@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 18:14:21 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/29 11:01:01 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/09 14:49:38 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ t_temp_map *init_dimensions(t_scene *scene)
     map = malloc(sizeof(t_temp_map));
     if (!map)
         return (NULL);
-    map->height =  MINI_WIN_HEIGHT - 2 * PADDING;
-    map->width =  MINI_WIN_WIDTH - 2 * PADDING;
+    map->height =  MINI_WIN_HEIGHT;
+    map->width =  MINI_WIN_WIDTH ;
     map->rows = scene->map.height;
     map->cols = scene->map.width;
     tile_x = map->width / map->cols;
