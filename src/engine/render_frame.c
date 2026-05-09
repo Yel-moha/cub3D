@@ -6,12 +6,12 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 12:32:42 by anacotti          #+#    #+#             */
-/*   Updated: 2026/05/09 15:35:44 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/09 16:27:52 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-/*
+
 static double	update_time(t_game *game)
 {
 	struct timeval	tv;
@@ -74,8 +74,8 @@ int	render_frame(void *param)
 	render_overlays(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img_ptr, 0, 0);
 	return (0);
-} */
-//Versione precedente non suddivisa in più funzioni:
+}
+/*Versione precedente non suddivisa in più funzioni:
 
 int	render_frame(void *param)
 {
@@ -119,4 +119,4 @@ int	render_frame(void *param)
 
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img_ptr, 0, 0);
 	return(0);
-}
+}*/

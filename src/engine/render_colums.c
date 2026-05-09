@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 12:32:33 by anacotti          #+#    #+#             */
-/*   Updated: 2026/05/09 12:32:35 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/09 16:46:48 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,10 @@ void	draw_column(t_game *game, t_ray *ray, int x)
 
 	/* texture X coordinate */
 	int tex_x = (int)(wall_x * (double)tex_w);
+	if (tex_x < 0)
+		tex_x = 0;
+	if (tex_x >= tex_w)
+		tex_x = tex_w - 1;
 	/* correct orientation for some faces */
 	if (ray->was_hit_vertical && ray->dir_x > 0)
 		tex_x = tex_w - tex_x - 1;

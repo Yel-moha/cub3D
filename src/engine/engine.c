@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 20:31:51 by anacotti          #+#    #+#             */
-/*   Updated: 2026/05/09 15:19:23 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/09 17:20:33 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	engine_init(t_game *game)
 		// warning - textures not loaded, continue with flat colors
 		write(2, "Warning: textures not loaded\n", 29); 
 	}
+
+	printf("%d %d\n", game->tex_w[0], game->tex_h[0]); //debug
 
 	game->rays = malloc(sizeof(t_ray) * WINDOW_WIDTH); /* Rays allocation */
 	if (!game->rays)

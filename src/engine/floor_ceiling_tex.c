@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 12:31:54 by anacotti          #+#    #+#             */
-/*   Updated: 2026/05/09 14:00:41 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/09 17:08:12 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	load_texture(t_game *game, int i, char *path)
 		return (0);
 	t->addr = mlx_get_data_addr(t->img_ptr,
 			&t->bpp, &t->line_len, &t->endian);
+	if (!t->addr)
+		return (0);
 	return (1);
 }
 
