@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dda.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/09 12:31:39 by anacotti          #+#    #+#             */
+/*   Updated: 2026/05/09 12:31:42 by anacotti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	perform_dda(t_game *game, t_ray *ray)
 {
 	int	hit;
 	
-	game->map = game->scene->map; // Aggiunto da youssef
+	//game->map = game->scene->map; // Aggiunto da youssef
 	hit = 0;
 	
 	/* INIZIALIZZAZIONE PASSO E DISTANZA ORIZZONTALE (X)
@@ -68,8 +80,8 @@ void	perform_dda(t_game *game, t_ray *ray)
 		 * Se la cella attuale esce dai limiti della mappa, esci dal loop
 		 * (il raggio ha raggiunto il confine senza trovare un muro)
 		 */
-		if (ray->map_y < 0 || ray->map_y >= game->map.height ||
-				ray->map_x < 0 || ray->map_x >= game->map.width)
+		if (ray->map_y < 0 || ray->map_y >= game->scene->map.height ||
+				ray->map_x < 0 || ray->map_x >= game->scene->map.width)
 			break ;
 		/* RICERCA MURO
 		 * Se la cella attuale contiene '1' (muro), hit trovato!

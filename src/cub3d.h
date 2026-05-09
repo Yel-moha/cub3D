@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/03 14:49:08 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/09 15:33:25 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <X11/X.h>
 // Da cancellare poi
 #include <stdio.h>
+#include <sys/time.h>
 
 # define WINDOW_WIDTH 1400
 # define WINDOW_HEIGHT 800
@@ -131,7 +132,7 @@ typedef struct s_game
     void        *win;
     t_scene     *scene;
     t_temp_map  *mini_map; // aggiunta per la stampa della minimappa
-    //t_map       map; //prendiomola direttamente da scene semmai -> sì, sono d'accordo
+    t_map       map; //prendiomola direttamente da scene semmai -> sì, sono d'accordo
     t_img       img;
     t_ray       *rays; //fixed
     //t_player    *player; direi di rimuovere, già presente in struct scene
@@ -240,6 +241,7 @@ void    fill_player_ns(char c, t_game *game, int row, int col);
 void	init_image(t_game *game);
 void	cleanup_and_exit(t_game *game, int code);
 void	put_pixel(t_img *img, int x, int y, int color);
+void    draw_line(t_img *img, int x0, int y0, int x1, int y1, int color);
 int		load_texture(t_game *game, int i, char *path);
 int		load_textures(t_game *game);
 void	draw_floor_ceiling(t_game *game);
@@ -318,5 +320,6 @@ t_temp_map *init_dimensions(t_scene *scene);
 
 //init_graphics
 void	init_graphics(t_game *game);
+void	init_graphics_one(t_game *game);
 
 #endif

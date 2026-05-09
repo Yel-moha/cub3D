@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/09 12:32:50 by anacotti          #+#    #+#             */
+/*   Updated: 2026/05/09 14:22:07 by anacotti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	put_pixel(t_img *img, int x, int y, int color)
@@ -11,7 +23,7 @@ void	put_pixel(t_img *img, int x, int y, int color)
 }
 
 // forse va ridotto il numero di parametri per via della norma? devo controllare il mio vecchio draw_line di fdf
-static void draw_line(t_img *img, int x0, int y0, int x1, int y1, int color)
+void draw_line(t_img *img, int x0, int y0, int x1, int y1, int color)
 {
 	int dx = abs(x1 - x0);
 	int sx = x0 < x1 ? 1 : -1;

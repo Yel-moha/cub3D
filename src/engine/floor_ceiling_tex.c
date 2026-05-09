@@ -1,19 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   floor_ceiling_tex.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/09 12:31:54 by anacotti          #+#    #+#             */
+/*   Updated: 2026/05/09 14:00:41 by anacotti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	draw_floor_ceiling(t_game *game)
 {
-	int x = 0;
+	int x;
 	int y;
 
+	x = 0;
 	while (x < WINDOW_WIDTH)
 	{
 		y = 0;
 		while (y < WINDOW_HEIGHT)
 		{
 			if (y < WINDOW_HEIGHT / 2)
-				put_pixel(&game->img, x, y, game->scene->ceiling);
+				put_pixel(&game->img, x, y, game->scene->ceiling.value);
 			else
-				put_pixel(&game->img, x, y, game->scene->floor);
+				put_pixel(&game->img, x, y, game->scene->floor.value);
 			y++;
 		}
 		x++;

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   engine.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 20:31:51 by anacotti          #+#    #+#             */
-/*   Updated: 2026/05/06 12:23:06 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/09 15:19:23 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <sys/time.h>
 
 /*
 ✔ player + direzione
@@ -90,6 +89,8 @@ void	engine_init(t_game *game)
 	/*Questo aggiunto da youssef*/
 	//Gestione della chiusura della finestra usando ESC e X
 
+	mlx_loop_hook(game->mlx, render_frame, game);
+
 	/* Use KeyPress/KeyRelease hooks so held keys work */
 	mlx_hook(game->win, 2, 1L<<0, key_press, (void *)game);
 	mlx_hook(game->win, 3, 1L<<1, key_release, (void *)game);
@@ -98,6 +99,5 @@ void	engine_init(t_game *game)
 	////////////
 	/*Fine parte aggiunta da youssef*/
 
-	mlx_loop_hook(game->mlx, render_frame, game);
 	mlx_loop(game->mlx);
 }
