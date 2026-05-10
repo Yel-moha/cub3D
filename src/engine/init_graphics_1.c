@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_graphics.c                                    :+:      :+:    :+:   */
+/*   init_graphics_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 12:27:09 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/04/27 14:19:58 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/09 15:32:35 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,33 +174,33 @@ static int	init_image_map(t_temp_map *map)
 	return (1);
 }
 
-void	init_graphics(t_temp_map *map, t_scene *scene)
+void	init_graphics_one(t_game *game)
 {
-	if (!map || !scene)
+	if (!(game->mini_map) || !(game->scene))
 		return ;
-	map->mlx = mlx_init();
-	if (!map->mlx)
+	game->mini_map->mlx = mlx_init();
+	if (!game->mini_map->mlx)
 	{
-		free(map);
+		free(game->mini_map);
 		return ;
 	}
-	map->win = mlx_new_window(map->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "mini_map");
-	if (!map->win)
+	game->mini_map->win = mlx_new_window(game->mini_map->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "mini_map");
+	if (!game->mini_map->win)
 	{
-		close_minimap(map);
+		close_minimap(game->mini_map);
 		return ;
 	}
-	if (!init_image_map(map))
+	if (!init_image_map(game->mini_map))
 	{
-		close_minimap(map);
+		close_minimap(game->mini_map);
 		return ;
 	}
-	clear_image(&map->img, 0x00000000);
-	draw_grid(map, scene);
-	draw_grid_lines(map, scene);
-	mlx_put_image_to_window(map->mlx, map->win, map->img.img_ptr, 0, 0);
-	mlx_key_hook(map->win, key_hook_minimap, (void *)map);
-	mlx_hook(map->win, 17, 0, close_minimap, (void *)map);
-	mlx_loop(map->mlx);
+	clear_image(&(game->mini_map->img), 0x00000000);
+	draw_grid(game->mini_map, game->scene);
+	draw_grid_lines(game->mini_map, game->scene);
+	mlx_put_image_to_window(game->mini_map->mlx, game->mini_map->win, game->mini_map->img.img_ptr, 0, 0);
+	mlx_key_hook(game->mini_map->win, key_hook_minimap, (void *)(game->mini_map));
+	mlx_hook(game->mini_map->win, 17, 0, close_minimap, (void *)(game->mini_map));
+	mlx_loop(game->mini_map->mlx);
 }
 
