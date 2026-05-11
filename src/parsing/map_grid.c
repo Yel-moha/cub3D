@@ -6,7 +6,7 @@
 /*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 17:17:44 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/02 17:23:11 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/11 14:57:10 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void fill_grid(t_scene *scene, int i, char *line)
     j = 0;
     while(line[j] != '\0' && line[j] != '\n')
     {
-        if(line[j] == ' ') // sostituisco gli spazi all'interno della mappa di uni
-            scene->map.grid[i][j] = '1';
+        if(line[j] == ' ') // mantengo gli spazi: servono per la validazione dei buchi
+            scene->map.grid[i][j] = ' ';
         else
             scene->map.grid[i][j] = line[j];
         j++;
@@ -77,7 +77,7 @@ void fill_grid(t_scene *scene, int i, char *line)
     // Qui normalizzo la mappa con uni ma prima di farlo vorrei verificare che fosse valida
     while (j < scene->map.width)
     {
-        scene->map.grid[i][j] = '1';
+        scene->map.grid[i][j] = ' ';
         j++;
     }
     scene->map.grid[i][scene->map.width] = '\0';
