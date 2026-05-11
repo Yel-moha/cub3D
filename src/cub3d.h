@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/09 15:33:25 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/11 16:05:45 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,15 @@ typedef struct s_ray
 	
 	int was_hit_vertical;
 }           t_ray;
+
+typedef struct s_draw_col
+{
+	int			tex_id;
+	double		wall_x;
+	int			draw_start;
+	int			draw_end;
+	int			line_height;
+}	t_draw_col;
 
 typedef struct s_img
 {
