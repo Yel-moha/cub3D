@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 12:32:50 by anacotti          #+#    #+#             */
-/*   Updated: 2026/05/09 14:22:07 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/14 21:50:50 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,44 @@ void	put_pixel(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-// forse va ridotto il numero di parametri per via della norma? devo controllare il mio vecchio draw_line di fdf
-void draw_line(t_img *img, int x0, int y0, int x1, int y1, int color)
+static t_line	init_line(t_point p0, t_point p1)
 {
-	int dx = abs(x1 - x0);
-	int sx = x0 < x1 ? 1 : -1;
-	int dy = -abs(y1 - y0);
-	int sy = y0 < y1 ? 1 : -1;
-	int err = dx + dy;
+	t_line	line;
+
+	line.dx = abs(p1.x - p0.x);
+	line.dy = -abs(p1.y - p0.y);
+	if (p0.x < p1.x)
+		line.sx = 1;
+	else
+		line.sx = -1;
+	if (p0.y < p1.y)
+		line.sy = 1;
+	else
+		line.sy = -1;
+	line.err = line.dx + line.dy;
+	return (line);
+}
+
+void	draw_line(t_img *img, t_point p0, t_point p1, int color)
+{
+	t_line	line;
+
+	line = init_line(p0, p1);
 	while (1)
 	{
-		put_pixel(img, x0, y0, color);
-		if (x0 == x1 && y0 == y1)
-			break;
-		int e2 = 2 * err;
-		if (e2 >= dy)
+		put_pixel(img, p0.x, p0.y, color);
+		if (p0.x == p1.x && p0.y == p1.y)
+			break ;
+		line.e2 = 2 * line.err;
+		if (line.e2 >= line.dy)
 		{
-			err += dy;
-			x0 += sx;
+			line.err += line.dy;
+			p0.x += line.sx;
 		}
-		if (e2 <= dx)
+		if (line.e2 <= line.dx)
 		{
-			err += dx;
-			y0 += sy;
+			line.err += line.dx;
+			p0.y += line.sy;
 		}
 	}
 }

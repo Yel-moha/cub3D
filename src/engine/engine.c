@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 20:31:51 by anacotti          #+#    #+#             */
-/*   Updated: 2026/05/09 17:20:33 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/14 22:36:00 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,10 @@ void	init_image(t_game *game)
 {
 	game->img.img_ptr = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	game->img.addr = mlx_get_data_addr(
-		game->img.img_ptr,
-		&game->img.bpp,
-		&game->img.line_len,
-		&game->img.endian
-	);
+			game->img.img_ptr,
+			&game->img.bpp,
+			&game->img.line_len,
+			&game->img.endian);
 }
 
 /*Aggiunti 29/04/2026 Da youssef*/
@@ -56,29 +55,23 @@ void	engine_init(t_game *game)
 
 	game->map = game->scene->map; // Aggiunto da youssef
 	//questo è pericoloso (copia, non riferimento), conviene usare sempre game->scene->map
-	
 	game->mlx = mlx_init();
 	if (!game->mlx)
-		return ; // TO-DO clean_exit();
+		clean_exit(game);
 	game->win = mlx_new_window(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
 	if (!game->win)
-		return ; // TO-DO clean_exit();
-
+		clean_exit(game);
 	init_image(game); /* Rendering buffer */
 	player_init(game); /* Game state */
-
 	if (!load_textures(game))
 	{
 		// warning - textures not loaded, continue with flat colors
 		write(2, "Warning: textures not loaded\n", 29); 
 	}
-
 	printf("%d %d\n", game->tex_w[0], game->tex_h[0]); //debug
-
 	game->rays = malloc(sizeof(t_ray) * WINDOW_WIDTH); /* Rays allocation */
 	if (!game->rays)
-		return ; // TO-DO clean_exit();
-
+		clean_exit(game);
 	/* init key states and frame timer */
 	i = 0;
 	while (i < 65536)
@@ -87,19 +80,14 @@ void	engine_init(t_game *game)
 		i++;
 	}
 	game->last_time = 0.0;
-
 	/*Questo aggiunto da youssef*/
 	//Gestione della chiusura della finestra usando ESC e X
-
 	mlx_loop_hook(game->mlx, render_frame, game);
-
 	/* Use KeyPress/KeyRelease hooks so held keys work */
-	mlx_hook(game->win, 2, 1L<<0, key_press, (void *)game);
-	mlx_hook(game->win, 3, 1L<<1, key_release, (void *)game);
+	mlx_hook(game->win, 2, 1L << 0, key_press, (void *)game);
+	mlx_hook(game->win, 3, 1L << 1, key_release, (void *)game);
 	mlx_hook(game->win, 17, 0, close_window, (void *)game);
-
 	////////////
 	/*Fine parte aggiunta da youssef*/
-
 	mlx_loop(game->mlx);
 }

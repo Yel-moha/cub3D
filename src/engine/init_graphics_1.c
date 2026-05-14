@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 12:27:09 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/09 15:32:35 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/14 21:04:10 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,10 +166,10 @@ static int	init_image_map(t_temp_map *map)
 	if (!map->img.img_ptr)
 		return (0);
 	map->img.addr = mlx_get_data_addr(
-		map->img.img_ptr,
-		&map->img.bpp,
-		&map->img.line_len,
-		&map->img.endian
+			map->img.img_ptr,
+			&map->img.bpp,
+			&map->img.line_len,
+			&map->img.endian
 	);
 	return (1);
 }
@@ -184,7 +184,8 @@ void	init_graphics_one(t_game *game)
 		free(game->mini_map);
 		return ;
 	}
-	game->mini_map->win = mlx_new_window(game->mini_map->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "mini_map");
+	game->mini_map->win = mlx_new_window(game->mini_map->mlx, WINDOW_WIDTH,
+			WINDOW_HEIGHT, "mini_map");
 	if (!game->mini_map->win)
 	{
 		close_minimap(game->mini_map);
@@ -198,9 +199,11 @@ void	init_graphics_one(t_game *game)
 	clear_image(&(game->mini_map->img), 0x00000000);
 	draw_grid(game->mini_map, game->scene);
 	draw_grid_lines(game->mini_map, game->scene);
-	mlx_put_image_to_window(game->mini_map->mlx, game->mini_map->win, game->mini_map->img.img_ptr, 0, 0);
-	mlx_key_hook(game->mini_map->win, key_hook_minimap, (void *)(game->mini_map));
-	mlx_hook(game->mini_map->win, 17, 0, close_minimap, (void *)(game->mini_map));
+	mlx_put_image_to_window(game->mini_map->mlx, game->mini_map->win,
+			game->mini_map->img.img_ptr, 0, 0);
+	mlx_key_hook(game->mini_map->win, key_hook_minimap,
+			(void *)(game->mini_map));
+	mlx_hook(game->mini_map->win, 17, 0, close_minimap,
+			(void *)(game->mini_map));
 	mlx_loop(game->mini_map->mlx);
 }
-

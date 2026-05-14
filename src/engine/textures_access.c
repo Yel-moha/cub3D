@@ -6,26 +6,26 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 14:28:06 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/09 12:33:04 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/14 21:30:58 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int textures_exist(t_scene *scene)
+int	textures_exist(t_scene *scene)
 {
-    if (!scene->textures.ea || access(scene->textures.ea, F_OK) != 0)
-        return (0);
-    if (!scene->textures.no || access(scene->textures.no, F_OK) != 0)
-        return (0);
-    if (!scene->textures.so || access(scene->textures.so, F_OK) != 0)
-        return (0);
-    if (!scene->textures.we || access(scene->textures.we, F_OK) != 0)
-        return (0);
-    return (1);
+	if (!scene->textures.ea || access(scene->textures.ea, F_OK) != 0)
+		return (0);
+	if (!scene->textures.no || access(scene->textures.no, F_OK) != 0)
+		return (0);
+	if (!scene->textures.so || access(scene->textures.so, F_OK) != 0)
+		return (0);
+	if (!scene->textures.we || access(scene->textures.we, F_OK) != 0)
+		return (0);
+	return (1);
 }
 
-void textures_error_path(t_scene *scene)
+void	textures_error_path(t_scene *scene)
 {
 	if (!scene)
 		exit(EXIT_FAILURE);

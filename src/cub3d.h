@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/11 16:05:45 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/14 22:32:41 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,24 @@ typedef struct s_game
 }               t_game;
 
 
+//engine/per norminettare minimap.c
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}	t_point;
+
+//engine/per norminettare render_utils.c
+typedef struct s_line
+{
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+	int	e2;
+}	t_line;
+
 /********************************************************/
 
 
@@ -250,7 +268,7 @@ void    fill_player_ns(char c, t_game *game, int row, int col);
 void	init_image(t_game *game);
 void	cleanup_and_exit(t_game *game, int code);
 void	put_pixel(t_img *img, int x, int y, int color);
-void    draw_line(t_img *img, int x0, int y0, int x1, int y1, int color);
+void	draw_line(t_img *img, t_point p0, t_point p1, int color);
 int		load_texture(t_game *game, int i, char *path);
 int		load_textures(t_game *game);
 void	draw_floor_ceiling(t_game *game);
@@ -275,9 +293,9 @@ int	key_release(int keycode, t_game *game);
 void	handle_keys(t_game *game, double dt);
 
 
-
-
-
+//cleanups
+void	clean_exit(t_game *game);
+void	destroy_textures(t_game *game);
 
 
 # define MINI_WIN_WIDTH (WINDOW_WIDTH/5)

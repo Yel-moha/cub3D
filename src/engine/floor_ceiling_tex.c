@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 12:31:54 by anacotti          #+#    #+#             */
-/*   Updated: 2026/05/09 17:08:12 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/14 20:59:52 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	draw_floor_ceiling(t_game *game)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = 0;
 	while (x < WINDOW_WIDTH)
@@ -35,7 +35,7 @@ void	draw_floor_ceiling(t_game *game)
 
 int	load_texture(t_game *game, int i, char *path)
 {
-	t_img *t;
+	t_img	*t;
 
 	t = &game->tex[i];
 	t->img_ptr = mlx_xpm_file_to_image(game->mlx, path,

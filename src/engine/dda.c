@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 12:31:39 by anacotti          #+#    #+#             */
-/*   Updated: 2026/05/09 12:31:42 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/14 20:52:36 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,15 @@
 void	perform_dda(t_game *game, t_ray *ray)
 {
 	int	hit;
-	
+
 	//game->map = game->scene->map; // Aggiunto da youssef
 	hit = 0;
-	
 	/* INIZIALIZZAZIONE PASSO E DISTANZA ORIZZONTALE (X)
 	 * step_x: -1 se il raggio va a sinistra (dir_x < 0), +1 se va a destra
 	 * side_dist_x: distanza dal punto di partenza fino al PRIMO bordo verticale
 	 *   - Se dir_x < 0: frazione della cella (pos_x - map_x) * delta_x = distanza al bordo sinistro
 	 *   - Else: distanza fino al prossimo bordo destro = (map_x + 1 - pos_x) * delta_x
-	 */
+	*/
 	if (ray->dir_x < 0)
 	{
 		ray->step_x = -1;
@@ -35,10 +34,9 @@ void	perform_dda(t_game *game, t_ray *ray)
 		ray->step_x = 1;
 		ray->side_dist_x = (ray->map_x + 1.0 - ray->pos_x) * ray->delta_x;
 	}
-
 	/* INIZIALIZZAZIONE PASSO E DISTANZA VERTICALE (Y)
 	 * Stessa logica di X ma per l'asse verticale
-	 */
+	*/
 	if (ray->dir_y < 0)
 	{
 		ray->step_y = -1;
@@ -49,7 +47,6 @@ void	perform_dda(t_game *game, t_ray *ray)
 		ray->step_y = 1;
 		ray->side_dist_y = (ray->map_y + 1.0 - ray->pos_y) * ray->delta_y;
 	}
-	
 	/* LOOP DDA (Digital Differential Analyzer)
 	 * Itera attraverso la griglia della mappa fino a trovare un muro ('1')
 	 * Ad ogni iterazione:
@@ -58,7 +55,7 @@ void	perform_dda(t_game *game, t_ray *ray)
 	 *   3. Aggiorna la cella corrente (map_x o map_y)
 	 *   4. Somma il delta corrispondente alla side_dist per la prossima iterazione
 	 *   5. Segna quale lato è stato colpito (verticale o orizzontale)
-	 */
+	*/
 	while(hit == 0)
 	{
 		/* Se il prossimo bordo verticale è più vicino del prossimo bordo orizzontale */

@@ -24,6 +24,7 @@ SRCS		=	src/parsing/read_maps.c \
 				src/engine/render_frame.c \
 				src/engine/render_utils.c \
 				src/engine/textures_access.c \
+				src/engine/clean_exit.c \
 				src/engine/temp/tests.c \
 				src/engine/temp/init_dimensions.c \
 				src/engine/temp/init_graphics.c \
