@@ -45,38 +45,15 @@ void	print_colors(t_scene scene)
 	printf("b = %d\n", scene.ceiling.b);
 	printf("value = %d\n", scene.ceiling.value);
 }
-void print_player(t_scene scene)
+
+void	print_player(t_scene scene)
 {
 	printf("La direzione del giocatore (spawn) e' %c\n", scene.player->spawn);
 }
 
-void print_map(t_scene scene)
+void	print_map(t_scene scene)
 {
 	printf("la largezza della mappa : %d\n", scene.map.width);
 	printf("la lunghezza della mappa : %d\n", scene.map.height);
 	printf("la flag e' : %s\n", scene.flag);
-}
-
-void print_grid(t_scene scene)
-{
-	printf("la larghezza della griglia è %d\n", scene.map.width);
-	int i;
-	int j;
-
-	i = 0;
-	while (i < scene.map.height)
-	{
-		printf("row[%d]: ", i);
-		j = 0;
-		while (j < scene.map.width)
-		{
-			if (scene.map.grid[i][j] == ' ')
-				printf(".");
-			else
-				printf("%c", scene.map.grid[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
 }

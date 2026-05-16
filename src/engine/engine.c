@@ -57,10 +57,10 @@ void	engine_init(t_game *game)
 	//questo è pericoloso (copia, non riferimento), conviene usare sempre game->scene->map
 	game->mlx = mlx_init();
 	if (!game->mlx)
-		clean_exit(game);
+		cleanup_and_exit(game, 0);
 	game->win = mlx_new_window(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
 	if (!game->win)
-		clean_exit(game);
+		cleanup_and_exit(game, 0);
 	init_image(game); /* Rendering buffer */
 	player_init(game); /* Game state */
 	if (!load_textures(game))
@@ -71,7 +71,7 @@ void	engine_init(t_game *game)
 	printf("%d %d\n", game->tex_w[0], game->tex_h[0]); //debug
 	game->rays = malloc(sizeof(t_ray) * WINDOW_WIDTH); /* Rays allocation */
 	if (!game->rays)
-		clean_exit(game);
+		cleanup_and_exit(game, 0);
 	/* init key states and frame timer */
 	i = 0;
 	while (i < 65536)

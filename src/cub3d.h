@@ -180,6 +180,11 @@ typedef struct s_line
 
 // Estratto direttamente del progetto get_next_line al fine di leggere il file della mappa
 char	*get_next_line(int fd);
+char	*append_buffer(char *buffer, char *temp);
+char	*read_line(int fd, char *buffer);
+size_t	line_len_with_newline(char *buffer);
+char	*extract_tail(char *buffer, size_t line_len);
+char	*extract_line(char **buffer);
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -226,6 +231,7 @@ void    allocate_grid(t_scene *scene);
 void    double_color_path(char flag, t_scene *scene, char **split);
 void    error_colors_value(char *line, char **rgb_split, t_scene *scene, char *joined);
 void    error_spawn_player(char *line, t_scene *scene);
+int     is_config_id(char *id);
 void    line_errors(char *line, int fd);
 void	split_error(char **split);
 void    error_extra_line_map(char *line, t_scene *scene);
@@ -246,11 +252,15 @@ void    parse_textures(char *line, t_scene *scene, int fd);
 
 //grind errors
 void    check_extra_chars_textures(t_scene *scene, char *line, char **split);
-void    nl_grid_error(char *line);
+void    nl_grid_error(char *line, t_scene *scene);
 
 //grid validation
 int	validate_borders(const char *map_path, t_scene *scene);
 int	validate_line(char *line, int index, t_scene *scene);
+int	line_len_no_nl(char *line);
+int	middle_row_is_closed(char **rows, int h, int i);
+void	free_rows(char **rows, int count);
+int	load_map_rows(const char *map_path, t_scene *scene, char **rows);
 
 //engine
 void	engine_init(t_game *game);
@@ -266,7 +276,6 @@ void    fill_player_ew(char c, t_game *game,  int row, int col);
 void    fill_player_ns(char c, t_game *game, int row, int col);
 /*********************************************** */
 void	init_image(t_game *game);
-void	cleanup_and_exit(t_game *game, int code);
 void	put_pixel(t_img *img, int x, int y, int color);
 void	draw_line(t_img *img, t_point p0, t_point p1, int color);
 int		load_texture(t_game *game, int i, char *path);
@@ -294,8 +303,8 @@ void	handle_keys(t_game *game, double dt);
 
 
 //cleanups
-void	clean_exit(t_game *game);
 void	destroy_textures(t_game *game);
+void	cleanup_and_exit(t_game *game, int code);
 
 
 # define MINI_WIN_WIDTH (WINDOW_WIDTH/5)

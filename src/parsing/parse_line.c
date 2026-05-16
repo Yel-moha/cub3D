@@ -12,21 +12,19 @@
 
 #include "cub3d.h"
 
-
-
 static int	count_pass_line(t_scene *scene, int fd, char *line)
 {
 	int	line_len;
 
-	line_len = max_line(line, scene);  //Torna la lunghezza della singola linea della griglia
+	line_len = max_line(line, scene);
 	if (line_len > scene->map.width)
-		scene->map.width = line_len; //Aggiorno la larghezza della griglia con la linea più lunga della griglia
+		scene->map.width = line_len;
 	parse_textures(line, scene, fd);
 	parse_colors(line, scene);
 	error_extra_line_map(line, scene);
 	if (scene->counter == 6 && is_map_line(line))
 	{
-		if(!textures_exist(scene))
+		if (!textures_exist(scene))
 			textures_error_path(scene);
 		parse_grid(scene, fd, line);
 		return (1);
@@ -45,7 +43,6 @@ static void	count_grid_pass(const char *map_path, t_scene *scene)
 	line = get_next_line(fd);
 	while (line)
 	{
-		//check_invalid_chars(scene, line);
 		if (count_pass_line(scene, fd, line))
 			break ;
 		free(line);
@@ -53,7 +50,6 @@ static void	count_grid_pass(const char *map_path, t_scene *scene)
 	}
 	close(fd);
 }
-
 
 void	parse_line(const char *map_path, t_scene *scene)
 {

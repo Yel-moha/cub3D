@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void update_flags(t_scene *scene, char *flag)
+void	update_flags(t_scene *scene, char *flag)
 {
 	char	*joined;
 
@@ -21,74 +21,7 @@ void update_flags(t_scene *scene, char *flag)
 		return ;
 	free(scene->flag);
 	scene->flag = joined;
-	scene->counter++; //Variabile determinante per capire se i colori o le texture sono ripetute prima della griglia
-}
-
-void	fill_direction_fixed(char **line, t_scene *scene, int path_index)
-{
-	char	*trimmed;
-	
-	if (!line || !line[0] || !line[path_index])
-		return ;
-	trimmed = ft_strtrim(line[path_index], " \t\n\r");
-	if (!trimmed || !trimmed[0])
-	{
-		free(trimmed);
-		return ;
-	}
-	if (ft_strncmp(line[0], "NO", 3) == 0 && !scene->textures.no)
-	{
-		scene->textures.no = ft_strdup(trimmed);
-		update_flags(scene, "NO");
-	}
-	else if (ft_strncmp(line[0], "SO", 3) == 0 && !scene->textures.so)
-	{
-		scene->textures.so = ft_strdup(trimmed);
-		update_flags(scene, "SO");
-	}
-	else if (ft_strncmp(line[0], "WE", 3) == 0 && !scene->textures.we)
-	{
-		scene->textures.we = ft_strdup(trimmed);
-		update_flags(scene, "WE");
-	}
-	else if (ft_strncmp(line[0], "EA", 3) == 0 && !scene->textures.ea)
-	{
-		scene->textures.ea = ft_strdup(trimmed);
-		update_flags(scene, "EA");
-	}
-	free(trimmed);
-}
-
-void	fill_direction(char **line, t_scene *scene)
-{
-	char	*trimmed;
-	
-	if (!line || !line[0] || !line[1])
-		return ;
-	trimmed = ft_strtrim(line[1], " \t\n\r");
-	if (!trimmed)
-		return ;
-	if (ft_strncmp(line[0], "NO", 3) == 0 && !scene->textures.no)
-	{
-		scene->textures.no = ft_strdup(trimmed);
-		update_flags(scene, "NO");
-	}
-	else if (ft_strncmp(line[0], "SO", 3) == 0 && !scene->textures.so)
-	{
-		scene->textures.so = ft_strdup(trimmed);
-		update_flags(scene, "SO");
-	}
-	else if (ft_strncmp(line[0], "WE", 3) == 0 && !scene->textures.we)
-	{
-		scene->textures.we = ft_strdup(trimmed);
-		update_flags(scene, "WE");
-	}
-	else if (ft_strncmp(line[0], "EA", 3) == 0 && !scene->textures.ea)
-	{
-		scene->textures.ea = ft_strdup(trimmed);
-		update_flags(scene, "EA");
-	}
-	free(trimmed);
+	scene->counter++;
 }
 
 void	fill_colors(char **line, t_scene *scene, char f_or_c)
@@ -119,20 +52,20 @@ void	fill_colors(char **line, t_scene *scene, char f_or_c)
 	}
 }
 
-int check_colors_value(char **rgb_split, char **split)
+int	check_colors_value(char **rgb_split, char **split)
 {
 	int	i;
-	int j;
+	int	j;
 
 	if (!rgb_split || !rgb_split[0] || !rgb_split[1] || !rgb_split[2])
 		return (-1);
 	i = 0;
-	while(rgb_split[i])
+	while (rgb_split[i])
 	{
 		j = 0;
-		while(rgb_split[i][j] && ft_atoi(rgb_split[i]) >= 0)
+		while (rgb_split[i][j] && ft_atoi(rgb_split[i]) >= 0)
 		{
-			if((!ft_isdigit(rgb_split[i][j]) && rgb_split[i][j] != '\n') ||
+			if ((!ft_isdigit(rgb_split[i][j]) && rgb_split[i][j] != '\n') ||
 				ft_atoi(&rgb_split[i][j]) > 255)
 			{
 				free_split(split);

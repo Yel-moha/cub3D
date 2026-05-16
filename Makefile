@@ -3,6 +3,7 @@ NAME		= cub3d
 SRCS		=	src/parsing/read_maps.c \
 				src/main.c \
 				src/parsing/errors.c \
+				src/parsing/errors_utils.c \
 				src/parsing/debug_prints.c \
 				src/parsing/validations.c \
 				src/parsing/free_utils.c \
@@ -10,8 +11,13 @@ SRCS		=	src/parsing/read_maps.c \
 				src/parsing/map_grid.c \
 				src/parsing/grid.c \
 				src/parsing/parse_colors.c \
+				src/parsing/parse_textures.c \
+				src/parsing/textures_fill.c \
 				src/parsing/grid_errors.c \
 				src/parsing/grid_validation.c \
+				src/parsing/grid_validation_utils.c \
+				src/parsing/grid_validation_rows.c \
+				src/parsing/read_maps_helpers.c \
 				src/engine/engine.c \
 				src/engine/dda.c \
 				src/engine/floor_ceiling_tex.c \

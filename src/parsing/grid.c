@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   grid.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/08 17:17:44 by yel-moha          #+#    #+#             */
+/*   Updated: 2026/05/16 00:00:00 by yel-moha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	is_blank_line(char *line)
@@ -7,7 +19,8 @@ int	is_blank_line(char *line)
 	j = 0;
 	if (!line)
 		return (1);
-	while (line[j] == ' ' || line[j] == '\n' || line[j] == '\t' || line[j] == '\r')
+	while (line[j] == ' ' || line[j] == '\n' || line[j] == '\t'
+		|| line[j] == '\r')
 		j++;
 	return (line[j] == '\0');
 }
@@ -20,7 +33,7 @@ void	parse_grid(t_scene *scene, int fd, char *line)
 	while (line && scene->counter >= 6)
 	{
 		if (is_blank_line(line))
-			nl_grid_error(line);
+			nl_grid_error(line, scene);
 		if (is_map_line(line))
 		{
 			line_len = max_line(line, scene);
@@ -29,11 +42,10 @@ void	parse_grid(t_scene *scene, int fd, char *line)
 			count_grid_height(line, scene);
 		}
 		else
-			nl_grid_error(line);
+			nl_grid_error(line, scene);
 		free(line);
 		line = get_next_line(fd);
 	}
-
 	scene->map.letta = 1;
 }
 
@@ -55,7 +67,6 @@ int	is_map_line(char *line)
 	return (0);
 }
 
-
 void	fill_grid_pass(const char *map_path, t_scene *scene)
 {
 	int		fd;
@@ -67,7 +78,7 @@ void	fill_grid_pass(const char *map_path, t_scene *scene)
 		return (line_errors(NULL, fd));
 	grid_i = 0;
 	line = get_next_line(fd);
-	if(scene->pos == 0) // nessun player inserito
+	if (scene->pos == 0)
 		error_spawn_player(line, scene);
 	while (line)
 	{
@@ -79,20 +90,26 @@ void	fill_grid_pass(const char *map_path, t_scene *scene)
 	close(fd);
 }
 
-/*
-
-
-void validate_grid(char *line, int index)
+void	print_grid(t_scene scene)
 {
-	int counter_lines;
-	char *prev_line;
+	int	i;
+	int	j;
 
-	prev_line = ft_strdup((const)line);
-	if(!prev_line)
-		return ;
-	
-	counter_lines = 0;
-
+	printf("la larghezza della griglia è %d\n", scene.map.width);
+	i = 0;
+	while (i < scene.map.height)
+	{
+		printf("row[%d]: ", i);
+		j = 0;
+		while (j < scene.map.width)
+		{
+			if (scene.map.grid[i][j] == ' ')
+				printf(".");
+			else
+				printf("%c", scene.map.grid[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
 }
-
-*/

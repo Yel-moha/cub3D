@@ -12,23 +12,6 @@
 
 #include "cub3d.h"
 
-void	cleanup_and_exit(t_game *game, int code)
-{
-	if (!game)
-		exit(code);
-	if (game->img.img_ptr && game->mlx)
-		mlx_destroy_image(game->mlx, game->img.img_ptr);
-	if (game->win && game->mlx)
-		mlx_destroy_window(game->mlx, game->win);
-	if (game->mlx)
-	{
-		mlx_destroy_display(game->mlx);
-		free(game->mlx);
-	}
-	free(game->rays);
-	free_scene(game->scene);
-	exit(code);
-}
 
 int	key_press(int keycode, t_game *game)
 {

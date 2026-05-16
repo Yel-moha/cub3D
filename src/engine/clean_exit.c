@@ -25,36 +25,26 @@ void	destroy_textures(t_game *game)
 	}
 }
 
-void	clean_exit(t_game *game)
+void	cleanup_and_exit(t_game *game, int code)
 {
 	if (!game)
-		exit(0);
-	if (game->rays)
-	{
-		free(game->rays);
-		game->rays = NULL;
-	}
+		exit(code);
+	destroy_textures(game);
 	if (game->mini_map)
 	{
 		free(game->mini_map);
 		game->mini_map = NULL;
 	}
-	destroy_textures(game);
-	if (game->img.img_ptr)
-	{
+	if (game->img.img_ptr && game->mlx)
 		mlx_destroy_image(game->mlx, game->img.img_ptr);
-		game->img.img_ptr = NULL;
-	}
-	if (game->win)
-	{
+	if (game->win && game->mlx)
 		mlx_destroy_window(game->mlx, game->win);
-		game->win = NULL;
-	}
 	if (game->mlx)
 	{
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
-		game->mlx = NULL;
 	}
-	exit(0);
+	free(game->rays);
+	free_scene(game->scene);
+	exit(code);
 }

@@ -58,6 +58,11 @@ static void	render_overlays(t_game *game)
 {
 	draw_grill(game);
 	draw_rays_on_minimap(game);
+	if (game->mini_map)
+	{
+		free(game->mini_map);
+		game->mini_map = NULL;
+	}
 }
 
 int	render_frame(void *param)
