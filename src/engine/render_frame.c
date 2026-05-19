@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 12:32:42 by anacotti          #+#    #+#             */
-/*   Updated: 2026/05/14 22:13:48 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/19 21:47:56 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,3 @@ int	render_frame(void *param)
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img_ptr, 0, 0);
 	return (0);
 }
-

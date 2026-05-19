@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   grid_validation_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 00:00:00 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/16 00:00:00 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/19 21:23:27 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

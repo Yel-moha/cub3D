@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 12:27:09 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/14 21:04:10 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/19 22:10:10 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,172 +38,36 @@ static int	key_hook_minimap(int keycode, t_temp_map *map)
 	return (0);
 }
 
-static void	put_pixel_map(t_img *img, int x, int y, int color)
-{
-	char	*dst;
-
-	if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
-		return ;
-	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	*(unsigned int *)dst = color;
-}
-
-static void	fill_rect(t_img *img, int start_x, int start_y, int size, int color)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < size)
-	{
-		x = 0;
-		while (x < size)
-		{
-			put_pixel_map(img, start_x + x, start_y + y, color);
-			x++;
-		}
-		y++;
-	}
-}
-
-static void	clear_image(t_img *img, int color)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < WINDOW_HEIGHT)
-	{
-		x = 0;
-		while (x < WINDOW_WIDTH)
-		{
-			put_pixel_map(img, x, y, color);
-			x++;
-		}
-		y++;
-	}
-}
-
-static int	cell_color(char cell)
-{
-	if (cell == '1')
-		return (0x00444444);
-	if (cell == '0')
-		return (0x00D9D9D9);
-	if (cell == 'N' || cell == 'S' || cell == 'E' || cell == 'W')
-		return (0x0000AA00);
-	if (cell == ' ')
-		return (0x00000000);
-	return (0x00666666);
-}
-
-static void	draw_cell(t_temp_map *map, int row, int col, char cell)
-{
-	int	pixel_x;
-	int	pixel_y;
-
-	pixel_x = PADDING + map->off_width + (col * map->tile);
-	pixel_y = PADDING + map->off_height + (row * map->tile);
-	fill_rect(&map->img, pixel_x, pixel_y, map->tile, cell_color(cell));
-}
-
-static void	draw_grid_lines(t_temp_map *map, t_scene *scene)
-{
-	int	row;
-	int	col;
-	int	line_x;
-	int	line_y;
-
-	col = 0;
-	while (col < scene->map.width - 1)
-	{
-		line_x = PADDING + map->off_width + ((col + 1) * map->tile);
-		row = 0;
-		while (row < scene->map.height)
-		{
-			line_y = PADDING + map->off_height + (row * map->tile);
-			put_pixel_map(&map->img, line_x, line_y, 0x00FFFFFF);
-			row++;
-		}
-		col++;
-	}
-	row = 0;
-	while (row < scene->map.height - 1)
-	{
-		line_y = PADDING + map->off_height + ((row + 1) * map->tile);
-		col = 0;
-		while (col < scene->map.width)
-		{
-			line_x = PADDING + map->off_width + (col * map->tile);
-			put_pixel_map(&map->img, line_x, line_y, 0x00FFFFFF);
-			col++;
-		}
-		row++;
-	}
-}
-
-static void	draw_grid(t_temp_map *map, t_scene *scene)
-{
-	int	row;
-	int	col;
-
-	row = 0;
-	while (row < scene->map.height)
-	{
-		col = 0;
-		while (col < scene->map.width)
-		{
-			draw_cell(map, row, col, scene->map.grid[row][col]);
-			col++;
-		}
-		row++;
-	}
-}
-
 static int	init_image_map(t_temp_map *map)
 {
 	map->img.img_ptr = mlx_new_image(map->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!map->img.img_ptr)
 		return (0);
-	map->img.addr = mlx_get_data_addr(
-			map->img.img_ptr,
-			&map->img.bpp,
-			&map->img.line_len,
-			&map->img.endian
-	);
+	map->img.addr = mlx_get_data_addr(map->img.img_ptr,
+			&map->img.bpp, &map->img.line_len, &map->img.endian);
+	return (1);
+}
+
+static int	init_minimap_window(t_game *game)
+{
+	game->mini_map->mlx = mlx_init();
+	if (!game->mini_map->mlx)
+		return (0);
+	game->mini_map->win = mlx_new_window(game->mini_map->mlx, WINDOW_WIDTH,
+			WINDOW_HEIGHT, "mini_map");
+	if (!game->mini_map->win || !init_image_map(game->mini_map))
+		return (close_minimap(game->mini_map));
+	mlx_key_hook(game->mini_map->win, key_hook_minimap, game->mini_map);
+	mlx_hook(game->mini_map->win, 17, 0, close_minimap, game->mini_map);
 	return (1);
 }
 
 void	init_graphics_one(t_game *game)
 {
-	if (!(game->mini_map) || !(game->scene))
+	if (!game || !game->mini_map || !game->scene)
 		return ;
-	game->mini_map->mlx = mlx_init();
-	if (!game->mini_map->mlx)
-	{
-		free(game->mini_map);
+	if (!init_minimap_window(game))
 		return ;
-	}
-	game->mini_map->win = mlx_new_window(game->mini_map->mlx, WINDOW_WIDTH,
-			WINDOW_HEIGHT, "mini_map");
-	if (!game->mini_map->win)
-	{
-		close_minimap(game->mini_map);
-		return ;
-	}
-	if (!init_image_map(game->mini_map))
-	{
-		close_minimap(game->mini_map);
-		return ;
-	}
-	clear_image(&(game->mini_map->img), 0x00000000);
-	draw_grid(game->mini_map, game->scene);
-	draw_grid_lines(game->mini_map, game->scene);
-	mlx_put_image_to_window(game->mini_map->mlx, game->mini_map->win,
-			game->mini_map->img.img_ptr, 0, 0);
-	mlx_key_hook(game->mini_map->win, key_hook_minimap,
-			(void *)(game->mini_map));
-	mlx_hook(game->mini_map->win, 17, 0, close_minimap,
-			(void *)(game->mini_map));
+	render_minimap(game);
 	mlx_loop(game->mini_map->mlx);
 }

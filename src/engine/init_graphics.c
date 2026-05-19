@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_graphics.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 12:27:09 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/06 12:24:53 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/19 22:10:24 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	cell_color(char cell)
 	return (0x00666666);
 }
 
-static void	draw_cell(t_game *game, int row, int col, char cell)
+static void	draw_cell_game(t_game *game, int row, int col, char cell)
 {
 	int	x;
 	int	y;
@@ -110,12 +110,11 @@ void	init_graphics(t_game *game)
 		col = 0;
 		while (col < game->scene->map.width)
 		{
-			draw_cell(game, row, col, game->scene->map.grid[row][col]);
+			draw_cell_game(game, row, col, game->scene->map.grid[row][col]);
 			col++;
 		}
 		row++;
 	}
 	draw_vlines(game);
 	draw_hlines(game);
-	/* keep game->mini_map allocated so caller can draw overlays (rays, player) */
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_grid.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 17:17:44 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/11 14:57:10 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/19 21:37:42 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	count_grid_height(char *line, t_scene *scene)
 		error_spawn_player(line, scene);
 	while (line[j] == '1' || line[j] == '0' || line[j] == ' '
 		|| line[j] == 'N' || line[j] == 'S' || line[j] == 'W'
-		|| line[j] == 'E')
+		|| line[j] == 'E' || line[j] == 'D' || line[j] == 'O')
 		j++;
 	if ((line[j] == '\n' || line[j] == '\0') && j != 0)
 		scene->map.height++;
@@ -58,7 +58,8 @@ int	max_line(char *line, t_scene *scene)
 	j = 0;
 	while ((line[j] == '1' || line[j] == '0' || line[j] == ' '
 			|| line[j] == 'N' || line[j] == 'S' || line[j] == 'W'
-			|| line[j] == 'E') && scene->counter == 6)
+			|| line[j] == 'E' || line[j] == 'D' || line[j] == 'O')
+		&& scene->counter == 6)
 		j++;
 	return (j);
 }
