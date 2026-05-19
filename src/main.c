@@ -45,7 +45,24 @@ static void allocate_scene(t_scene *scene)
 	scene->pos = 0;
 	scene->map.letta = 0;
 }
-	
+
+static void map_format(const char *map_path)
+{
+	size_t  len;
+
+	if (!map_path)
+	{
+		write(2, "Errore formato mappa\n", 20);
+		exit(EXIT_FAILURE);
+	}
+	len = ft_strlen(map_path);
+	if (len < 4 || ft_strncmp(&(map_path[len - 4]), ".cub", 5) != 0)
+	{
+		write(2, "Errore formato mappa\n", 20);
+		exit(EXIT_FAILURE);
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	const char	*map_path;
@@ -53,17 +70,14 @@ int	main(int argc, char **argv)
 
 	//x testing
 	t_game	game = {0};
-
+	if (argc != 2)
+		return (1);
+	map_path = argv[1];
+	map_format(map_path);
 	scene = ft_calloc(1, sizeof(t_scene));
 	if (!scene)
 		return (1);
 	allocate_scene(scene);
-	if (argc != 2)
-	{
-		free_scene(scene);
-		return (1);
-	}
-	map_path = argv[1];
 	parse_line(map_path, scene);
 	if (scene->map.letta != 2)
 	{
