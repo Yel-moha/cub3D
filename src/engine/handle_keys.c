@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   handle_keys.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 12:23:45 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/06 12:07:27 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/19 21:59:25 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
 int	key_press(int keycode, t_game *game)
 {
 	if (!game)
 		return (0);
-	if (keycode == 65307) // ESC
+	if (keycode == 65307)
 		cleanup_and_exit(game, 0);
 	if (keycode >= 0 && keycode < 65536)
 		game->keys[keycode] = 1;
@@ -41,24 +40,25 @@ int	close_window(t_game *game)
 
 void	handle_keys(t_game *game, double dt)
 {
-	double scale;
+	double	scale;
 
 	if (!game)
 		return ;
-	/* scale so that dt ~1/60 produces scale ~= 1 */
-	scale = dt * 30.0; //Fattore determinante della velocita di movineto del player
+	scale = dt * 30.0;
 	if (scale <= 0)
 		scale = 1.0;
-	if (game->keys[119]) // w
+	if (game->keys[119])
 		move_player(game, 1.0 * scale);
-	if (game->keys[115]) // s
+	if (game->keys[115])
 		move_player(game, -1.0 * scale);
-	if (game->keys[97]) // a
+	if (game->keys[97])
 		strafe_player(game, -1.0 * scale);
-	if (game->keys[100]) // d
+	if (game->keys[100])
 		strafe_player(game, 1.0 * scale);
-	if (game->keys[65361]) // left arrow
+	if (game->keys[65361])
 		rotate_player(game, 0.08 * scale);
-	if (game->keys[65363]) // right arrow
+	if (game->keys[65363])
 		rotate_player(game, -0.08 * scale);
+	if (game->keys[101])
+		toggle_nearest_door(game);
 }

@@ -22,9 +22,12 @@ SRCS		=	src/parsing/read_maps.c \
 				src/engine/dda.c \
 				src/engine/floor_ceiling_tex.c \
 				src/engine/init_graphics_1.c \
+				src/engine/init_graphics_1_draw.c \
+				src/engine/init_graphics_1_lines.c \
 				src/engine/minimap.c \
 				src/engine/player_init.c \
 				src/engine/player_movment.c \
+				src/engine/door_keys.c \
 				src/engine/raycasting.c \
 				src/engine/render_colums.c \
 				src/engine/render_frame.c \

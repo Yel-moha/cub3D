@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/18 00:00:00 by copilot          ###   ########.fr       */
+/*   Updated: 2026/05/19 22:10:25 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,17 @@ typedef struct s_game
 	t_img		tex[4];
 	int			tex_w[4];
 	int			tex_h[4];
+	int			**door_open;
 }	t_game;
+
+typedef struct s_door_search
+{
+	int		x;
+	int		y;
+	int		found_x;
+	int		found_y;
+	double	min_dist;
+}	t_door_search;
 
 typedef struct s_point
 {
@@ -251,6 +261,10 @@ void	draw_floor_ceiling(t_game *game);
 void	draw_rays_on_minimap(t_game *game);
 void	draw_grill(t_game *game);
 t_temp_map	*init_dimensions(t_scene *scene);
+void	put_pixel_map(t_img *img, int x, int y, int color);
+void	clear_image(t_img *img, int color);
+void	draw_cell(t_temp_map *map, int row, int col, char cell);
+void	render_minimap(t_game *game);
 
 /* player */
 void	player_init(t_game *game);
@@ -259,6 +273,7 @@ void	fill_player_ns(char c, t_game *game, int row, int col);
 void	move_player(t_game *game, double forward);
 void	strafe_player(t_game *game, double right);
 void	rotate_player(t_game *game, double angle);
+int		mouse_move(int x, int y, t_game *game);
 
 /* input / cleanup */
 int		key_press(int keycode, t_game *game);
@@ -267,5 +282,6 @@ int		key_release(int keycode, t_game *game);
 void	handle_keys(t_game *game, double dt);
 void	destroy_textures(t_game *game);
 void	cleanup_and_exit(t_game *game, int code);
+void	toggle_nearest_door(t_game *game);
 
 #endif

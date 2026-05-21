@@ -6,22 +6,11 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 20:31:51 by anacotti          #+#    #+#             */
-/*   Updated: 2026/05/14 22:36:00 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/19 22:15:19 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/*
-✔ player + direzione
-✔ raycasting senza texture (muri colorati)
-✔ DDA stabile
-✔ correzione distanza
-✔ rendering colonne
-✔ texture
-✔ movimento player
-✔ collisioni
-*/
 
 void	init_image(t_game *game)
 {
@@ -33,46 +22,45 @@ void	init_image(t_game *game)
 			&game->img.endian);
 }
 
-/*Aggiunti 29/04/2026 Da youssef*/
-//void	compute_distance(t_game *game, t_ray *ray)
-//void	draw_column(t_game *game, t_ray *ray, int x)
-//static void draw_line(t_img *img, int x0, int y0, int x1, int y1, int color)
-//void	draw_rays_on_minimap(t_game *game)
-/******************************************************** */
-
-// 1.init MLX
-// 2.init window
-// 3.init immagini
-// 4.init player
-// 5.load textures
-// 6.allocazioni runtime
-// 7.input + hooks
-// 8.loop
-
-void	engine_init(t_game *game)
+static void	init_door_matrix(t_game *game)
 {
-	int	i;
+	int	j;
 
-	game->map = game->scene->map; // Aggiunto da youssef
-	//questo è pericoloso (copia, non riferimento), conviene usare sempre game->scene->map
+	game->door_open = ft_calloc(game->scene->map.height, sizeof(int *));
+	if (!game->door_open)
+		cleanup_and_exit(game, 0);
+	j = 0;
+	while (j < game->scene->map.height)
+	{
+		game->door_open[j] = ft_calloc(game->scene->map.width, sizeof(int));
+		if (!game->door_open[j])
+			cleanup_and_exit(game, 0);
+		j++;
+	}
+}
+
+static void	init_window_and_image(t_game *game)
+{
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		cleanup_and_exit(game, 0);
 	game->win = mlx_new_window(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
 	if (!game->win)
 		cleanup_and_exit(game, 0);
-	init_image(game); /* Rendering buffer */
-	player_init(game); /* Game state */
+	init_image(game);
+	player_init(game);
 	if (!load_textures(game))
-	{
-		// warning - textures not loaded, continue with flat colors
-		write(2, "Warning: textures not loaded\n", 29); 
-	}
-	printf("%d %d\n", game->tex_w[0], game->tex_h[0]); //debug
-	game->rays = malloc(sizeof(t_ray) * WINDOW_WIDTH); /* Rays allocation */
+		write(2, "Warning: textures not loaded\n", 29);
+	printf("%d %d\n", game->tex_w[0], game->tex_h[0]);
+}
+
+static void	init_runtime_allocs_and_hooks(t_game *game)
+{
+	int	i;
+
+	game->rays = malloc(sizeof(t_ray) * WINDOW_WIDTH);
 	if (!game->rays)
 		cleanup_and_exit(game, 0);
-	/* init key states and frame timer */
 	i = 0;
 	while (i < 65536)
 	{
@@ -80,14 +68,18 @@ void	engine_init(t_game *game)
 		i++;
 	}
 	game->last_time = 0.0;
-	/*Questo aggiunto da youssef*/
-	//Gestione della chiusura della finestra usando ESC e X
 	mlx_loop_hook(game->mlx, render_frame, game);
-	/* Use KeyPress/KeyRelease hooks so held keys work */
 	mlx_hook(game->win, 2, 1L << 0, key_press, (void *)game);
 	mlx_hook(game->win, 3, 1L << 1, key_release, (void *)game);
 	mlx_hook(game->win, 17, 0, close_window, (void *)game);
-	////////////
-	/*Fine parte aggiunta da youssef*/
+	mlx_hook(game->win, MotionNotify, PointerMotionMask, mouse_move, game);
 	mlx_loop(game->mlx);
+}
+
+void	engine_init(t_game *game)
+{
+	game->map = game->scene->map;
+	init_door_matrix(game);
+	init_window_and_image(game);
+	init_runtime_allocs_and_hooks(game);
 }

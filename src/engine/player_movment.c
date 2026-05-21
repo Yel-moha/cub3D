@@ -6,15 +6,22 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 14:57:44 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/14 21:22:37 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/19 21:35:47 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	is_wall(t_game *game, double x, double y)
+static int	is_wall(t_game *game, double x, double y) //modificato x bonus porte
 {
-	return (game->scene->map.grid[(int)y][(int)x] == '1');
+	char	cell;
+
+	cell = game->scene->map.grid[(int)y][(int)x];
+	if (cell == '1')
+		return (1);
+	if (cell == 'D' && !game->door_open[(int)y][(int)x])
+		return (1);
+	return (0);
 }
 
 void	move_player(t_game *game, double forward)
@@ -70,22 +77,23 @@ void	rotate_player(t_game *game, double angle)
 		+ player->plane_y * cos(angle);
 }
 
-/* Versione precedente:
-void rotate_player(t_game *game, double angle)
+int	mouse_move(int x, int y, t_game *game)
 {
-    double old_dx;
-    double old_dy;
-    double old_px;
-    double old_py;
-    t_player *player;
+	int		center_x;
+	int		delta;
+	double	sens;
 
-    player = game->scene->player;
-    old_dx = player->dir_x;
-    old_dy = player->dir_y;
-    old_px = player->plane_x;
-    old_py = player->plane_y;
-    player->dir_x = old_dx * cos(angle) - old_dy * sin(angle);
-    player->dir_y = old_dx * sin(angle) + old_dy * cos(angle);
-    player->plane_x = old_px * cos(angle) - old_py * sin(angle);
-    player->plane_y = old_px * sin(angle) + old_py * cos(angle);
-} */
+	(void)y;
+	center_x = WINDOW_WIDTH / 2;
+	sens = 0.003;
+	delta = x - center_x;
+	if (delta != 0)
+	{
+		rotate_player(game, -delta * sens);
+		mlx_mouse_move(game->mlx,
+			game->win,
+			center_x,
+			WINDOW_HEIGHT / 2);
+	}
+	return (0);
+}
