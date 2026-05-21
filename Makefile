@@ -37,6 +37,10 @@ SRCS		=	src/parsing/read_maps.c \
 				src/engine/handle_keys.c \
 				src/engine/init_dimensions.c \
 				src/engine/init_graphics.c \
+				src/engine/sprites.c \
+				src/engine/sprites_utils.c \
+				src/engine/sprites_render.c \
+				src/engine/sprites_draw.c \
 
 OBJS		= $(SRCS:.c=.o)
 

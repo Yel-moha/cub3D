@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moha <yel-moha@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:48:58 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/02 17:40:34 by yel-moha         ###   ########.fr       */
+/*   Updated: 2026/05/21 21:23:22 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	count_pass_line(t_scene *scene, int fd, char *line)
 	if (scene->counter == 6 && is_map_line(line))
 	{
 		if (!textures_exist(scene))
-			textures_error_path(scene);
+			return (-1);
 		parse_grid(scene, fd, line);
 		return (1);
 	}
@@ -36,6 +36,7 @@ static void	count_grid_pass(const char *map_path, t_scene *scene)
 {
 	int		fd;
 	char	*line;
+	int		rc;
 
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
@@ -43,7 +44,14 @@ static void	count_grid_pass(const char *map_path, t_scene *scene)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (count_pass_line(scene, fd, line))
+		rc = count_pass_line(scene, fd, line);
+		if (rc == -1)
+		{
+			free(line);
+			textures_error_path(scene);
+			return ;
+		}
+		if (rc == 1)
 			break ;
 		free(line);
 		line = get_next_line(fd);

@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 12:32:42 by anacotti          #+#    #+#             */
-/*   Updated: 2026/05/19 21:47:56 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/21 21:21:19 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	handle_keys_frame(t_game *game)
 	double	dt;
 
 	dt = update_time(game);
+	game->elapsed_time += dt;
 	handle_keys(game, dt);
 }
 
@@ -49,6 +50,7 @@ static void	render_scene(t_game *game)
 		init_ray(game, &game->rays[x], x);
 		perform_dda(game, &game->rays[x]);
 		compute_distance(game, &game->rays[x]);
+		game->z_buffer[x] = game->rays[x].perp_dist;
 		draw_column(game, &game->rays[x], x);
 		x++;
 	}
@@ -56,6 +58,7 @@ static void	render_scene(t_game *game)
 
 static void	render_overlays(t_game *game)
 {
+	render_sprites(game);
 	draw_grill(game);
 	draw_rays_on_minimap(game);
 	if (game->mini_map)

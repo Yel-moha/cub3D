@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 14:57:44 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/19 21:35:47 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/21 20:47:36 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	mouse_move(int x, int y, t_game *game)
 	delta = x - center_x;
 	if (delta != 0)
 	{
-		rotate_player(game, -delta * sens);
+		rotate_player(game, delta * sens);
 		mlx_mouse_move(game->mlx,
 			game->win,
 			center_x,

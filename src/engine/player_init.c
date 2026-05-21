@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 12:32:05 by anacotti          #+#    #+#             */
-/*   Updated: 2026/05/14 21:16:24 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/21 20:22:44 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ void	fill_player_ns(char c, t_game *game, int row, int col)
 	game->scene->player->pos_y = row + 0.5;
 	if (c == 'N')
 	{
-		game->scene->player->dir_x = -1;
-		game->scene->player->dir_y = 0;
-		game->scene->player->plane_x = 0;
-		game->scene->player->plane_y = 0.66;
+		game->scene->player->dir_x = 0;
+		game->scene->player->dir_y = -1;
+		game->scene->player->plane_x = 0.66;
+		game->scene->player->plane_y = 0;
 	}
 	else if (c == 'S')
 	{
-		game->scene->player->dir_x = 1;
-		game->scene->player->dir_y = 0;
-		game->scene->player->plane_x = 0;
-		game->scene->player->plane_y = -0.66;
+		game->scene->player->dir_x = 0;
+		game->scene->player->dir_y = 1;
+		game->scene->player->plane_x = -0.66;
+		game->scene->player->plane_y = 0;
 	}
 }
 
@@ -38,17 +38,17 @@ void	fill_player_ew(char c, t_game *game, int row, int col)
 	game->scene->player->pos_y = row + 0.5;
 	if (c == 'E')
 	{
-		game->scene->player->dir_x = 0;
-		game->scene->player->dir_y = 1;
-		game->scene->player->plane_x = 0.66;
-		game->scene->player->plane_y = 0;
+		game->scene->player->dir_x = -1;
+		game->scene->player->dir_y = 0;
+		game->scene->player->plane_x = 0;
+		game->scene->player->plane_y = -0.66;
 	}
 	else if (c == 'W')
 	{
-		game->scene->player->dir_x = 0;
-		game->scene->player->dir_y = -1;
-		game->scene->player->plane_x = -0.66;
-		game->scene->player->plane_y = 0;
+		game->scene->player->dir_x = 1;
+		game->scene->player->dir_y = 0;
+		game->scene->player->plane_x = 0;
+		game->scene->player->plane_y = 0.66;
 	}
 }
 
