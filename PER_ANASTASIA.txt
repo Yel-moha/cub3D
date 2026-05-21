@@ -1,0 +1,16 @@
+Ciao Anastasia ti lascio qui queste note di modo che tu possa migliorare o correggere queste faccende:
+
+1 - ho colorato la porte aperte e chiuse sulla minimappa ed ho notato che:
+    - Le porte chiuse si aprono in modo non efficiente, ovvero non sempre si aprono
+    - Le porte aperte non si chiudono
+    suggerimento:
+        - per le funzionalita' prinicipali di movimento e di rotazione, abbiamo implementato
+        i tasti della ketboard in modo persistente, per le funzione di apertura e chiusura 
+        delle porte meglio se vengono implementate diversamente
+
+2 - se riesci ad implementare textures diverse per le porte sarebbe meglio
+
+3 - se riesci a fare dei test sotto valgrind con il fallimento del caricamento delle textures
+    per vedere se rimane allocata roba o meno (Magari il parsing conserva memoria non liberata)
+
+4 - Orientare il player in modo corretto (N = player guarda vero l'alto e non a destra)

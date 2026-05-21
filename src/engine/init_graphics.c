@@ -20,6 +20,10 @@ static int	cell_color(char cell)
 		return (0x00D9D9D9);
 	if (cell == 'N' || cell == 'S' || cell == 'E' || cell == 'W')
 		return (0x0000AA00);
+	if (cell == 'D')
+		return (0x00AA0000);
+	if (cell == 'O')
+		return (0x0000AA00);
 	if (cell == ' ')
 		return (0x00000000);
 	return (0x00666666);
@@ -101,6 +105,7 @@ void	init_graphics(t_game *game)
 {
 	int	row;
 	int	col;
+	char cell;
 
 	if (!game || !game->mini_map || !game->scene)
 		return ;
@@ -110,7 +115,13 @@ void	init_graphics(t_game *game)
 		col = 0;
 		while (col < game->scene->map.width)
 		{
-			draw_cell_game(game, row, col, game->scene->map.grid[row][col]);
+			{
+				cell = game->scene->map.grid[row][col];
+				if (cell == 'D' && game->door_open && game->door_open[row]
+					&& game->door_open[row][col])
+					cell = 'O';
+				draw_cell_game(game, row, col, cell);
+			}
 			col++;
 		}
 		row++;

@@ -66,6 +66,10 @@ static int	cell_color(char cell)
 		return (0x00D9D9D9);
 	if (cell == 'N' || cell == 'S' || cell == 'E' || cell == 'W')
 		return (0x0000AA00);
+	if (cell == 'D')
+		return (0x00AA0000); /* closed door: red */
+	if (cell == 'O')
+		return (0x0000AA00); /* open door: green */
 	if (cell == ' ')
 		return (0x00000000);
 	return (0x00666666);
