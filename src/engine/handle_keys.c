@@ -63,7 +63,7 @@ void	handle_keys(t_game *game, double dt)
 	if (game->keys[100])
 		strafe_player(game, 1.0 * scale);
 	if (game->keys[65361])
-		rotate_player(game, -0.08 * scale);
-	if (game->keys[65363])
 		rotate_player(game, 0.08 * scale);
+	if (game->keys[65363])
+		rotate_player(game, -0.08 * scale);
 }

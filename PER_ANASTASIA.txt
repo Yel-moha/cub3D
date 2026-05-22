@@ -14,3 +14,16 @@ Ciao Anastasia ti lascio qui queste note di modo che tu possa migliorare o corre
     per vedere se rimane allocata roba o meno (Magari il parsing conserva memoria non liberata)
 
 4 - Orientare il player in modo corretto (N = player guarda vero l'alto e non a destra)
+
+
+
+22/05/2026
+
+1-   Le porte aperte se messe accanto a quelle chiuse non si chiudono anzi non si chiudono mai
+    (Siamo sicuri di voler implementare sta cosa delle porte ?)
+    io lascerei solo quelle normalmente chiuse (simbolo D che funzionano oppure eliminare le porte proprio, anche
+    perche' l'effetto di apertura non e' il massimo perche' scompaiono completamente, a meno che non pensi di poter
+    migliorare questi effetti)
+
+2- ho corretto le direzioni (N, S, W, E)invertendo qualche lettere, e qualche segno per le rotazioni
+
