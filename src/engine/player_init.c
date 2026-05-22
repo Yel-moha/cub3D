@@ -16,17 +16,17 @@ void	fill_player_ns(char c, t_game *game, int row, int col)
 {
 	game->scene->player->pos_x = col + 0.5;
 	game->scene->player->pos_y = row + 0.5;
-	if (c == 'N')
-	{
-		game->scene->player->dir_x = 0;
-		game->scene->player->dir_y = -1;
-		game->scene->player->plane_x = 0.66;
-		game->scene->player->plane_y = 0;
-	}
-	else if (c == 'S')
+	if (c == 'S')
 	{
 		game->scene->player->dir_x = 0;
 		game->scene->player->dir_y = 1;
+		game->scene->player->plane_x = 0.66;
+		game->scene->player->plane_y = 0;
+	}
+	else if (c == 'N')
+	{
+		game->scene->player->dir_x = 0;
+		game->scene->player->dir_y = -1;
 		game->scene->player->plane_x = -0.66;
 		game->scene->player->plane_y = 0;
 	}
@@ -36,14 +36,14 @@ void	fill_player_ew(char c, t_game *game, int row, int col)
 {
 	game->scene->player->pos_x = col + 0.5;
 	game->scene->player->pos_y = row + 0.5;
-	if (c == 'E')
+	if (c == 'W')
 	{
 		game->scene->player->dir_x = -1;
 		game->scene->player->dir_y = 0;
 		game->scene->player->plane_x = 0;
 		game->scene->player->plane_y = -0.66;
 	}
-	else if (c == 'W')
+	else if (c == 'E')
 	{
 		game->scene->player->dir_x = 1;
 		game->scene->player->dir_y = 0;
