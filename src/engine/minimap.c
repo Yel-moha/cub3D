@@ -12,25 +12,31 @@
 
 #include "cub3d.h"
 
-static t_point	get_player_pos(t_game *game, int map_w_px, int tile)
+static t_point	get_player_pos(t_game *game, int tile)
 {
 	t_point	p;
 
 	p.x = PADDING + game->mini_map->off_width
-		+ (map_w_px - (int)(game->scene->player->pos_x * tile));
+		+ (int)(game->scene->player->pos_x * tile);
 	p.y = PADDING + game->mini_map->off_height
 		+ (int)(game->scene->player->pos_y * tile);
 	return (p);
 }
 
-static t_point	get_ray_target(t_game *game, int i, int map_w_px, int tile)
+static t_point	get_ray_target(t_game *game, int i, int tile)
 {
 	t_point	p;
+	double	hit_x;
+	double	hit_y;
 
+	hit_x = game->rays[i].pos_x + game->rays[i].dir_x
+		* game->rays[i].perp_dist;
+	hit_y = game->rays[i].pos_y + game->rays[i].dir_y
+		* game->rays[i].perp_dist;
 	p.x = PADDING + game->mini_map->off_width
-		+ (map_w_px - ((game->rays[i].map_x * tile) + tile / 2));
+		+ (int)(hit_x * tile);
 	p.y = PADDING + game->mini_map->off_height
-		+ game->rays[i].map_y * tile + tile / 2;
+		+ (int)(hit_y * tile);
 	return (p);
 }
 
@@ -38,19 +44,17 @@ void	draw_rays_on_minimap(t_game *game)
 {
 	int		i;
 	int		tile;
-	int		map_w_px;
 	t_point	player;
 	t_point	target;
 
 	if (!game || !game->mini_map || !game->scene)
 		return ;
 	tile = game->mini_map->tile;
-	map_w_px = game->scene->map.width * tile;
-	player = get_player_pos(game, map_w_px, tile);
+	player = get_player_pos(game, tile);
 	i = 0;
 	while (i < WINDOW_WIDTH)
 	{
-		target = get_ray_target(game, i, map_w_px, tile);
+		target = get_ray_target(game, i, tile);
 		draw_line(&game->img, player, target, 0x00FF0000);
 		i++;
 	}

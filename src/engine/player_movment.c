@@ -46,12 +46,16 @@ void	strafe_player(t_game *game, double right)
 	double		ms;
 	double		nx;
 	double		ny;
+	double		right_x;
+	double		right_y;
 	t_player	*player;
 
 	player = game->scene->player;
 	ms = 0.10;
-	nx = player->pos_x + player->plane_x * ms * right;
-	ny = player->pos_y + player->plane_y * ms * right;
+	right_x = -player->dir_y;
+	right_y = player->dir_x;
+	nx = player->pos_x + right_x * ms * right;
+	ny = player->pos_y + right_y * ms * right;
 	if (!is_wall(game, nx, player->pos_y))
 		player->pos_x = nx;
 	if (!is_wall(game, player->pos_x, ny))
