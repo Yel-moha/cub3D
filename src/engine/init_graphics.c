@@ -37,7 +37,7 @@ static void	draw_cell_game(t_game *game, int row, int col, char cell)
 	int	pixel_y;
 
 	pixel_x = PADDING + game->mini_map->off_width
-		+ ((game->scene->map.width - 1 - col) * game->mini_map->tile);
+		+ (col * game->mini_map->tile);
 	pixel_y = PADDING + game->mini_map->off_height
 		+ (row * game->mini_map->tile);
 	y = 0;
