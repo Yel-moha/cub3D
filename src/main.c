@@ -52,13 +52,13 @@ static void map_format(const char *map_path)
 
 	if (!map_path)
 	{
-		write(2, "Errore formato mappa\n", 20);
+		write(2, "Errore formato mappa\n", 21);
 		exit(EXIT_FAILURE);
 	}
 	len = ft_strlen(map_path);
 	if (len < 4 || ft_strncmp(&(map_path[len - 4]), ".cub", 5) != 0)
 	{
-		write(2, "Errore formato mappa\n", 20);
+		write(2, "Errore formato mappa\n", 21);
 		exit(EXIT_FAILURE);
 	}
 }
