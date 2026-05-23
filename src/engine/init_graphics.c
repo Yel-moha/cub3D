@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 12:27:09 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/19 22:10:24 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/21 21:24:56 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,9 @@ static void	draw_hlines(t_game *game)
 
 void	init_graphics(t_game *game)
 {
-	int	row;
-	int	col;
-	char cell;
+	int		row;
+	int		col;
+	char	cell;
 
 	if (!game || !game->mini_map || !game->scene)
 		return ;

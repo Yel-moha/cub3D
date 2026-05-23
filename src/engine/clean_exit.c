@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 22:24:43 by anacotti          #+#    #+#             */
-/*   Updated: 2026/05/19 21:51:47 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/21 21:21:13 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,19 @@ void	destroy_textures(t_game *game)
 	int	i;
 
 	i = 0;
-	while (i < 4)
+	while (i < SPRITE_TEX_BASE + SPRITE_FRAME_COUNT)
 	{
 		if (game->tex[i].img_ptr)
 			mlx_destroy_image(game->mlx, game->tex[i].img_ptr);
 		i++;
 	}
+}
+
+static void	free_sprites(t_game *game)
+{
+	free(game->sprites);
+	game->sprites = NULL;
+	game->sprite_count = 0;
 }
 
 static void	free_door_open(t_game *game)
@@ -60,6 +67,8 @@ static void	cleanup_game(t_game *game)
 		free(game->mlx);
 	}
 	free_door_open(game);
+	free_sprites(game);
+	free(game->z_buffer);
 	free(game->rays);
 	free_scene(game->scene);
 }

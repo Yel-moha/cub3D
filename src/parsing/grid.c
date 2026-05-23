@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 17:17:44 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/19 21:35:43 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/21 21:21:17 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int	is_map_line(char *line)
 		end--;
 	while (line[j] == '1' || line[j] == '0' || line[j] == ' '
 		|| line[j] == 'N' || line[j] == 'S' || line[j] == 'W'
-		|| line[j] == 'E' || line[j] == 'D' || line[j] == 'O')
+		|| line[j] == 'E' || line[j] == 'D' || line[j] == 'O'
+		|| line[j] == 'M')
 		j++;
 	if (j == end && j != 0)
 		return (1);

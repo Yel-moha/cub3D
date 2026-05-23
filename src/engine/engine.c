@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 20:31:51 by anacotti          #+#    #+#             */
-/*   Updated: 2026/05/19 22:15:19 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/21 21:21:24 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static void	init_window_and_image(t_game *game)
 	player_init(game);
 	if (!load_textures(game))
 		write(2, "Warning: textures not loaded\n", 29);
-	printf("%d %d\n", game->tex_w[0], game->tex_h[0]);
 }
 
 static void	init_runtime_allocs_and_hooks(t_game *game)
@@ -60,6 +59,9 @@ static void	init_runtime_allocs_and_hooks(t_game *game)
 
 	game->rays = malloc(sizeof(t_ray) * WINDOW_WIDTH);
 	if (!game->rays)
+		cleanup_and_exit(game, 0);
+	game->z_buffer = ft_calloc(WINDOW_WIDTH, sizeof(double));
+	if (!game->z_buffer)
 		cleanup_and_exit(game, 0);
 	i = 0;
 	while (i < 65536)
@@ -79,6 +81,7 @@ static void	init_runtime_allocs_and_hooks(t_game *game)
 void	engine_init(t_game *game)
 {
 	game->map = game->scene->map;
+	init_sprites(game);
 	init_door_matrix(game);
 	init_window_and_image(game);
 	init_runtime_allocs_and_hooks(game);

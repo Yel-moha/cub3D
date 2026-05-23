@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 22:45:00 by anacotti          #+#    #+#             */
-/*   Updated: 2026/05/19 22:10:18 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/21 21:25:25 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ static int	cell_color(char cell)
 	if (cell == 'N' || cell == 'S' || cell == 'E' || cell == 'W')
 		return (0x0000AA00);
 	if (cell == 'D')
-		return (0x00AA0000); /* closed door: red */
+		return (0x00AA0000);
 	if (cell == 'O')
-		return (0x0000AA00); /* open door: green */
+		return (0x0000AA00);
 	if (cell == ' ')
 		return (0x00000000);
 	return (0x00666666);

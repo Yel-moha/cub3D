@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/19 22:10:25 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/21 21:39:32 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define MINI_WIN_WIDTH 280
 # define MINI_WIN_HEIGHT 200
 # define PADDING 10
+# define SPRITE_FRAME_COUNT 4
+# define SPRITE_TEX_BASE 5
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -58,6 +60,29 @@ typedef struct s_map
 	int		height;
 	int		letta;
 }	t_map;
+
+typedef struct s_sprite
+{
+	double	pos_x;
+	double	pos_y;
+} 	t_sprite;
+
+typedef struct s_sprite_draw
+{
+	int		tex_id;
+	double	transform_y;
+	int		screen_x;
+} 	t_sprite_draw;
+
+typedef struct s_sprite_box
+{
+	int	height;
+	int	width;
+	int	x_start;
+	int	x_end;
+	int	y_start;
+	int	y_end;
+} 	t_sprite_box;
 
 typedef struct s_player
 {
@@ -130,11 +155,16 @@ typedef struct s_game
 	t_img		img;
 	t_ray		*rays;
 	int			keys[65536];
+	int			door_toggle_locked;
 	double		last_time;
-	t_img		tex[4];
-	int			tex_w[4];
-	int			tex_h[4];
+	double		elapsed_time;
+	t_img		tex[SPRITE_TEX_BASE + SPRITE_FRAME_COUNT];
+	int		tex_w[SPRITE_TEX_BASE + SPRITE_FRAME_COUNT];
+	int		tex_h[SPRITE_TEX_BASE + SPRITE_FRAME_COUNT];
 	int			**door_open;
+	t_sprite	*sprites;
+	int		sprite_count;
+	double		*z_buffer;
 }	t_game;
 
 typedef struct s_door_search
@@ -251,6 +281,11 @@ void	init_ray(t_game *game, t_ray *ray, int x);
 void	perform_dda(t_game *game, t_ray *ray);
 void	compute_distance(t_game *game, t_ray *ray);
 void	draw_column(t_game *game, t_ray *ray, int x);
+void	count_sprite_positions(t_game *game);
+void	sort_sprites(int *order, double *dist, int count);
+void	render_single_sprite(t_game *game, int index, t_sprite_draw *draw);
+void	render_sprites(t_game *game);
+void	init_sprites(t_game *game);
 void	put_pixel(t_img *img, int x, int y, int color);
 void	draw_line(t_img *img, t_point p0, t_point p1, int color);
 int		load_texture(t_game *game, int i, char *path);

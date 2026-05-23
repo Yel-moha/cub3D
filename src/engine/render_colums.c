@@ -32,6 +32,8 @@ static void	draw_flat_col(t_game *game, int x, t_draw_col col)
 
 	if (col.tex_id == 2 || col.tex_id == 3)
 		color = 0x00444444;
+	else if (col.tex_id == 4)
+		color = 0x008B5A2B;
 	else
 		color = 0x00BBBBBB;
 	y = col.draw_start;
@@ -103,12 +105,16 @@ static void	init_draw_col(t_draw_col *col, t_ray *ray, int lh)
 void	draw_column(t_game *game, t_ray *ray, int x)
 {
 	t_draw_col	col;
+	char		cell;
 	int			lh;
 
 	if (!game || !ray)
 		return ;
 	lh = (int)(WINDOW_HEIGHT / ray->perp_dist);
 	init_draw_col(&col, ray, lh);
+	cell = game->scene->map.grid[ray->map_y][ray->map_x];
+	if (cell == 'D')
+		col.tex_id = 4;
 	if (!game->tex[col.tex_id].img_ptr || game->tex_w[col.tex_id] <= 0
 		|| game->tex_h[col.tex_id] <= 0)
 		draw_flat_col(game, x, col);
