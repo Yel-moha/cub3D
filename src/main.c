@@ -98,8 +98,6 @@ int	main(int argc, char **argv)
 	// x testing - INIT ENGINE
 	engine_init(&game);
 
-	// x testing -
-	//draw_grill(scene);
 	free_scene(scene);
 	return (0);
 }

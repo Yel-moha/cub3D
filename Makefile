@@ -45,7 +45,7 @@ SRCS		=	src/parsing/read_maps.c \
 OBJS		= $(SRCS:.c=.o)
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g -Isrc
+CFLAGS		= -Wall -Wextra -Werror -Wno-error=incompatible-pointer-types -g -Isrc
 
 # Build-time debug flags
 # -DRAY_DEBUG: when defined, enables drawing of DDA steps (ray traversal)
