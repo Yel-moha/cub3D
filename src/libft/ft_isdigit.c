@@ -22,24 +22,24 @@ int	ft_isdigit(int c)
 #include <ctype.h>
 int main()
 {
-    int i;
+	int i;
 
-    i = -1;
-    while (i < 530)
-    {
-        if (ft_isdigit(i) != 0 && isdigit(i) == 0)
-        {
-            printf("Error with i = %d\n", i);
-            return (1);
-        }
-        if (ft_isdigit(i) == 0 && isdigit(i) != 0)
-        {
-            printf("Error with i = %d\n", i);
-            return (1);
-        }
-        i++;
-    }
-    printf("All tests passed successfully!\n");
-    return (0);
+	i = -1;
+	while (i < 530)
+	{
+		if (ft_isdigit(i) != 0 && isdigit(i) == 0)
+		{
+			printf("Error with i = %d\n", i);
+			return (1);
+		}
+		if (ft_isdigit(i) == 0 && isdigit(i) != 0)
+		{
+			printf("Error with i = %d\n", i);
+			return (1);
+		}
+		i++;
+	}
+	printf("All tests passed successfully!\n");
+	return (0);
 }
 */

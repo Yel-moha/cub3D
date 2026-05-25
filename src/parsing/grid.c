@@ -90,27 +90,3 @@ void	fill_grid_pass(const char *map_path, t_scene *scene)
 	}
 	close(fd);
 }
-
-void	print_grid(t_scene scene)
-{
-	int	i;
-	int	j;
-
-	printf("la larghezza della griglia è %d\n", scene.map.width);
-	i = 0;
-	while (i < scene.map.height)
-	{
-		printf("row[%d]: ", i);
-		j = 0;
-		while (j < scene.map.width)
-		{
-			if (scene.map.grid[i][j] == ' ')
-				printf(".");
-			else
-				printf("%c", scene.map.grid[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-}

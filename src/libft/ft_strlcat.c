@@ -32,25 +32,25 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	dst[j] = '\0';
 	return (ft_strlen(src) + k);
 }
-/* 
+/*
 #include <stdio.h>
 #include <bsd/string.h>
 
 
 int main(void)
 {
-    char dst1[20] = "Hellooooo, ";
-    char src1[] = "worhhhhhhhhhhhhhhhhhhhhhhhhhhhhld";
-    char dst2[20] = "Hellooooo, ";
-    char src2[] = "worhhhhhhhhhhhhhhhhhhhhhhhhhhhhld";
-    
-    size_t result1 = ft_strlcat(dst1, src1, sizeof(dst1));
-    size_t result2 = strlcat(dst2, src2, sizeof(dst2));
-    
-    printf("Custom ft_strlcat: %s (result: %zu)\n", dst1, result1);
-    printf("Original strlcat: %s (result: %zu)\n", dst2, result2);
-    
-    return 0;
+	char dst1[20] = "Hellooooo, ";
+	char src1[] = "worhhhhhhhhhhhhhhhhhhhhhhhhhhhhld";
+	char dst2[20] = "Hellooooo, ";
+	char src2[] = "worhhhhhhhhhhhhhhhhhhhhhhhhhhhhld";
+
+	size_t result1 = ft_strlcat(dst1, src1, sizeof(dst1));
+	size_t result2 = strlcat(dst2, src2, sizeof(dst2));
+
+	printf("Custom ft_strlcat: %s (result: %zu)\n", dst1, result1);
+	printf("Original strlcat: %s (result: %zu)\n", dst2, result2);
+
+	return 0;
 }
 
  */

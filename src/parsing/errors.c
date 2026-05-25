@@ -17,13 +17,11 @@ void	double_color_path(char flag, t_scene *scene, char **split)
 	free_split(split);
 	get_next_line(-1);
 	free_scene(scene);
-	write(1, "double path\n", ft_strlen("double path") + 1);
+	write(1, "double path\n", 13);
 	if (flag == 'F')
-		write(2, "Errore doppio path per il colore dei floor\n", \
-			ft_strlen("Errore doppio path per il colore dei floor") + 1);
+		write(2, "Errore doppio path per il colore dei floor\n", 44);
 	if (flag == 'C')
-		write(2, "Errore doppio path per il colore dei cieling\n", \
-			ft_strlen("Errore doppio path per il colore dei cieling") + 1);
+		write(2, "Errore doppio path per il colore dei cieling\n", 46);
 	exit(EXIT_FAILURE);
 }
 
@@ -35,8 +33,8 @@ void	error_colors_value(char *line, char **rgb_split, t_scene *scene,
 	free_split(rgb_split);
 	get_next_line(-1);
 	free_scene(scene);
-	write(2, "Errore valore colori\n", \
-			ft_strlen("Errore valore colori\n") + 1);
+	write(2, "Errore valore colori\n", ft_strlen("Errore valore colori\n") + 1);
+	write(2, "Errore valore colori\n", 22);
 	exit(EXIT_FAILURE);
 }
 
@@ -45,8 +43,8 @@ void	error_spawn_player(char *line, t_scene *scene)
 	free(line);
 	get_next_line(-1);
 	free_scene(scene);
-	write(2, "Errore spawn player\n", \
-			ft_strlen("Errore spawn player\n") + 1);
+	write(2, "Errore spawn player\n", ft_strlen("Errore spawn player\n") + 1);
+	write(2, "Errore spawn player\n", 21);
 	exit(EXIT_FAILURE);
 }
 

@@ -1,9 +1,9 @@
 /*
-** mlx_int_param_event.c for MinilibX in 
-** 
+** mlx_int_param_event.c for MinilibX in
+**
 ** Made by Charlie Root
 ** Login   <ol@epitech.net>
-** 
+**
 ** Started on  Mon Jul 31 16:37:50 2000 Charlie Root
 ** Last update Wed Oct  6 13:14:52 2004 Olivier Crouzet
 */
@@ -50,7 +50,7 @@ int	mlx_int_param_MotionNotify(t_xvar *xvar, XEvent *ev, t_win_list *win)
 int	mlx_int_param_Expose(t_xvar *xvar, XEvent *ev, t_win_list *win)
 {
   if (!ev->xexpose.count)
-    win->hooks[Expose].hook(win->hooks[Expose].param);
+	win->hooks[Expose].hook(win->hooks[Expose].param);
 }
 
 

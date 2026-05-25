@@ -264,14 +264,6 @@ void		free_split(char **split);
 void		free_paths(t_tex_paths *pos_text);
 void		free_scene(t_scene *scene);
 
-/* debug */
-void		print_split(char **split);
-void		print_text_paths(t_scene scene);
-void		print_colors(t_scene scene);
-void		print_player(t_scene scene);
-void		print_map(t_scene scene);
-void		print_grid(t_scene scene);
-
 /* engine */
 void		engine_init(t_game *game);
 void		init_graphics(t_game *game);

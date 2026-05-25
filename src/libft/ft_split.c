@@ -80,31 +80,31 @@ char	**ft_split(char const *s, char c)
 	result = if_aux(s, c, result);
 	return (result);
 }
-/* 
+/*
 int main(void)
 {
-    char *str = "      split       this for   me  !       ";
-    char **result;
-    int i;
+	char *str = "      split       this for   me  !       ";
+	char **result;
+	int i;
 
-    result = ft_split(str, ' '); // Usa lo spazio come delimitatore
+	result = ft_split(str, ' '); // Usa lo spazio come delimitatore
 
-    if (result != NULL)
-    {
-        i = 0;
-        while (result[i] != NULL)
-        {
-            printf("Word %d: '%s'\n", i, result[i]);
-            free(result[i]); // Libera ogni parola
-            i++;
-        }
-        free(result); // Libera l'array di puntatori
-    }
-    else
-    {
-        printf("ft_split returned NULL.\n");
-    }
+	if (result != NULL)
+	{
+		i = 0;
+		while (result[i] != NULL)
+		{
+			printf("Word %d: '%s'\n", i, result[i]);
+			free(result[i]); // Libera ogni parola
+			i++;
+		}
+		free(result); // Libera l'array di puntatori
+	}
+	else
+	{
+		printf("ft_split returned NULL.\n");
+	}
 
-    return 0;
+	return 0;
 }
  */

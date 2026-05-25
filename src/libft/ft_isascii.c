@@ -17,25 +17,25 @@ int	ft_isascii(int c)
 	else
 		return (0);
 }
-/* 
+/*
 #include <stdio.h>
 #include <ctype.h>
 int main()
 {
-    int i;
+	int i;
 
-    i = -1;
-    while (i < 130)
-    {
-        if (ft_isascii(i) != isascii(i))
-        {
-            printf("Error at %d: ft_isascii = %d, isascii = %d\n", 
-                i, ft_isascii(i), isascii(i));
-            return (1);
-        }
-        i++;
-    }
-    printf("All tests passed!\n");
-    return (0);
+	i = -1;
+	while (i < 130)
+	{
+		if (ft_isascii(i) != isascii(i))
+		{
+			printf("Error at %d: ft_isascii = %d, isascii = %d\n",
+				i, ft_isascii(i), isascii(i));
+			return (1);
+		}
+		i++;
+	}
+	printf("All tests passed!\n");
+	return (0);
 }
  */

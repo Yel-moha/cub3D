@@ -19,27 +19,27 @@ int	ft_tolower(int c)
 	return (c);
 }
 
-/* 
+/*
 #include <stdio.h>
 #include <ctype.h>
 
 void compare_functions(int c) {
-    int my_result = ft_tolower(c);
-    int original_result = tolower(c); // A
+	int my_result = ft_tolower(c);
+	int original_result = tolower(c); // A
 
-    printf("Character: %c\n", c);
-    printf("My function result: %c\n", my_result);
-    printf("Original function result: %c\n", original_result);
+	printf("Character: %c\n", c);
+	printf("My function result: %c\n", my_result);
+	printf("Original function result: %c\n", original_result);
 }
 
 int main() {
-    char test_chars[] = {'A', 'B', 'C', 'a', 'b', '1', '!', 'Z'};
-    int i;
+	char test_chars[] = {'A', 'B', 'C', 'a', 'b', '1', '!', 'Z'};
+	int i;
 
-    for (i = 0; i < sizeof(test_chars); i++) {
-        compare_functions(test_chars[i]);
-    }
+	for (i = 0; i < sizeof(test_chars); i++) {
+		compare_functions(test_chars[i]);
+	}
 
-    return 0;
+	return 0;
 }
  */

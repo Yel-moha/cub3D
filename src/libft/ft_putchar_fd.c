@@ -17,11 +17,11 @@ void	ft_putchar_fd(char c, int fd)
 	write(fd, &c, 1);
 }
 
-/* 
+/*
 int main(void)
-{	
+{
 	// Apri un file in scrittura
-	int fd = open("output.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644); 
+	int fd = open("output.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1) // Controlla errori
 		return 1;
 

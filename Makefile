@@ -4,7 +4,6 @@ SRCS		=	src/parsing/read_maps.c \
 				src/main.c \
 				src/parsing/errors.c \
 				src/parsing/errors_utils.c \
-				src/parsing/debug_prints.c \
 				src/parsing/validations.c \
 				src/parsing/free_utils.c \
 				src/parsing/parse_line.c \

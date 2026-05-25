@@ -44,8 +44,7 @@ static void	draw_flat_col(t_game *game, int x, t_draw_col col)
 	}
 }
 
-static void	draw_textured_col(t_game *game, t_ray *ray, int x, \
-		t_draw_col col)
+static void	draw_textured_col(t_game *game, t_ray *ray, int x, t_draw_col col)
 {
 	double	step;
 	double	tex_pos;

@@ -21,15 +21,15 @@ int	ft_isalpha(int c)
 /*
  int main(void)
  {
-    int verify;
-    char c;
-    c = 'A';
+	int verify;
+	char c;
+	c = 'A';
 
-    verify = isalpha(c);
-    if (verify == 1)
-        printf(" Hai inserito una lettera dell'alfabeto");
-    else
-        printf(" il carattere inserito non e' parte dell'alfabeto ");
-    return(0);
+	verify = isalpha(c);
+	if (verify == 1)
+		printf(" Hai inserito una lettera dell'alfabeto");
+	else
+		printf(" il carattere inserito non e' parte dell'alfabeto ");
+	return(0);
  }
  */

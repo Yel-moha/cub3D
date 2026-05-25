@@ -27,7 +27,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 		j++;
 	}
 }
-/* 
+/*
 void to_upper_with_index(unsigned int index, char *c)
 {
 	if (*c >= 'a' && *c <= 'z')

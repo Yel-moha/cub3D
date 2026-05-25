@@ -61,13 +61,17 @@ int	load_textures(t_game *game)
 		return (0);
 	if (!load_texture(game, 4, "textures_liminal/door.xpm"))
 		return (0);
-	if (!load_texture(game, SPRITE_TEX_BASE + 0, "textures_liminal/monitor_0.xpm"))
+	if (!load_texture(game, SPRITE_TEX_BASE + 0, \
+"textures_liminal/monitor_0.xpm"))
 		return (0);
-	if (!load_texture(game, SPRITE_TEX_BASE + 1, "textures_liminal/monitor_1.xpm"))
+	if (!load_texture(game, SPRITE_TEX_BASE + 1, \
+"textures_liminal/monitor_1.xpm"))
 		return (0);
-	if (!load_texture(game, SPRITE_TEX_BASE + 2, "textures_liminal/monitor_2.xpm"))
+	if (!load_texture(game, SPRITE_TEX_BASE + 2, \
+"textures_liminal/monitor_2.xpm"))
 		return (0);
-	if (!load_texture(game, SPRITE_TEX_BASE + 3, "textures_liminal/monitor_3.xpm"))
+	if (!load_texture(game, SPRITE_TEX_BASE + 3, \
+"textures_liminal/monitor_3.xpm"))
 		return (0);
 	return (1);
 }

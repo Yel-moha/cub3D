@@ -29,33 +29,33 @@ char	*ft_strrchr(const char *s, int c)
 		return ((char *)&s[i]);
 	return (last_occurrence);
 }
-/* 
+/*
 #include <stdio.h>
 #include <string.h>
 
 
 int main(void)
 {
-    const char *str = "teste";
-    int test_chars[] = {'o', 'W', 'l', 'z', '\0'};
+	const char *str = "teste";
+	int test_chars[] = {'o', 'W', 'l', 'z', '\0'};
 	 //char str1[] = "NULL";
 	 //char *ptr = str1;
-    char *result_ft, *result_orig;
-    int i;
+	char *result_ft, *result_orig;
+	int i;
 
-    printf("Testing ft_strrchr against original strrchr:\n");
-    for (i = 0; i < sizeof(test_chars) / sizeof(test_chars[0]); i++)
-    {
-        result_ft = ft_strrchr(str, test_chars[i]);
-        result_orig = strrchr(str, test_chars[i]);
+	printf("Testing ft_strrchr against original strrchr:\n");
+	for (i = 0; i < sizeof(test_chars) / sizeof(test_chars[0]); i++)
+	{
+		result_ft = ft_strrchr(str, test_chars[i]);
+		result_orig = strrchr(str, test_chars[i]);
 
-        printf("%d Character: '%c'\n",str[i], test_chars[i]);
-        printf("%dft_strrchr: %p\n",str[i], (void*)result_ft);
+		printf("%d Character: '%c'\n",str[i], test_chars[i]);
+		printf("%dft_strrchr: %p\n",str[i], (void*)result_ft);
 		//printf("Posizione del carattere trovato: %p\n", (void*)ptr);
-        printf("%dstrrchr: %p\n",str[i], (void*)result_orig);
-        printf("\n");
-    }
+		printf("%dstrrchr: %p\n",str[i], (void*)result_orig);
+		printf("\n");
+	}
 
-    return 0;
+	return 0;
 }
  */

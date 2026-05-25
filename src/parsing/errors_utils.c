@@ -21,7 +21,7 @@ void	line_errors(char *line, int fd)
 	}
 	if (!line)
 	{
-		printf("file vuoto o non leggibile:\n");
+		write(2, "file vuoto o non leggibile:\n", 29);
 		close(fd);
 		return ;
 	}

@@ -27,11 +27,11 @@ void	ft_putstr_fd(char *s, int fd)
 		i++;
 	}
 }
-/* 
+/*
 int main(void)
-{	
+{
 	// Apri un file in scrittura
-	int fd = open("output.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644); 
+	int fd = open("output.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1) // Controlla errori
 		return 1;
 

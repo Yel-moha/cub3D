@@ -25,8 +25,7 @@ void	check_extra_chars_textures(t_scene *scene, char *line, char **split)
 			free(line);
 			get_next_line(-1);
 			free_scene(scene);
-			write(2, "Errore carattere non valido\n", \
-					ft_strlen("Errore carattere non valido\n") + 1);
+			write(2, "Errore carattere non valido\n", 29);
 			exit(EXIT_FAILURE);
 		}
 		i++;

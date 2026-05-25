@@ -12,11 +12,7 @@
 
 #include "cub3d.h"
 
-//da cancellare prima di pusciare
-#include <stdio.h>
-
-void
-free_split(char **split)
+void	free_split(char **split)
 {
 	int	i;
 
@@ -31,7 +27,7 @@ free_split(char **split)
 	free(split);
 }
 
-static void allocate_scene(t_scene *scene)
+static void	allocate_scene(t_scene *scene)
 {
 	scene->flag = ft_calloc(1, sizeof(char));
 	if (!scene->flag)
@@ -46,9 +42,9 @@ static void allocate_scene(t_scene *scene)
 	scene->map.letta = 0;
 }
 
-static void map_format(const char *map_path)
+static void	map_format(const char *map_path)
 {
-	size_t  len;
+	size_t	len;
 
 	if (!map_path)
 	{
@@ -67,9 +63,9 @@ int	main(int argc, char **argv)
 {
 	const char	*map_path;
 	t_scene		*scene;
+	t_game		game;
 
-	//x testing
-	t_game	game = {0};
+	game = (t_game){0};
 	if (argc != 2)
 		return (1);
 	map_path = argv[1];
@@ -84,20 +80,8 @@ int	main(int argc, char **argv)
 		free_scene(scene);
 		return (1);
 	}
-	print_text_paths(*scene); // debug
-	print_colors(*scene); // debug
-	print_player(*scene);
-	//printf("il numero di texture e' : %d\n", scene->counter);
-	print_split(scene->map.grid);
-	//print_grid(*scene);
-	//print_map(*scene);
-
-	// x testing - collega scene al game
 	game.scene = scene;
-
-	// x testing - INIT ENGINE
 	engine_init(&game);
-
 	free_scene(scene);
 	return (0);
 }

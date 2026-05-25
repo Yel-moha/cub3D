@@ -33,58 +33,58 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	nstr[i] = '\0';
 	return (nstr);
 }
-/* 
+/*
 
 void test_ft_substr(char *s, unsigned int start, size_t len)
 {
-    char *result;
+	char *result;
 
-    printf("Input string: \"%s\", start: %u, len: %zu\n", s, start, len);
-    result = ft_substr(s, start, len);
-    if (result != NULL)
-        printf("ft_substr result: \"%s\"\n", result);
-    else
-        printf("ft_substr result: NULL\n");
+	printf("Input string: \"%s\", start: %u, len: %zu\n", s, start, len);
+	result = ft_substr(s, start, len);
+	if (result != NULL)
+		printf("ft_substr result: \"%s\"\n", result);
+	else
+		printf("ft_substr result: NULL\n");
 
-    free(result);
+	free(result);
 }
 void test_ft_substr_extended(void)
 {
-    // Test with special characters
-    test_ft_substr("Hello\n\tWorld!", 5, 3);  // "\n\t"
-    test_ft_substr("Hello\0World", 0, 10);    // "Hello"
-    
-    // Test with non-ASCII characters
-    test_ft_substr("héllø wørld", 2, 4);      // "llø "
-    
-    // Test with very large len
-    test_ft_substr("small", 0, SIZE_MAX);     // "small"
-    
-    // Test with multiple spaces
-    test_ft_substr("   spaces   ", 3, 6);     // "spaces"
-    
-    // Test with single character
-    test_ft_substr("X", 0, 1);                // "X"
-    
-    // Test with overlapping len
-    test_ft_substr("12345", 2, 10);           // "345"
-    
-    // Test with exact string length
-    test_ft_substr("test", 0, 4);             // "test"
-    
-    // Test with numbers and symbols
-    test_ft_substr("123!@#$%^", 3, 4);        // "!@#$"
+	// Test with special characters
+	test_ft_substr("Hello\n\tWorld!", 5, 3);  // "\n\t"
+	test_ft_substr("Hello\0World", 0, 10);    // "Hello"
+
+	// Test with non-ASCII characters
+	test_ft_substr("héllø wørld", 2, 4);      // "llø "
+
+	// Test with very large len
+	test_ft_substr("small", 0, SIZE_MAX);     // "small"
+
+	// Test with multiple spaces
+	test_ft_substr("   spaces   ", 3, 6);     // "spaces"
+
+	// Test with single character
+	test_ft_substr("X", 0, 1);                // "X"
+
+	// Test with overlapping len
+	test_ft_substr("12345", 2, 10);           // "345"
+
+	// Test with exact string length
+	test_ft_substr("test", 0, 4);             // "test"
+
+	// Test with numbers and symbols
+	test_ft_substr("123!@#$%^", 3, 4);        // "!@#$"
 }
 
 int main(void)
 {
-    // Original tests
-    test_ft_substr("Hello, world!", 0, 5);
-    test_ft_substr("Hello, world!", 7, 5);
-    
-    // New extended tests
-    test_ft_substr_extended();
-    
-    return 0;
+	// Original tests
+	test_ft_substr("Hello, world!", 0, 5);
+	test_ft_substr("Hello, world!", 7, 5);
+
+	// New extended tests
+	test_ft_substr_extended();
+
+	return 0;
 }
  */

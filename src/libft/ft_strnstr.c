@@ -38,9 +38,9 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 
 int main()
 {
-    char *big = "Hello, world!";
-    char *little = "";
-    size_t len = 15;
+	char *big = "Hello, world!";
+	char *little = "";
+	size_t len = 15;
 	char *result = ft_strnstr(big, little, len);
 	if (result != NULL)
 	{
