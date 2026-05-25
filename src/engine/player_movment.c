@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 14:57:44 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/21 20:47:36 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/25 20:44:42 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,12 @@ void	strafe_player(t_game *game, double right)
 	double		ms;
 	double		nx;
 	double		ny;
-	double		right_x;
-	double		right_y;
 	t_player	*player;
 
 	player = game->scene->player;
 	ms = 0.10;
-	right_x = -player->dir_y;
-	right_y = player->dir_x;
-	nx = player->pos_x + right_x * ms * right;
-	ny = player->pos_y + right_y * ms * right;
+	nx = player->pos_x - player->dir_y * ms * right;
+	ny = player->pos_y + player->dir_x * ms * right;
 	if (!is_wall(game, nx, player->pos_y))
 		player->pos_x = nx;
 	if (!is_wall(game, player->pos_x, ny))

@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 22:30:00 by anacotti          #+#    #+#             */
-/*   Updated: 2026/05/19 21:59:29 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/25 20:25:40 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,19 @@ static void	update_door_search(t_game *game, t_door_search *search)
 
 static void	apply_door_toggle(t_game *game, t_door_search *search)
 {
-	if (search->found_x != -1 && search->found_y != -1)
-		game->door_open[search->found_y][search->found_x]
-			= !game->door_open[search->found_y][search->found_x];
+	char	cell;
+
+	if (search->found_x == -1 || search->found_y == -1)
+		return ;
+	cell = game->scene->map.grid[search->found_y][search->found_x];
+	if (cell == 'O')
+	{
+		game->scene->map.grid[search->found_y][search->found_x] = 'D';
+		game->door_open[search->found_y][search->found_x] = 0;
+		return ;
+	}
+	game->door_open[search->found_y][search->found_x]
+		= !game->door_open[search->found_y][search->found_x];
 }
 
 void	toggle_nearest_door(t_game *game)
@@ -55,7 +65,8 @@ void	toggle_nearest_door(t_game *game)
 		search.x = 0;
 		while (search.x < game->scene->map.width)
 		{
-			if (game->scene->map.grid[search.y][search.x] == 'D')
+			if (game->scene->map.grid[search.y][search.x] == 'D'
+				|| game->scene->map.grid[search.y][search.x] == 'O')
 				update_door_search(game, &search);
 			search.x++;
 		}

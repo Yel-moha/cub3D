@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:38:23 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/05/21 21:39:32 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/25 20:31:19 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,14 @@ typedef struct s_sprite
 {
 	double	pos_x;
 	double	pos_y;
-} 	t_sprite;
+}	t_sprite;
 
 typedef struct s_sprite_draw
 {
 	int		tex_id;
 	double	transform_y;
 	int		screen_x;
-} 	t_sprite_draw;
+}	t_sprite_draw;
 
 typedef struct s_sprite_box
 {
@@ -82,7 +82,7 @@ typedef struct s_sprite_box
 	int	x_end;
 	int	y_start;
 	int	y_end;
-} 	t_sprite_box;
+}	t_sprite_box;
 
 typedef struct s_player
 {
@@ -159,11 +159,11 @@ typedef struct s_game
 	double		last_time;
 	double		elapsed_time;
 	t_img		tex[SPRITE_TEX_BASE + SPRITE_FRAME_COUNT];
-	int		tex_w[SPRITE_TEX_BASE + SPRITE_FRAME_COUNT];
-	int		tex_h[SPRITE_TEX_BASE + SPRITE_FRAME_COUNT];
+	int			tex_w[SPRITE_TEX_BASE + SPRITE_FRAME_COUNT];
+	int			tex_h[SPRITE_TEX_BASE + SPRITE_FRAME_COUNT];
 	int			**door_open;
 	t_sprite	*sprites;
-	int		sprite_count;
+	int			sprite_count;
 	double		*z_buffer;
 }	t_game;
 
@@ -209,114 +209,115 @@ typedef struct s_temp_map
 }	t_temp_map;
 
 /* get_next_line */
-char	*get_next_line(int fd);
-char	*append_buffer(char *buffer, char *temp);
-char	*read_line(int fd, char *buffer);
-size_t	line_len_with_newline(char *buffer);
-char	*extract_tail(char *buffer, size_t line_len);
-char	*extract_line(char **buffer);
+char		*get_next_line(int fd);
+char		*append_buffer(char *buffer, char *temp);
+char		*read_line(int fd, char *buffer);
+size_t		line_len_with_newline(char *buffer);
+char		*extract_tail(char *buffer, size_t line_len);
+char		*extract_line(char **buffer);
 
 /* parsing */
-void	parse_line(const char *map_path, t_scene *scene);
-void	parse_textures(char *line, t_scene *scene, int fd);
-void	parse_colors(char *line, t_scene *scene);
-void	fill_direction(char **line, t_scene *scene);
-void	fill_direction_fixed(char **line, t_scene *scene, int path_index);
-void	fill_colors(char **line, t_scene *scene, char f_or_c);
-int		check_colors_value(char **rgb_split, char **split);
-void	update_flags(t_scene *scene, char *flag);
+void		parse_line(const char *map_path, t_scene *scene);
+void		parse_textures(char *line, t_scene *scene, int fd);
+void		parse_colors(char *line, t_scene *scene);
+void		fill_direction(char **line, t_scene *scene);
+void		fill_direction_fixed(char **line, t_scene *scene, int path_index);
+void		fill_colors(char **line, t_scene *scene, char f_or_c);
+int			check_colors_value(char **rgb_split, char **split);
+void		update_flags(t_scene *scene, char *flag);
 
 /* grid */
-void	count_grid_height(char *line, t_scene *scene);
-int		max_line(char *line, t_scene *scene);
-void	fill_grid(t_scene *scene, int i, char *line);
-void	allocate_grid(t_scene *scene);
-void	parse_grid(t_scene *scene, int fd, char *line);
-int		is_blank_line(char *line);
-int		is_map_line(char *line);
-void	fill_grid_pass(const char *map_path, t_scene *scene);
+void		count_grid_height(char *line, t_scene *scene);
+int			max_line(char *line, t_scene *scene);
+void		fill_grid(t_scene *scene, int i, char *line);
+void		allocate_grid(t_scene *scene);
+void		parse_grid(t_scene *scene, int fd, char *line);
+int			is_blank_line(char *line);
+int			is_map_line(char *line);
+void		fill_grid_pass(const char *map_path, t_scene *scene);
 
 /* validation */
-int		validate_borders(const char *map_path, t_scene *scene);
-int		validate_line(char *line, int index, t_scene *scene);
-int		line_len_no_nl(char *line);
-int		middle_row_is_closed(char **rows, int h, int i);
-void	free_rows(char **rows, int count);
-int		load_map_rows(const char *map_path, t_scene *scene, char **rows);
+int			validate_borders(const char *map_path, t_scene *scene);
+int			validate_line(char *line, int index, t_scene *scene);
+int			line_len_no_nl(char *line);
+int			middle_row_is_closed(char **rows, int h, int i);
+void		free_rows(char **rows, int count);
+int			load_map_rows(const char *map_path, t_scene *scene, char **rows);
 
 /* errors */
-void	double_color_path(char flag, t_scene *scene, char **split);
-void	error_colors_value(char *line, char **rgb_split, t_scene *scene,
-			char *joined);
-void	error_spawn_player(char *line, t_scene *scene);
-int		is_config_id(char *id);
-void	line_errors(char *line, int fd);
-void	split_error(char **split);
-void	error_extra_line_map(char *line, t_scene *scene);
-int		textures_exist(t_scene *scene);
-void	textures_error_path(t_scene *scene);
-void	check_extra_chars_textures(t_scene *scene, char *line, char **split);
-void	nl_grid_error(char *line, t_scene *scene);
+void		double_color_path(char flag, t_scene *scene, char **split);
+void		error_colors_value(char *line, char **rgb_split, t_scene *scene,
+				char *joined);
+void		error_spawn_player(char *line, t_scene *scene);
+int			is_config_id(char *id);
+void		line_errors(char *line, int fd);
+void		split_error(char **split);
+void		error_extra_line_map(char *line, t_scene *scene);
+int			textures_exist(t_scene *scene);
+void		textures_error_path(t_scene *scene);
+void		check_extra_chars_textures(t_scene *scene, char *line,
+				char **split);
+void		nl_grid_error(char *line, t_scene *scene);
 
 /* memory */
-void	free_split(char **split);
-void	free_paths(t_tex_paths *pos_text);
-void	free_scene(t_scene *scene);
+void		free_split(char **split);
+void		free_paths(t_tex_paths *pos_text);
+void		free_scene(t_scene *scene);
 
 /* debug */
-void	print_split(char **split);
-void	print_text_paths(t_scene scene);
-void	print_colors(t_scene scene);
-void	print_player(t_scene scene);
-void	print_map(t_scene scene);
-void	print_grid(t_scene scene);
+void		print_split(char **split);
+void		print_text_paths(t_scene scene);
+void		print_colors(t_scene scene);
+void		print_player(t_scene scene);
+void		print_map(t_scene scene);
+void		print_grid(t_scene scene);
 
 /* engine */
-void	engine_init(t_game *game);
-void	init_graphics(t_game *game);
-void	init_graphics_one(t_game *game);
-void	init_image(t_game *game);
-int		render_frame(void *param);
-void	init_ray(t_game *game, t_ray *ray, int x);
-void	perform_dda(t_game *game, t_ray *ray);
-void	compute_distance(t_game *game, t_ray *ray);
-void	draw_column(t_game *game, t_ray *ray, int x);
-void	count_sprite_positions(t_game *game);
-void	sort_sprites(int *order, double *dist, int count);
-void	render_single_sprite(t_game *game, int index, t_sprite_draw *draw);
-void	render_sprites(t_game *game);
-void	init_sprites(t_game *game);
-void	put_pixel(t_img *img, int x, int y, int color);
-void	draw_line(t_img *img, t_point p0, t_point p1, int color);
-int		load_texture(t_game *game, int i, char *path);
-int		load_textures(t_game *game);
-void	draw_floor_ceiling(t_game *game);
+void		engine_init(t_game *game);
+void		init_graphics(t_game *game);
+void		init_graphics_one(t_game *game);
+void		init_image(t_game *game);
+int			render_frame(void *param);
+void		init_ray(t_game *game, t_ray *ray, int x);
+void		perform_dda(t_game *game, t_ray *ray);
+void		compute_distance(t_game *game, t_ray *ray);
+void		draw_column(t_game *game, t_ray *ray, int x);
+void		count_sprite_positions(t_game *game);
+void		sort_sprites(int *order, double *dist, int count);
+void		render_single_sprite(t_game *game, int index, t_sprite_draw *draw);
+void		render_sprites(t_game *game);
+void		init_sprites(t_game *game);
+void		put_pixel(t_img *img, int x, int y, int color);
+void		draw_line(t_img *img, t_point p0, t_point p1, int color);
+int			load_texture(t_game *game, int i, char *path);
+int			load_textures(t_game *game);
+void		draw_floor_ceiling(t_game *game);
 
 /* minimap */
-void	draw_rays_on_minimap(t_game *game);
-void	draw_grill(t_game *game);
+void		draw_rays_on_minimap(t_game *game);
+void		draw_grill(t_game *game);
 t_temp_map	*init_dimensions(t_scene *scene);
-void	put_pixel_map(t_img *img, int x, int y, int color);
-void	clear_image(t_img *img, int color);
-void	draw_cell(t_temp_map *map, int row, int col, char cell);
-void	render_minimap(t_game *game);
+void		put_pixel_map(t_img *img, int x, int y, int color);
+void		clear_image(t_img *img, int color);
+void		draw_cell(t_temp_map *map, int row, int col, char cell);
+void		render_minimap(t_game *game);
 
 /* player */
-void	player_init(t_game *game);
-void	fill_player_ew(char c, t_game *game, int row, int col);
-void	fill_player_ns(char c, t_game *game, int row, int col);
-void	move_player(t_game *game, double forward);
-void	strafe_player(t_game *game, double right);
-void	rotate_player(t_game *game, double angle);
-int		mouse_move(int x, int y, t_game *game);
+void		player_init(t_game *game);
+void		fill_player_ew(char c, t_game *game, int row, int col);
+void		fill_player_ns(char c, t_game *game, int row, int col);
+void		move_player(t_game *game, double forward);
+void		strafe_player(t_game *game, double right);
+void		rotate_player(t_game *game, double angle);
+int			mouse_move(int x, int y, t_game *game);
 
 /* input / cleanup */
-int		key_press(int keycode, t_game *game);
-int		close_window(t_game *game);
-int		key_release(int keycode, t_game *game);
-void	handle_keys(t_game *game, double dt);
-void	destroy_textures(t_game *game);
-void	cleanup_and_exit(t_game *game, int code);
-void	toggle_nearest_door(t_game *game);
+int			key_press(int keycode, t_game *game);
+int			close_window(t_game *game);
+int			key_release(int keycode, t_game *game);
+void		handle_keys(t_game *game, double dt);
+void		destroy_textures(t_game *game);
+void		cleanup_and_exit(t_game *game, int code);
+void		toggle_nearest_door(t_game *game);
 
 #endif

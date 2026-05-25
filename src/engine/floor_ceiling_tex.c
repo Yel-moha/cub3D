@@ -6,7 +6,7 @@
 /*   By: anacotti <anacotti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 12:31:54 by anacotti          #+#    #+#             */
-/*   Updated: 2026/05/21 21:21:05 by anacotti         ###   ########.fr       */
+/*   Updated: 2026/05/25 21:02:16 by anacotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,15 @@ int	load_textures(t_game *game)
 		return (0);
 	if (!load_texture(game, 3, game->scene->textures.ea))
 		return (0);
-	if (!load_texture(game, 4, "textures/door.xpm"))
+	if (!load_texture(game, 4, "textures_liminal/door.xpm"))
 		return (0);
-	if (!load_texture(game, SPRITE_TEX_BASE + 0, "textures/monitor_0.xpm"))
+	if (!load_texture(game, SPRITE_TEX_BASE + 0, "textures_liminal/monitor_0.xpm"))
 		return (0);
-	if (!load_texture(game, SPRITE_TEX_BASE + 1, "textures/monitor_1.xpm"))
+	if (!load_texture(game, SPRITE_TEX_BASE + 1, "textures_liminal/monitor_1.xpm"))
 		return (0);
-	if (!load_texture(game, SPRITE_TEX_BASE + 2, "textures/monitor_2.xpm"))
+	if (!load_texture(game, SPRITE_TEX_BASE + 2, "textures_liminal/monitor_2.xpm"))
 		return (0);
-	if (!load_texture(game, SPRITE_TEX_BASE + 3, "textures/monitor_3.xpm"))
+	if (!load_texture(game, SPRITE_TEX_BASE + 3, "textures_liminal/monitor_3.xpm"))
 		return (0);
 	return (1);
 }
