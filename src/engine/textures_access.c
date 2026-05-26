@@ -12,15 +12,32 @@
 
 #include "cub3d.h"
 
+static int	textures_extra(void)
+{
+	if (access("./textures/monitor_0.xpm", F_OK | R_OK) != 0)
+		return (0);
+	if (access("./textures/monitor_1.xpm", F_OK | R_OK) != 0)
+		return (0);
+	if (access("./textures/monitor_2.xpm", F_OK | R_OK) != 0)
+		return (0);
+	if (access("./textures/monitor_3.xpm", F_OK | R_OK) != 0)
+		return (0);
+	if (access("./textures/door.xpm", F_OK | R_OK) != 0)
+		return (0);
+	return (1);
+}
+
 int	textures_exist(t_scene *scene)
 {
-	if (!scene->textures.ea || access(scene->textures.ea, F_OK) != 0)
+	if (!scene->textures.ea || access(scene->textures.ea, F_OK | R_OK) != 0)
 		return (0);
-	if (!scene->textures.no || access(scene->textures.no, F_OK) != 0)
+	if (!scene->textures.no || access(scene->textures.no, F_OK | R_OK) != 0)
 		return (0);
-	if (!scene->textures.so || access(scene->textures.so, F_OK) != 0)
+	if (!scene->textures.so || access(scene->textures.so, F_OK | R_OK) != 0)
 		return (0);
-	if (!scene->textures.we || access(scene->textures.we, F_OK) != 0)
+	if (!scene->textures.we || access(scene->textures.we, F_OK | R_OK) != 0)
+		return (0);
+	if (!textures_extra())
 		return (0);
 	return (1);
 }
