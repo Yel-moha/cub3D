@@ -33,7 +33,6 @@ void	error_colors_value(char *line, char **rgb_split, t_scene *scene,
 	free_split(rgb_split);
 	get_next_line(-1);
 	free_scene(scene);
-	write(2, "Errore valore colori\n", ft_strlen("Errore valore colori\n") + 1);
 	write(2, "Errore valore colori\n", 22);
 	exit(EXIT_FAILURE);
 }
@@ -43,7 +42,6 @@ void	error_spawn_player(char *line, t_scene *scene)
 	free(line);
 	get_next_line(-1);
 	free_scene(scene);
-	write(2, "Errore spawn player\n", ft_strlen("Errore spawn player\n") + 1);
 	write(2, "Errore spawn player\n", 21);
 	exit(EXIT_FAILURE);
 }
