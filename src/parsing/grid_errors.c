@@ -37,7 +37,7 @@ void	nl_grid_error(char *line, t_scene *scene)
 	free(line);
 	free_scene(scene);
 	get_next_line(-1);
-	write(2, "Error\nnewline nel mezzo della griglia\n", 38);
+	write(2, "Errore carattere non valido nella mappa\n", 40);
 	exit(EXIT_FAILURE);
 }
 

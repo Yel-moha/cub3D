@@ -78,6 +78,7 @@ int	main(int argc, char **argv)
 	if (scene->map.letta != 2)
 	{
 		free_scene(scene);
+		write(2, "mappa incompleta\n", 17);
 		return (1);
 	}
 	game.scene = scene;

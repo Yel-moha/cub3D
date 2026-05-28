@@ -17,7 +17,6 @@ void	double_color_path(char flag, t_scene *scene, char **split)
 	free_split(split);
 	get_next_line(-1);
 	free_scene(scene);
-	write(1, "double path\n", 13);
 	if (flag == 'F')
 		write(2, "Errore doppio path per il colore dei floor\n", 44);
 	if (flag == 'C')

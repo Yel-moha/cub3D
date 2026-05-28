@@ -19,7 +19,7 @@ static int	cell_color(char cell)
 	if (cell == '0')
 		return (0x00D9D9D9);
 	if (cell == 'N' || cell == 'S' || cell == 'E' || cell == 'W')
-		return (0x0000AA00);
+		return (0x00D9D9D9);
 	if (cell == 'D')
 		return (0x00AA0000);
 	if (cell == 'O')

@@ -74,14 +74,14 @@ void	fill_grid(t_scene *scene, int i, char *line)
 	while (line[j] != '\0' && line[j] != '\n')
 	{
 		if (line[j] == ' ')
-			scene->map.grid[i][j] = ' ';
+			scene->map.grid[i][j] = '1';
 		else
 			scene->map.grid[i][j] = line[j];
 		j++;
 	}
 	while (j < scene->map.width)
 	{
-		scene->map.grid[i][j] = ' ';
+		scene->map.grid[i][j] = '1';
 		j++;
 	}
 	scene->map.grid[i][scene->map.width] = '\0';
