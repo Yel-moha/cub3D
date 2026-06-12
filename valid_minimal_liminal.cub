@@ -1,7 +1,8 @@
-NO ./textures_liminal/wall_north.xpm             
-SO ./textures_liminal/wall_south.xpm
-WE ./textures_liminal/wall_west.xpm
-EA ./textures_liminal/wall_east.xpm
+NO ./textures/north_wall.xpm             
+SO ./textures/south_wall.xpm
+WE ./textures/west_wall.xpm
+EA ./textures/east_wall.xpm
+
 
 
 C 179,229,252

@@ -1,8 +1,7 @@
-NO ./textures/north_wall.xpm             
-SO ./textures/south_wall.xpm
-WE ./textures/west_wall.xpm
-EA ./textures/east_wall.xpm
-
+NO ./textures/textures_2/north_wall.xpm             
+SO ./textures/textures_2/south_wall.xpm
+WE ./textures/textures_2/west_wall.xpm
+EA ./textures/textures_2/east_wall.xpm
 
 C 225,30,250
 

@@ -2,6 +2,10 @@
 
 `cub3D` is a 42 raycasting project inspired by Wolfenstein 3D. This repository contains a complete parser, validation layer, rendering engine, doors, minimap, and animated monitor sprites.
 
+<p align="center">
+  <img src="images/cubd.gif" alt="Anteprima Mandelbrot" width="700">
+</p>
+
 ## Overview
 
 The program starts from a `.cub` scene file and goes through these stages:
