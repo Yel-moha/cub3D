@@ -44,7 +44,7 @@ SRCS		=	src/parsing/read_maps.c \
 OBJS		= $(SRCS:.c=.o)
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g -Isrc #-Isrc per includere cubd.h
+CFLAGS		= -Wall -Wextra -Werror -g -Isrc -Wno-incompatible-pointer-types #-Isrc per includere cubd.h
 # libft
 LIBFT_DIR	= src/libft
 LIBFT		= $(LIBFT_DIR)/libft.a
@@ -64,7 +64,8 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(MLX):
-	$(MAKE) -C $(MLX_DIR)
+	@[ -f $(MLX_DIR)/Makefile.gen ] || (cd $(MLX_DIR) && (./configure || true))
+	$(MAKE) -C $(MLX_DIR) -f Makefile.gen all CC="gcc -std=gnu17"
 
 clean:
 	rm -f $(OBJS)

@@ -23,8 +23,8 @@
 # include "minilibx-linux/mlx.h"
 # include "libft/libft.h"
 
-# define WINDOW_WIDTH 1400
-# define WINDOW_HEIGHT 800
+# define WINDOW_WIDTH 1800
+# define WINDOW_HEIGHT 1000
 # define MINI_WIN_WIDTH 280
 # define MINI_WIN_HEIGHT 200
 # define PADDING 10

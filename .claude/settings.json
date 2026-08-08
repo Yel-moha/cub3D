@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(make fclean *)",
+      "Bash(make -j4)",
+      "Bash(timeout 3 ./cub3d valid_minimal.cub)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(timeout 3 ./cub3d valid_minimal_liminal.cub)",
+      "Bash(mkdir -p /tmp/claude-1000/-home-ley-hamo-Desktop-Github-cub3D/ff9ef236-26c4-4fa9-83ef-3b783bdc9cab/scratchpad)",
+      "Bash(python3 /tmp/claude-1000/-home-ley-hamo-Desktop-Github-cub3D/ff9ef236-26c4-4fa9-83ef-3b783bdc9cab/scratchpad/gen_city.py /tmp/claude-1000/-home-ley-hamo-Desktop-Github-cub3D/ff9ef236-26c4-4fa9-83ef-3b783bdc9cab/scratchpad/city.cub)"
+    ]
+  }
+}
